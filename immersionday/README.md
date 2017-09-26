@@ -24,7 +24,7 @@
 
 # Module 5 / Lunch & Learn:	Innovation at scale Video
 
-# Module 6 - Storage on AWS
+# Module 6 - Storage and Database on AWS
 - S3 (L100~200)
 - EBS (L100~200)
 - Glacier (L100)
@@ -36,7 +36,7 @@
 # Module 7 - Immersion Lab: S3 Immersion Lab
 
 # Module 8 - Security Essentials
-Security Ã¢ÂÂ Shared Responsibility Model
+- Security Shared Responsibility Model
 - IAM (L100~200): user, group, role. No need go deeper into id federation. Explain more on IAM role used on AWS services (ex. EC2) to prevent hard coding the credential information
 - Security best practice
 - Encryption: data at transit and rest option (L100~200)
