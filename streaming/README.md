@@ -2,6 +2,31 @@
 
 * adaptive bitrate (ABR) formats: HLS, HDS, MSS, and MPEG-DASH along with advanced video encoding features such as HEVC, Dolby Digital audio, and motion graphic insertion.
 
+# Wowza Steup
+
+* [EC2 User Guide](http://www.wowza.com/resources/WowzaStreamingEngineforEC2_UsersGuide.pdf)
+
+* Security group
+
+![Wowza security group](images/sgWowza.png)
+
+* Players: MPEG-DASH, Apple HLS, Adobe RTMP, Adobe HDS, MS Smooth, Mobile
+  - Mobile iOS: use playlist m3u8
+  - Android/Other: use mp4
+  - Chrome need to add plugin to support m3u8 (Apple HLS)
+
+* [How to use wowza gocoder video broadcasting ios app](https://www.wowza.com/docs/how-to-use-wowza-gocoder-video-broadcasting-ios-app)
+
+# Other Streaming servers
+
+* [Unified Streaming](http://docs.unified-streaming.com/documentation/vod/index.html)
+
+* [Open source Red5](https://github.com/Red5/red5-server)
+
+* [Wiki - Streaming media system](https://en.wikipedia.org/wiki/Comparison_of_streaming_media_systems)
+
+# References
+
 * [Streaming videos to millions of mobile app users via Amazon CloudFront CDN](
 https://aws.amazon.com/blogs/mobile/streaming-videos-to-mobile-app-users-via-amazon-cloudfront-cdn/)
 

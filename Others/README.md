@@ -1,0 +1,1 @@
+* [Natural Language Processing at Clemson University – 1.1 Million vCPUs & EC2 Spot Instances](https://aws.amazon.com/blogs/aws/natural-language-processing-at-clemson-university-1-1-million-vcpus-ec2-spot-instances/)
