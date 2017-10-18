@@ -1,5 +1,68 @@
+# Streaming Concepts
+
+Ask What / Where / When / How questions:
+
+  - What results are being calculated?
+  - Where in event time?
+  - When in processing time?
+  - How do refinements of results relate?
+
+* recommend reading through the [Streaming 101] (https://www.oreilly.com/ideas/the-world-beyond-batch-streaming-101) [Streaming 102](https://www.oreilly.com/ideas/the-world-beyond-batch-streaming-102) post on O’Reilly Radar. And [The Evolution of Massive-Scale Data Processing](https://docs.google.com/presentation/d/10vs2PnjynYMtDpwFsqmSePtMnfJirCkXcHZ1SkwDg-s/present?slide=id.g63ca2a7cd_0_527)
+
+## Key Design questions and mindset
+  - micro-service with fast data
+  - Streaming
+
+## Comparison
+
+* Kafa vs Queue
+  - Kafa good things: consumers read the whole things.
+  - Queue: consumers read and delete the message.
+  - Kafa benefits: reduce the complexity from N*M links to N+M links
+
+* Time Latency: Picosecond, nanoseconds, microseconds
+  - < 10 ms
+    - Streaming tools: Flink, Akka Streams, Kafka Streams
+  - < 100 ms
+    - Fast JVM message handlers: Akka Actors, LMAX Disruptor
+    - "Micro-batch"
+    - Incremental, micro-batch training of faster ML models. SQL query, group by, accumulate.
+  - < 1 second
+    - "Mini-batch"
+    - Incremental ML model training for compute-intensive models
+
+* High Volume
+  - < 10K qps
+    - REST
+    - Process individually
+  - < 100K qps
+    - Nonblocking REST: eg parallel Akka actors
+    - Process individually (? it depends)
+  - < 1M qps
+    - Flink or Spark Streaming
+    - Process in bulk
+
+* Which kinds of data processing, analytics?
+  - Machine learning: training models, mini-bath to batch, dynamically training?
+  - serve model: game score, leaderboard
+  - Process individually: i.e. **Complex event processing (CEP)** usually lower volumes (<10k qps) with per-event overhead low such as cpu-on-fire.
+  - Process bulk: usually datum's identity unimportant
+
+* Apache Flink
+  * High volume
+  * Low latency
+  * Beam Runner
+  * Evolving SQL, ML
+
+* Spark Streaming
+  * Mini-batch model
+  * > 0.5 second latency
+  * Ideal for Rich SQL, ML
+
+
 * Impala query engine to offer SQL-for-Hadoop
 
+* [Beam Capability Matrix](https://beam.apache.org/documentation/runners/capability-matrix/)
 
 * [Apache Flink on AWS](https://aws.amazon.com/blogs/big-data/build-a-real-time-stream-processing-pipeline-with-apache-flink-on-aws/)
 
@@ -58,3 +121,19 @@
     - Recommended for lowest cost if clusters will be busy less than 50% of the time.
     - Most batch ETL and data engineering workloads are transient: they are intended to prepare a set of data for some downstream use, and the clusters don't need to stay up 24x7. A transient cluster is launched to run a particular job and is terminated when the job is done.
     - choose different cluster configurations for different jobs instead of running all jobs on the same permanent cluster with a particular configuration of hardware
+
+* Fast data Architecture for streaming applications - Dean Wampler[video](https://www.youtube.com/watch?v=oCW5y4_8uGU), [slide](https://deanwampler.github.io/polyglotprogramming/papers/StreamAllTheThings.pdf)
+
+* [re:Invent 2016: AWS Big Data & Machine Learning Sessions](https://aws.amazon.com/blogs/big-data/reinvent-2016-aws-big-data-machine-learning-sessions/#more-740)
+
+* [Apache Flink: What How Why Who Where by Slim Baltagi](https://www.slideshare.net/sbaltagi/apacheflinkwhathowwhywhowherebyslimbaltagi-57825047)
+
+* [Comparing Pig Latin and SQL for Constructing Data Processing Pipelines](http://yahoohadoop.tumblr.com/post/98294444546/comparing-pig-latin-and-sql-for-constructing-data)
+
+* Pig
+  - a platform for analyzing large data sets
+  - Pig Latin is the relational data-flow language
+
+* Tez
+  - Tez is a framework for creating a complex directed acyclic graph (DAG) of tasks for processing data. (DAG- spark also use)
+  - Pig and Hive can use Tez as running engine to gain better performance.
