@@ -12,3 +12,6 @@
 * [Raspberry Pi - Jessie version](http://downloads.raspberrypi.org/NOOBS/images/NOOBS-2017-03-03/)
 
 * [IoT Backend Architecture](https://s3.amazonaws.com/awslambda-reference-architectures/iot-backend/lambda-refarch-iotbackend.pdf)
+
+### Tools
+  * [MQTT SPY](https://github.com/eclipse/paho.mqtt-spy)

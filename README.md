@@ -21,6 +21,20 @@ sudo yum -y install nodejs
     - `sudo yum-config-manager --enable epel`
     - `sudo yum --enablerepo=epel install zabbix`
 
+### Add Repositories for Amazon Linux
+  - default launch with two Repositories: `amzn-main` and `amzn-updates`.
+  - List the installed yum repositories with the following command:
+
+    `yum repolist all`
+
+  - enable a yum repository in `/etc/yum.repos.d`
+
+    `sudo yum-config-manager --enable <repo id>`
+
+    such as `epel` for `<repo id>`.
+
+  - reference this [link](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/add-repositories.html)
+
 ### Setup `cmake`
 ```
 wget https://cmake.org/files/v3.8/cmake-3.8.0.tar.gz

@@ -137,3 +137,8 @@ Ask What / Where / When / How questions:
 * Tez
   - Tez is a framework for creating a complex directed acyclic graph (DAG) of tasks for processing data. (DAG- spark also use)
   - Pig and Hive can use Tez as running engine to gain better performance.
+
+### MXNet
+  * [Real-time Object Detection with MXNet On The Raspberry Pi](https://mxnet.incubator.apache.org/tutorials/embedded/wine_detector.html)
+
+  * [AWS Blog](https://aws.amazon.com/blogs/ai/build-a-real-time-object-classification-system-with-apache-mxnet-on-raspberry-pi/)
