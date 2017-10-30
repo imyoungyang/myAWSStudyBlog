@@ -36,6 +36,7 @@ Launch aws console and switch to `us-west-1` N.Califoria and select `VPC` servic
 	- Add Subnet Associations: select `subnet associations` tab and click/save with subnet sub-172.20.0.0/24
 	![](images/lab1/6-rtb-associate-subnet.png)
 6. Now, you finished the following architecture diagram:
+
    ![](images/lab1/7-stage1-architecture.png)
 
 
