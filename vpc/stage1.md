@@ -14,9 +14,10 @@ Launch aws console and switch to `us-west-1` N.Califoria and select `VPC` servic
 	- Name tag: vpc-172.20.0.0/16
 	- IPv4 CIDR block: 172.20.0.0/16
 	![](images/lab1/0-createVPC-us-west-1.png)
-2. After created the VPC, AWS also created a route table and network ACL for you. For the best practices, add the name tag for your route table and network ACL:
+2. After created the VPC, AWS also created a route table, network ACL, and security group for you. For the best practices, add the name tag for your route table and network ACL:
 	- route table: rtb-172.20.0.0/16
 	- network ACL: acl-vpc-172.20.0.0/16
+	- security group: sg-172.20.0.0/16
 	![](images/lab1/1-rtb-us-west-1.png)
 3. create Subnet:
 	- Name tag: sub-172.20.0.0/24
