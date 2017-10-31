@@ -102,6 +102,8 @@ Also, you can login AWS console, switch to `VPC services` in region `eu-west-1`.
 
 ![](images/lab5/1-tunnel-status.png)
 
+**important**: you can't up two tunnel with the same strongswan machine. The routing will have trouble and can't pass packages correctly.
+
 ## Setup Routes
 
 #### Disable source/destination check
@@ -126,5 +128,15 @@ select route table: `rtb-172.20.0.0/16` in `us-west-1` region. Add route `172.30
 Now, you done the VPN connections setting. You can ping your restricted machine in `eu-west-1` region.
 
 ![](images/lab5/5-ping-results.png)
+
+#### ssh to restricted machine
+
+`scp` your `eu-west-1` keys to strongswan machine. Now, you can ssh to restricted machine.
+
+## Take away
+
+Now, you have the following architecture diagam:
+
+![](images/lab5/6-architect.png)
 
 

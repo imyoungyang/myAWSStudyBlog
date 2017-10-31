@@ -1,12 +1,4 @@
-# AWS VPC Deep Dive Lab
-
-## Objectives
-
-At the end of this assignment you will have created a Shared services VPC using the following Amazon Web Services: EC2, VPC, VPC Peering, VPN Connections, Customer Gateway, and Virtual Private Gateway.
-
-![](images/architecture1.png)
-
-## Stage 1: Building the VPC, subnet, routing table and Internet Gateway
+# Stage 1: Building the VPC, subnet, routing table and Internet Gateway
 
 Launch aws console and switch to `us-west-1` N.Califoria and select `VPC` services. Do the following steps:
 
