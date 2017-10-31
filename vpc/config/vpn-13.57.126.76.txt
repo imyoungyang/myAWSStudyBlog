@@ -1,0 +1,209 @@
+Amazon Web Services
+Virtual Private Cloud
+
+VPN Connection Configuration
+================================================================================
+AWS utilizes unique identifiers to manipulate the configuration of 
+a VPN Connection. Each VPN Connection is assigned a VPN Connection Identifier 
+and is associated with two other identifiers, namely the 
+Customer Gateway Identifier and the Virtual Private Gateway Identifier.
+
+Your VPN Connection ID		         : vpn-ca4e3d81
+Your Virtual Private Gateway ID          : vgw-b5c5f8c1
+Your Customer Gateway ID    		 : cgw-68c6fa1c
+		
+A VPN Connection consists of a pair of IPSec tunnel security associations (SAs). 
+It is important that both tunnel security associations be configured. 
+
+				
+IPSec Tunnel #1
+================================================================================
+#1: Internet Key Exchange Configuration
+		
+Configure the IKE SA as follows:
+Please note, these sample configurations are for the minimum requirement of AES128, SHA1, and DH Group 2.
+You will need to modify these sample configuration files to take advantage of AES256, SHA256, or other DH groups like 2, 14-18, 22, 23, and 24.
+The address of the external interface for your customer gateway must be a static address. 
+Your customer gateway may reside behind a device performing network address translation (NAT).
+To ensure that NAT traversal (NAT-T) can function, you must adjust your firewall !rules to unblock UDP port 4500. If not behind NAT, we recommend disabling NAT-T.
+  - IKE version              : IKEv1 
+  - Authentication Method    : Pre-Shared Key 
+  - Pre-Shared Key           : 
+  - Authentication Algorithm : sha1
+  - Encryption Algorithm     : aes-128-cbc
+  - Lifetime                 : 28800 seconds
+  - Phase 1 Negotiation Mode : main
+  - Diffie-Hellman           : Group 2
+
+#2: IPSec Configuration
+
+Configure the IPSec SA as follows:
+Please note, you may use these additionally supported IPSec parameters for encryption like AES256 and other DH groups like 2, 5, 14-18, 22, 23, and 24.
+  - Protocol                 : esp
+  - Authentication Algorithm : hmac-sha1-96
+  - Encryption Algorithm     : aes-128-cbc
+  - Lifetime                 : 3600 seconds
+  - Mode                     : tunnel
+  - Perfect Forward Secrecy  : Diffie-Hellman Group 2
+	
+IPSec Dead Peer Detection (DPD) will be enabled on the AWS Endpoint. We
+recommend configuring DPD on your endpoint as follows:
+  - DPD Interval             : 10
+  - DPD Retries              : 3
+
+IPSec ESP (Encapsulating Security Payload) inserts additional
+headers to transmit packets. These headers require additional space, 
+which reduces the amount of space available to transmit application data.
+To limit the impact of this behavior, we recommend the following 
+configuration on your Customer Gateway:
+  - TCP MSS Adjustment       : 1379 bytes
+  - Clear Don't Fragment Bit : enabled
+  - Fragmentation            : Before encryption
+
+#3: Tunnel Interface Configuration
+
+Your Customer Gateway must be configured with a tunnel interface that is
+associated with the IPSec tunnel. All traffic transmitted to the tunnel
+interface is encrypted and transmitted to the Virtual Private Gateway.
+
+
+
+The Customer Gateway and Virtual Private Gateway each have two addresses that relate
+to this IPSec tunnel. Each contains an outside address, upon which encrypted
+traffic is exchanged. Each also contain an inside address associated with
+the tunnel interface.
+ 
+The Customer Gateway outside IP address was provided when the Customer Gateway
+was created. Changing the IP address requires the creation of a new
+Customer Gateway.
+
+The Customer Gateway inside IP address should be configured on your tunnel
+interface. 
+
+Outside IP Addresses:
+  - Customer Gateway 		        : 13.57.126.76 
+  - Virtual Private Gateway	        : 34.240.82.0
+		
+Inside IP Addresses
+  - Customer Gateway         		: 169.254.22.58/30
+  - Virtual Private Gateway             : 169.254.22.57/30
+
+Configure your tunnel to fragment at the optimal size:
+  - Tunnel interface MTU     : 1436 bytes
+    
+
+#4: Static Routing Configuration:
+
+To route traffic between your internal network and your VPC, 
+you will need a static route added to your router.
+
+Static Route Configuration Options:
+
+  - Next hop       : 169.254.22.57
+  
+You should add static routes towards your internal network on the VGW.
+The VGW will then send traffic towards your internal network over 
+the tunnels.  
+  
+		
+				
+IPSec Tunnel #2
+================================================================================
+#1: Internet Key Exchange Configuration
+		
+Configure the IKE SA as follows:
+Please note, these sample configurations are for the minimum requirement of AES128, SHA1, and DH Group 2.
+You will need to modify these sample configuration files to take advantage of AES256, SHA256, or other DH groups like 2, 14-18, 22, 23, and 24.
+The address of the external interface for your customer gateway must be a static address. 
+Your customer gateway may reside behind a device performing network address translation (NAT).
+To ensure that NAT traversal (NAT-T) can function, you must adjust your firewall !rules to unblock UDP port 4500. If not behind NAT, we recommend disabling NAT-T.
+  - IKE version              : IKEv1 
+  - Authentication Method    : Pre-Shared Key 
+  - Pre-Shared Key           : 
+  - Authentication Algorithm : sha1
+  - Encryption Algorithm     : aes-128-cbc
+  - Lifetime                 : 28800 seconds
+  - Phase 1 Negotiation Mode : main
+  - Diffie-Hellman           : Group 2
+
+#2: IPSec Configuration
+
+Configure the IPSec SA as follows:
+Please note, you may use these additionally supported IPSec parameters for encryption like AES256 and other DH groups like 2, 5, 14-18, 22, 23, and 24.
+  - Protocol                 : esp
+  - Authentication Algorithm : hmac-sha1-96
+  - Encryption Algorithm     : aes-128-cbc
+  - Lifetime                 : 3600 seconds
+  - Mode                     : tunnel
+  - Perfect Forward Secrecy  : Diffie-Hellman Group 2
+	
+IPSec Dead Peer Detection (DPD) will be enabled on the AWS Endpoint. We
+recommend configuring DPD on your endpoint as follows:
+  - DPD Interval             : 10
+  - DPD Retries              : 3
+
+IPSec ESP (Encapsulating Security Payload) inserts additional
+headers to transmit packets. These headers require additional space, 
+which reduces the amount of space available to transmit application data.
+To limit the impact of this behavior, we recommend the following 
+configuration on your Customer Gateway:
+  - TCP MSS Adjustment       : 1379 bytes
+  - Clear Don't Fragment Bit : enabled
+  - Fragmentation            : Before encryption
+
+#3: Tunnel Interface Configuration
+
+Your Customer Gateway must be configured with a tunnel interface that is
+associated with the IPSec tunnel. All traffic transmitted to the tunnel
+interface is encrypted and transmitted to the Virtual Private Gateway.
+
+
+
+The Customer Gateway and Virtual Private Gateway each have two addresses that relate
+to this IPSec tunnel. Each contains an outside address, upon which encrypted
+traffic is exchanged. Each also contain an inside address associated with
+the tunnel interface.
+ 
+The Customer Gateway outside IP address was provided when the Customer Gateway
+was created. Changing the IP address requires the creation of a new
+Customer Gateway.
+
+The Customer Gateway inside IP address should be configured on your tunnel
+interface. 
+
+Outside IP Addresses:
+  - Customer Gateway 		        : 13.57.126.76 
+  - Virtual Private Gateway	        : 52.49.98.107
+		
+Inside IP Addresses
+  - Customer Gateway         		: 169.254.21.178/30
+  - Virtual Private Gateway             : 169.254.21.177/30
+
+Configure your tunnel to fragment at the optimal size:
+  - Tunnel interface MTU     : 1436 bytes
+    
+
+#4: Static Routing Configuration:
+
+To route traffic between your internal network and your VPC, 
+you will need a static route added to your router.
+
+Static Route Configuration Options:
+
+  - Next hop       : 169.254.21.177
+  
+You should add static routes towards your internal network on the VGW.
+The VGW will then send traffic towards your internal network over 
+the tunnels.  
+  
+		 
+ 
+
+Additional Notes and Questions
+================================================================================
+
+  - Amazon Virtual Private Cloud Getting Started Guide: 
+      http://docs.amazonwebservices.com/AmazonVPC/latest/GettingStartedGuide
+  - Amazon Virtual Private Cloud Network Administrator Guide: 
+      http://docs.amazonwebservices.com/AmazonVPC/latest/NetworkAdminGuide
+  - XSL Version: 2009-07-15-1119716
