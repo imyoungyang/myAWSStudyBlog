@@ -1,4 +1,4 @@
-# Stage 4 - Setup Virtual Private Gateway and VPN Connections
+# Stage 4: Setup Virtual Private Gateway and VPN Connections
 
 In the end of this stage, you will create virtual private gateway and vpn connection to other aws region. You will use AWS VPC, subnets, virtual private gateway, and VPN connections.
 
