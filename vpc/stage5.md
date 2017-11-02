@@ -66,6 +66,7 @@ conn %default
        installpolicy=yes
        dpdaction=restart
        authby=psk
+       leftfirewall=yes
        left=172.20.0.184
        leftsubnet=172.20.0.0/16
        leftid=13.57.126.76
@@ -81,6 +82,17 @@ conn vpg-52.49.98.107
        dpdaction=restart
        auto=add
 ```
+
+##### Forwarding And Split Tunneling:
+
+We would like to forward restricted machines requests to other subnet machines. Need to run the following commands:
+
+```
+iptables -t nat -A POSTROUTING -s 172.30.0.0/16 -m policy --dir out --pol ipsec -j ACCEPT
+iptables -t nat -A POSTROUTING -s 172.30.0.0/16 -j MASQUERADE
+```
+
+The detail information is [here](https://wiki.strongswan.org/projects/strongswan/wiki/ForwardingAndSplitTunneling)
 
 ## Start Strongswan service
 
@@ -129,9 +141,22 @@ Now, you done the VPN connections setting. You can ping your restricted machine 
 
 ![](images/lab5/5-ping-results.png)
 
+#### Check the IPTables
+
+Run command `sudo iptables -L`
+
+![](images/lab5/7-iptables.png)
+
+Run command `sudo iptables -t nat -L`
+
+![](images/lab5/8-iptables.png)
+
+Run command `sudo iptables-save` to keep the routing table.
+
 #### ssh to restricted machine
 
-`scp` your `eu-west-1` keys to strongswan machine. Now, you can ssh to restricted machine.
+`scp` your `eu-west-1` keys to strongswan machine(. Now, you can ssh to restricted machine.
+
 
 ## Take away
 
