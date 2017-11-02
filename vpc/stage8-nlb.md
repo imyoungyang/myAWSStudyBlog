@@ -1,4 +1,4 @@
-# Stage 8: Load Balancer for Proxy
+# Stage 8: Load Balancer for Squid Server
 
 In the end of this lab, you will create a AWS classical load balancer for squid proxy.
 
@@ -18,10 +18,6 @@ Please reference the [comparison of elastic load balancing](https://aws.amazon.c
 2. Enable auto-assign Public IP for `sub-172.20.1.0/24` and `sub-172.20.0.0/24` because NLB needs two subnets and squid proxy needs public IP.
 
 	![](images/lab8/0-auto-assignIP.png)
-
-3. Create squid proxy AMI images.
-
-	![](images/lab8/0-ami-image.png)
 
 #### Network Load Balancer
 

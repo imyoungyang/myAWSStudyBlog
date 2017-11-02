@@ -21,6 +21,8 @@ At the end of this assignment you will have created a Shared services VPC using 
 - [Stage 5: Connect VPN connections](stage5-vnp-tunnel.md)
 - [Stage 6: Setup Proxy](stage6-proxy.md)
 - [Stage 7: Auto scaling group](stage7-autoscaling.md)
+- [Stage 8: Load Balancer for Squid Server](stage8-nlb.md)
+- [Stage 9: network load balancer + Auto Scaling](stage9-nlb-asg.md)
 
 
 ## Reference Links
@@ -28,3 +30,4 @@ At the end of this assignment you will have created a Shared services VPC using 
 - [Squid HA design in AWS](https://aws.amazon.com/articles/using-squid-proxy-instances-for-web-service-access-in-amazon-vpc-another-example-with-aws-codedeploy-and-amazon-cloudwatch/)
 - [Enable proxy protocol on ELB](http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-proxy-protocol.html)
 - [Squid receive proxy protocol](ftp://ftp.arnes.si/packages/squid/squid-3.5.3-RELEASENOTES.html#toc2.7)
+- [DX Gateway](https://aws.amazon.com/tw/blogs/aws/new-aws-direct-connect-gateway-inter-region-vpc-access/)
