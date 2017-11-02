@@ -20,6 +20,7 @@ At the end of this assignment you will have created a Shared services VPC using 
 - [Stage 4: Setup Virtual Private Gateway and VPN Connections](stage4-vgw.md)
 - [Stage 5: Connect VPN connections](stage5-vnp-tunnel.md)
 - [Stage 6: Setup Proxy](stage6-proxy.md)
+- [Stage 7: Auto scaling group](stage7-autoscaling.md)
 
 
 ## Reference Links

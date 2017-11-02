@@ -18,6 +18,7 @@ In the end of this stage, you can create a proxy server. And the, you will confi
 5. modify `/etc/squid/squid.conf`
 
 	```
+	acl localnet src 172.20.0.0/16  # RFC1918 possible internal network
 	acl localnet src 172.30.0.0/16  # RFC1918 possible internal network
 #acl localnet src 172.16.0.0/12 # RFC1918 possible internal network
 	```
@@ -44,7 +45,7 @@ In the end of this stage, you can create a proxy server. And the, you will confi
 	proxy_username=yum-user
 	proxy_password=qwerty
 	```
-3. run `sudo yum update -y` to verify you can update your packages.
+3. run `sudo yum update -y` to verify that you can update your packages.
 
 ## Take away
 
