@@ -14,12 +14,12 @@ At the end of this assignment you will have created a Shared services VPC using 
 
 ## Lab stages
 
-- [Stage 1: Building the VPC, subnet, routing table and Internet Gateway](stage1.md)
-- [Stage 2: Setup Customer Gateways Secruity Group](stage2.md)
-- [Stage 3: Setup Customer Gateway](stage3.md)
-- [Stage 4: Setup Virtual Private Gateway and VPN Connections](stage4.md)
-- [Stage 5: Connect VPN connections](stage5.md)
-- [Stage 6: Setup Proxy](stage6.md)
+- [Stage 1: the VPC, subnet, routing table and Internet Gateway](stage1-vpc.md)
+- [Stage 2: Setup Customer Gateways Secruity Group](stage2-sg.md)
+- [Stage 3: Setup Customer Gateway](stage3-cgw.md)
+- [Stage 4: Setup Virtual Private Gateway and VPN Connections](stage4-vgw.md)
+- [Stage 5: Connect VPN connections](stage5-vnp-tunnel.md)
+- [Stage 6: Setup Proxy](stage6-proxy.md)
 
 
 ## Reference Links
