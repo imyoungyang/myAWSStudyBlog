@@ -23,6 +23,7 @@ At the end of this assignment you will have created a Shared services VPC using 
 - [Stage 7: Auto scaling group](stage7-autoscaling.md)
 - [Stage 8: Load Balancer for Squid Server](stage8-nlb.md)
 - [Stage 9: network load balancer + Auto Scaling](stage9-nlb-asg.md)
+- [Stage 10: VPC Peering](stage10-vpc-peering.md)
 
 
 ## Reference Links
