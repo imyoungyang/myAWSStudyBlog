@@ -87,7 +87,9 @@ You can reference [stage1](stage1.md) for the detail VPC configuration and relat
 
 	![](images/lab4/10-rtb-subnet.png)
 
-3. Launch an EC2 instance at subnet `sub-172.30.0.0/24` with name tag `restricted-machine`.
+### Launch EC2 instance
+
+Launch an EC2 instance at subnet `sub-172.30.0.0/24` with name tag `restricted-machine`. And join the existing security group with name tag `sg-172.30.0.0/16`
 
 ## Take away
 
