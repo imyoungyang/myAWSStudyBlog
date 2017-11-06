@@ -6,15 +6,15 @@ You will learn use `vpc peering` to connect 2 VPCs in the same region.
 
 1. create a VPC in the `us-west-1`
 
-	- Name: `vpc-172.120.0.0/16`
-	- CIDR: `172.120.0.0/16`
+	- Name: `vpc-172.18.0.0/16`
+	- CIDR: `172.18.0.0/16`
 
 2. Create a VPC Peering
 	
 	![](images/lab10/0-create-peering.png)
 	
-	- name: peer-172.120.0.0/16
-	- requester: 172.120.0.0/16
+	- name: peer-172.18.0.0/16
+	- requester: 172.18.0.0/16
 	- accepter: 172.20.0.0/16
 	
 	![](images/lab10/1-create-peering.png)
@@ -28,26 +28,26 @@ You will learn use `vpc peering` to connect 2 VPCs in the same region.
 	
 	![](images/lab10/3-create-peering.png)
 	
-5. Edit route table `rtb-172.120.0.0/16`
+5. Edit route table `rtb-172.18.0.0/16`
 	- add 172.20.0.0/16 to pcx peering
 	
 	![](images/lab10/4-create-peering.png)
 	
-6. Edit security group `sg-172.120.0.0/16`
+6. Edit security group `sg-172.18.0.0/16`
 
 	![](images/lab10/5-sg.png)
 	
 ## Verify VPC Peering
 
-1. Create a subnet 172.120.0.0/24 at vpc-172.120.0.0/16
+1. Create a subnet 172.18.0.0/24 at vpc-172.18.0.0/16
 
 	![](images/lab10/6-subnet.png)
 
-2. Launch an EC2 instance at sub-172.120.0.0/24
-	- name: restricted-172.120.0.0
-	- use existing security group `sg-172.120.0.0/16`
+2. Launch an EC2 instance at sub-172.18.0.0/24
+	- name: restricted-172.18.0.0
+	- use existing security group `sg-172.18.0.0/16`
 
-3. ssh to your strongwan machine and ping your ec2 machine at sub-172.120.0.0/24
+3. ssh to your strongwan machine and ping your ec2 machine at sub-172.18.0.0/24
 
 	![](images/lab10/7-verify.png)
 	
@@ -56,7 +56,11 @@ You will learn use `vpc peering` to connect 2 VPCs in the same region.
 	```
 	proxy=http://nlb-proxy-1ced42e7fcf40e9a.elb.us-west-1.amazonaws.com:3128
 	```
-	if FQDN did not work, change to the ip address of one of proxy server.
+	if FQDN did not work, change to the ip address of one of proxy server such as
+	
+	```
+	proxy=http://172.20.1.64:3128
+	```
 
 5. execut yum update
 

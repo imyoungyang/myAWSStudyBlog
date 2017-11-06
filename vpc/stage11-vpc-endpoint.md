@@ -2,15 +2,15 @@
 
 ### Before S3 endpoint
 
-1. ssh to restricted machine in the vpc-172.120.0.0/16
-2. ping s3 region endpoint and you will get timeout
-
+1. ssh to restricted machine in the vpc-172.18.0.0/16
+2. `ping s3.us-west-1.amazonaws.com` and you will get timeout
+	
 	![](images/lab11/3-s3-before-endpoint.png)
 
 ### S3 endpiont
 
 1. create S3 endpoint
-	- vpc: vpc-172.120.0.0/16
+	- vpc: vpc-172.18.0.0/16
 	- service: S3
 
 	![](images/lab11/1-endpoint-create.png)
@@ -29,7 +29,7 @@ Now, login into restricted machine in vpc-172.120.0.0/16. Ping S3 endpoint again
 
 ![](images/lab11/4-s3-endpoint.png)
 
-You can see route table `rtb-172.120.0.0/16` with the `vpce` in the target.
+You can see route table `rtb-172.18.0.0/16` with the `vpce` in the target.
 
 ![](images/lab11/5-route-table-endpoint.png)
 
