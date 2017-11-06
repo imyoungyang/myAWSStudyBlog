@@ -6,11 +6,12 @@ At the end of this assignment you will have created a Shared services VPC using 
 
 ![](images/architecture1.png)
 
-1. Learn how to connect two VPC in different AWS regions.
-2. Restricted machine can't direct access. Only from left region VPC can ssh to restricted machine.
-3. Restricted machine needs to update packages such as `yum install` command.
-4. All other VPC connects to internet must pass the proxy to do the security control.
-
+1. Customers have legitimate privacy and security concerns about sending and receiving data across the public internet.
+2. Connect two VPC in different AWS regions.
+3. Restricted machine can't direct access. Only from us-west-1 vpc-172.20.0.0/16 can ssh to restricted machines.
+4. For security reason, restricted machines need to update packages such as `yum install` command.
+5. The other two VPC connects to internet must pass throught proxy in vpc-172.20.0.0/16 for the security control.
+6. Restricted machines must use a private IP addresses to access Amazon S3 with no exposure to the public internet.
 
 ## Lab stages
 
@@ -24,6 +25,7 @@ At the end of this assignment you will have created a Shared services VPC using 
 - [Stage 8: Load Balancer for Squid Server](stage8-nlb.md)
 - [Stage 9: network load balancer + Auto Scaling](stage9-nlb-asg.md)
 - [Stage 10: VPC Peering](stage10-vpc-peering.md)
+- [Stage 11: VPC Endpoint](stage11-vpc-endpoint.md)
 
 
 ## Reference Links
