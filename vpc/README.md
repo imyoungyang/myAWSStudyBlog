@@ -4,14 +4,19 @@
 
 At the end of this assignment you will have created a Shared services VPC using the following Amazon Web Services: EC2, VPC, VPC Peering, VPN Connections, Customer Gateway, and Virtual Private Gateway.
 
-![](images/architecture1.png)
+## Business Requirement
 
 1. Customers have legitimate privacy and security concerns about sending and receiving data across the public internet.
-2. Connect two VPC in different AWS regions.
-3. Restricted machine can't direct access. Only from us-west-1 vpc-172.20.0.0/16 can ssh to restricted machines.
-4. For security reason, restricted machines need to update packages such as `yum install` command.
-5. The other two VPC connects to internet must pass throught proxy in vpc-172.20.0.0/16 for the security control.
-6. Restricted machines must use a private IP addresses to access Amazon S3 with no exposure to the public internet.
+
+1. Cross regions communication in AWS
+
+1. Compliance programs require additional proxy-controlled access to the Internet
+
+1. They prefer to centralize egress and ingress of the Internet
+
+## Architecture
+
+![](images/architecture1.png)
 
 ## Lab stages
 
