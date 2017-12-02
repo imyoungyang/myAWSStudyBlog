@@ -1,0 +1,17 @@
+{
+  "Sid": "AllowUseOfTheKey",
+	"Effect": "Allow",
+  "Principal": {
+    "AWS": [
+      "arn:aws:iam::111111111111:user/User1","arn:aws:iam::111111111111:root"
+    ]
+  },
+  "Action": [
+    "kms:Encrypt",
+    "kms:Decrypt",
+    "kms:ReEncrypt*",
+    "kms:GenerateDataKey*",
+    "kms:DescribeKey"
+  ],
+  "Resource": "*"
+}
