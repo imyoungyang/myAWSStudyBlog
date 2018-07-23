@@ -39,3 +39,4 @@ At the end of this assignment you will have created a Shared services VPC using 
 - [Enable proxy protocol on ELB](http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-proxy-protocol.html)
 - [Squid receive proxy protocol](ftp://ftp.arnes.si/packages/squid/squid-3.5.3-RELEASENOTES.html#toc2.7)
 - [DX Gateway](https://aws.amazon.com/tw/blogs/aws/new-aws-direct-connect-gateway-inter-region-vpc-access/)
+- [IP Overlay failover](http://www.scalingbits.com/aws/ipfailover/overlay)
