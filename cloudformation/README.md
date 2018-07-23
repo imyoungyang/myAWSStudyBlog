@@ -1,0 +1,8 @@
+* [Your-aws-cloudformation-guide-to-reinvent-2017](https://aws.amazon.com/blogs/mt/your-aws-cloudformation-guide-to-reinvent-2017/)
+* [Faster Auto Scaling in AWS CloudFormation Stacks with Lambda-backed Custom Resources](https://aws.amazon.com/blogs/devops/faster-auto-scaling-in-aws-cloudformation-stacks-with-lambda-backed-custom-resources/)
+* [Green/Blue Deployments with AWS Lambda and CloudFormation - done right.](http://fbrnc.net/blog/2016/05/green-blue-deployments-with-aws-lambda-and-cloudformation)
+* [DevOps on AWS: Deep Dive on Infrastructure as Code](https://www.slideshare.net/AmazonWebServices/devops-on-aws-deep-dive-on-infrastructure-as-code)
+* [Advanced Infrastructure as Code: Building Modular, Dynamic AWS CloudFormation Stacks](https://www.slideshare.net/AmazonWebServices/advanced-infrastructure-as-code-building-modular-dynamic-aws-cloudformation-stacks-64919580/22)
+* [Stack Mastery - reInvent 2017](https://www.slideshare.net/AmazonWebServices/stack-mastery-create-and-optimize-advanced-aws-cloudformation-templates-dev336-reinvent-2017?qid=269d6af0-d8d0-4d1b-afee-3382a426449e&v=&b=&from_search=1)
+* [Immutable deployment with AWS cloud](https://www.slideshare.net/aoepeople/immutable-deployments-with-aws-cloudformation-and-aws-lambda)
+* [Quick Starts](https://aws-quickstart.github.io/prereq.html)

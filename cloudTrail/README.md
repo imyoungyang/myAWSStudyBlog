@@ -1,0 +1,12 @@
+* [Query CloudTrail Logs by Athena](http://docs.aws.amazon.com/athena/latest/ug/cloudtrail-logs.html)
+* [AWS CloudTrail Now Logs AWS Management Console Sign-In Events](https://aws.amazon.com/blogs/security/aws-cloudtrail-now-logs-aws-management-console-sign-in-events/)
+* [Resource Types Supported by CloudTrail Event History](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events-supported-resource-types.html)
+* [Analyze Security, Compliance, and Operational Activity Using AWS CloudTrail and Amazon Athena](https://aws.amazon.com/blogs/big-data/aws-cloudtrail-and-amazon-athena-dive-deep-to-analyze-security-compliance-and-operational-activity/)
+* [quicksight with cloudtrail](https://aws.amazon.com/blogs/big-data/amazon-quicksight-now-supports-audit-logging-with-cloudtrail/)
+* [elb-metrics](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/elb-metricscollected.html)
+* [load-balancer-cloudwatch-metrics](http://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-cloudwatch-metrics.html)
+* [cloud watch splunk](https://aws.amazon.com/cloudtrail/partners/splunk/)
+* [AWS Config Rules – Dynamic Compliance Checking for Cloud Resources](https://aws.amazon.com/blogs/aws/aws-config-rules-dynamic-compliance-checking-for-cloud-resources/)
+* [Convert to column format](http://docs.aws.amazon.com/athena/latest/ug/convert-to-columnar.html)
+* [aws-glue-unable-to-access-input-data-set
+](https://stackoverflow.com/questions/46105700/aws-glue-unable-to-access-input-data-set)
