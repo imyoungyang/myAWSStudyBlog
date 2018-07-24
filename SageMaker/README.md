@@ -50,7 +50,7 @@
 * Training image: `<Amazon ECR path>:<tag>`. Can get it from `docker images`
 	![](images/07-cloud9.png)
 * Hyperparameters: `max_leaf_nodes` value: `8`
-* Trainig
+* Training
 	* channel name: `training`
 	* s3 location: `sagemaker-iris-dataset-<your-id>/data/training/`
 	![](images/08-SageMaker.png)
@@ -61,7 +61,39 @@
 	![](images/10-SageMaker.png)
 
 ### Deploy an endpoint
-* Create model
+#### Create model 
+* model name: `scikit-<your-name>-yyyymmdd`
+	![](images/11-SageMaker.png)
+* Primary container: 
+	* `<your container path>:<tag>`
+	* model artifacts: s3 path with output file `s3://<bucket name>/models/<job name>/output/model.tar.gz`
+	![](images/12-SageMaker.png)
+* click create the model
+
+#### Create endpoint configuration
+* name: `scikit-<your-name>-yyyymmdd`
+* add model: `scikit-<your-name>-yyyymmdd`
+	![](images/13-SageMaker.png)
+
+#### Create an endpoint
+* name: `scikit-<your-name>-yyyymmdd`
+* select endpoint configuration `scikit-<your-name>-yyyymmdd`
+	![](images/14-SageMaker.png)
+* create endpoint
+
+### Test the endpoint
+In cloud9, install pip3:
+
+* `sudo easy_install-3.6 pip`
+* `sudo /usr/local/bin/pip3 install boto3 pandas`
+
+Download the `test-endpoint-sample.py` in the same github folder.
+
+* modify the bucket name and endpoint
+* run `python3 test-endpoint-sample.py`
+	![](images/15-SageMaker.png)
+
+
 
 ### Reference
 * [Blog](https://aws.amazon.com/blogs/machine-learning/train-and-host-scikit-learn-models-in-amazon-sagemaker-by-building-a-scikit-docker-container/)
