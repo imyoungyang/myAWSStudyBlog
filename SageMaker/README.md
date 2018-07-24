@@ -93,7 +93,10 @@ Download the `test-endpoint-sample.py` in the same github folder.
 * run `python3 test-endpoint-sample.py`
 	![](images/15-SageMaker.png)
 
-
+### Clean Up
+* SageMaker Endpoint
+* s3
+* cloud9
 
 ### Reference
-* [Blog](https://aws.amazon.com/blogs/machine-learning/train-and-host-scikit-learn-models-in-amazon-sagemaker-by-building-a-scikit-docker-container/)
+* [AWS Blog](https://aws.amazon.com/blogs/machine-learning/train-and-host-scikit-learn-models-in-amazon-sagemaker-by-building-a-scikit-docker-container/)
