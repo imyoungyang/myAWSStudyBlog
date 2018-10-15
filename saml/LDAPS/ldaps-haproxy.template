@@ -1,0 +1,278 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Sample LDAPS HAProxy Stack - **WARNING** This template creates 2 EC2 instances and an ELB. You will be billed for the AWS resources used if you create a stack from this template. **NOTICE** Copyright 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved. Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at http://www.apache.org/licenses/LICENSE-2.0 or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+Mappings:
+  RegionMap:
+    ap-northeast-1:
+      AmznLinux: ami-3bd3c45c
+    ap-northeast-2:
+      AmznLinux: ami-e21cc38c
+    ap-south-1:
+      AmznLinux: ami-47205e28
+    ap-southeast-1:
+      AmznLinux: ami-77af2014
+    ap-southeast-2:
+      AmznLinux: ami-10918173
+    eu-central-1:
+      AmznLinux: ami-82be18ed
+    eu-west-1:
+      AmznLinux: ami-d7b9a2b1
+    eu-west-2:
+      AmznLinux: ami-ed100689
+    sa-east-1:
+      AmznLinux: ami-87dab1eb
+    us-east-1:
+      AmznLinux: ami-a4c7edb2
+    us-east-2:
+      AmznLinux: ami-8a7859ef
+    ca-central-1:
+      AmznLinux: ami-a7aa15c3
+    us-west-2:
+      AmznLinux: ami-6df1e514
+Parameters:
+  HAProxyInstanceSize:
+    Default: "t2.micro"
+    Description: Instance size for HAProxy Instances.
+    Type: String
+    AllowedValues:
+      - "t2.micro"
+      - "t2.small"
+      - "t2.medium"
+      - "m4.large"
+  MyKeyPair:
+    Description: Public/private key pair, which allows you to connect securely toyour instance after it launches.
+    Type: AWS::EC2::KeyPair::KeyName
+  MyTrustedNetwork:
+    Description: Only connections from this network are allowed to your LDAPS endpoint. Enter an IP or CIDR E.g. 10.10.10.10/32
+    AllowedPattern: "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})"
+    Type: String
+  LDAPSCertificateARN:
+    Description: ARN of SSL Certificate
+    AllowedPattern: "arn:aws:acm:.*"
+    Type: String
+  VPCId:
+    Description: Please provide a VPC to deploy the solution into.
+    Type: AWS::EC2::VPC::Id
+  SubnetId1:
+    Description: Please provide the first Simple AD private subnet id with outbound connectivity within the VPC you selected above.
+    Type: AWS::EC2::Subnet::Id
+  SubnetId2:
+    Description: Please provide the second Simple AD private subnet id with outbound connectivity within the VPC you selected above.
+    Type: AWS::EC2::Subnet::Id
+  SimpleADPriIP:
+    Description: IP Address of primary Simple AD instance
+    AllowedPattern: "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})"
+    Type: String
+  SimpleADSecIP:
+    Description: IP Address of secondary Simple AD instance
+    AllowedPattern: "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})"
+    Type: String
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+    - Label:
+        default: Instance Configuration
+      Parameters:
+      - HAProxyInstanceSize
+      - MyKeyPair
+    - Label:
+        default: Network Configuration
+      Parameters:
+      - VPCId
+      - SubnetId1
+      - SubnetId2
+      - MyTrustedNetwork
+      - SimpleADPriIP
+      - SimpleADSecIP
+      - LDAPSCertificateARN
+    ParameterLabels:
+      HAProxyInstanceSize:
+        default: EC2 instance size for HAProxy servers
+      MyKeyPair:
+        default: SSH Key Pair
+      MyTrustedNetwork:
+        default: Trusted Network CIDR
+      VPCId:
+        default: Target VPC for solution
+      SubnetId1:
+        default: Simple AD Primary Subnet
+      SubnetId2:
+        default: Simple AD Secondary Subnet
+      SimpleADPriIP:
+        default: Primary Simple AD Server IP
+      SimpleADSecIP:
+        default: Secondary Simple AD Server IP
+      LDAPSCertificateARN:
+        default: ARN for SSL Certificate
+Resources:
+  HAProxySecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: LDAP Incoming Traffic Group
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: '389'
+        ToPort: '389'
+        SourceSecurityGroupId: !GetAtt LDAPSSecurityGroup.GroupId
+      VpcId: !Ref VPCId
+      Tags:
+      - Key: Name
+        Value: !Join ["-" , [!Ref 'AWS::StackName', haproxy-security-group]]
+  LDAPSSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: LDAPS Incoming Traffic Group
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: '636'
+        ToPort: '636'
+        CidrIp: !Ref MyTrustedNetwork
+      VpcId:
+        !Ref VPCId
+      Tags:
+      - Key: Name
+        Value: !Join ["-" , [!Ref 'AWS::StackName', ldaps-security-group]]
+  LaunchConfiguration:
+    Type: AWS::AutoScaling::LaunchConfiguration
+    Properties:
+      ImageId:
+        Fn::FindInMap:
+        - RegionMap
+        - !Ref AWS::Region
+        - AmznLinux
+      KeyName: !Ref MyKeyPair
+      SecurityGroups:
+      - !GetAtt HAProxySecurityGroup.GroupId
+      InstanceType: !Ref HAProxyInstanceSize
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash -xe
+          yum update -y
+          yum install -y haproxy
+          /usr/bin/aws configure set region ${AWS::Region}
+          /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource LaunchConfiguration --configsets haproxy --region ${AWS::Region}
+          /opt/aws/bin/cfn-signal -e $? --stack ${AWS::StackName} --resource AutoScalingGroup --region ${AWS::Region}
+    Metadata:
+        AWS::CloudFormation::Init:
+          configSets:
+            haproxy:
+            - haproxy_config
+            - haproxy_start
+          haproxy_config:
+            files:
+              /etc/haproxy/haproxy.cfg :
+                content: !Sub |
+                   global
+                    log 127.0.0.1 local6
+                    chroot /var/lib/haproxy
+                    pidfile /var/run/haproxy.pid
+                    maxconn 2000
+                    user haproxy
+                    group haproxy
+                    daemon
+                    stats socket /var/lib/haproxy/stats
+
+                   defaults
+                    mode tcp
+                    log global
+                    option dontlognull
+                    option redispatch
+                    retries 3
+                    timeout http-request 10s
+                    timeout queue 1m
+                    timeout connect 10s
+                    timeout client 1m
+                    timeout server 1m
+                    timeout http-keep-alive 10s
+                    timeout check 10s
+                    maxconn 2000
+
+                   # LDAP frontend
+                   frontend ldap_front *:389
+                    description LDAP Service
+                    option socket-stats
+                    option tcpka
+                    timeout client 5s
+                    default_backend simple-ad
+
+                   # Simple AD backend
+                   backend simple-ad
+                    balance roundrobin
+                    server directory1 ${SimpleADPriIP}:389
+                    server directory2 ${SimpleADSecIP}:389
+                    option tcp-check
+                    tcp-check connect port 389
+                mode: '0644'
+                owner: haproxy
+                group: haproxy
+              /etc/rsyslog.d/haproxy.conf :
+                content: !Sub |
+                  $ModLoad imudp
+                  $UDPServerAddress 127.0.0.1
+                  $UDPServerRun 514
+                  local6.* /var/log/haproxy.log
+                mode: '0644'
+                owner: root
+                group: root
+          haproxy_start:
+            commands:
+              starthaproxy:
+                cwd: /tmp
+                command: "service haproxy start; service rsyslog restart"
+  AutoScalingGroup:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties:
+      VPCZoneIdentifier:
+      - !Ref SubnetId1
+      - !Ref SubnetId2
+      LaunchConfigurationName: !Ref LaunchConfiguration
+      MinSize: '2'
+      MaxSize: '2'
+      LoadBalancerNames:
+      - !Ref ElasticLoadBalancer
+      DesiredCapacity: '2'
+      HealthCheckType: ELB
+      HealthCheckGracePeriod: 120
+      Tags:
+       -
+        Key: Name
+        Value: !Join ["-" , [!Ref 'AWS::StackName', node]]
+        PropagateAtLaunch: true
+    CreationPolicy:
+      ResourceSignal:
+        Timeout: PT10M
+    UpdatePolicy:
+      AutoScalingReplacingUpdate:
+        WillReplace: 'true'
+  ElasticLoadBalancer:
+    Type: AWS::ElasticLoadBalancing::LoadBalancer
+    Properties:
+      Subnets:
+      - !Ref SubnetId1
+      - !Ref SubnetId2
+      SecurityGroups:
+      - !GetAtt LDAPSSecurityGroup.GroupId
+      Policies:
+      - PolicyName: LDAPSDefaultPolicy
+        PolicyType: SSLNegotiationPolicyType
+        Attributes:
+        - Name: Reference-Security-Policy
+          Value: ELBSecurityPolicy-TLS-1-2-2017-01
+      Listeners:
+      - LoadBalancerPort: '636'
+        InstancePort: '389'
+        Protocol: SSL
+        PolicyNames:
+          - LDAPSDefaultPolicy
+        SSLCertificateId: !Ref LDAPSCertificateARN
+      Scheme: internal
+      CrossZone: true
+      HealthCheck:
+        Target: 'TCP:389'
+        HealthyThreshold: '2'
+        UnhealthyThreshold: '2'
+        Interval: '6'
+        Timeout: '4'
+Outputs:
+  LDAPSURL:
+    Description: LDAPS Route53 Alias Target
+    Value: !GetAtt ElasticLoadBalancer.DNSName
