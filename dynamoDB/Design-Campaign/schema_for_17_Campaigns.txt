@@ -1,0 +1,429 @@
+1. 全站 or 指定商品定額折: Hollister短褲任選現折100元
+{
+  "name": "Hollister短褲任選現折100元",
+  "ruleSet": [
+    {
+      "seq": 10,
+      "criteria": [{
+        "goodsID": [11, 22, 33, 44]
+      }],
+      "action": [
+        { 
+          "originalPrice": "salesPrice",
+          "deductAmount": 100
+        }
+      ]
+    }
+  ]
+}
+
+2. 全站 or 指定商品定率折: Apple 配件任選88折
+{
+  "name": "Apple 配件任選88折",
+  "ruleSet": [
+    {
+      "seq": 10,
+      "criteria": [{
+        "goodsID": [11, 22, 33, 44]
+      }],
+      "action": [
+        { 
+          "originalPrice": "salesPrice",
+          "rate": 88
+        }
+      ]
+    }
+  ]
+}
+
+3. 滿M件定率折
+{
+  "name": "此賣場任選滿3件結帳金額打88折",
+  "Description": "未達活動門檻件數, 仍可用東森價(原價)結帳, 但無法享折扣",
+  "ruleSet": [
+    {
+      "seq": 10,
+      "criteria": [{
+        "goodsID": [11, 22, 33, 44],
+        "goodsBuyX": 3
+      }],
+      "action": [
+        { 
+          "originalPrice": "salesPrice",
+          "rate": 88
+        }
+      ]
+    }
+  ]
+}
+
+4.滿M件定額 or 定額折
+{
+  "name": "此賣場任選滿3件結帳金額再折100元",
+  "Description": "未達活動門檻件數, 仍可用東森價(原價)結帳, 但無法享折扣",
+  "ruleSet": [
+    {
+      "seq": 10,
+      "criteria": [{
+        "goodsID": [11, 22, 33, 44],
+        "goodsBuyX": 3
+      }],
+      "action": [
+        { 
+          "originalPrice": "goodsSelectedAmountX",
+          "deductAmount": 100
+        }
+      ]
+    }
+  ]
+}
+
+5. 此賣場任選滿3件299元, 滿5件399元
+{
+  "name": "此賣場任選滿3件299元, 滿5件399元",
+  "Description": "未達活動門檻件數, 仍可用東森價(原價)結帳, 但無法享折扣",
+  "ruleSet": [
+    {
+      "seq": 10,
+      "criteria": [{
+        "goodsID": [11, 22, 33, 44],
+        "goodsBuyX": 3
+      }],
+      "action": [
+        { 
+          "fixedPrice": 299
+        }
+      ]
+    },
+    {
+      "seq": 20,
+      "criteria": [{
+        "goodsID": [11, 22, 33, 44],
+        "goodsBuyX": 5
+      }],
+      "action": [
+        {
+          "fixedPrice": 399
+        }
+      ]
+    }    
+  ]
+}
+
+6. 此賣場任選滿3件出貨, 結帳金額再打88折
+{
+  "name": "此賣場任選滿3件出貨, 結帳金額再打88折",
+  "Description": "未達活動門檻件數, 無法加入購物車結帳",
+  "ruleSet": [
+    {
+      "seq": 10,
+      "criteria": [{
+        "goodsID": [11, 22, 33, 44],
+        "goodsShipX": 3
+      }],
+      "action": [
+        { 
+          "originalPrice": "goodsSelectedAmountX",
+          "rate": 88
+        }
+      ]
+    }    
+  ]
+}
+
+7. 此賣場任選3件出貨, 結帳金額再折100元
+{
+  "name": "此賣場任選滿3件出貨, 結帳金額再折100元",
+  "Description": "未達活動門檻件數, 無法加入購物車結帳",
+  "ruleSet": [
+    {
+      "seq": 10,
+      "criteria": [{
+        "goodsID": [11, 22, 33, 44],
+        "goodsShipX": 3
+      }],
+      "action": [
+        { 
+          "originalPrice": "goodsSelectedAmountX",
+          "deductAmount": 100
+        }
+      ]
+    }    
+  ]
+}
+
+8. 此賣場任滿3件299元, 滿5件399元, 未達活動門檻件數, 無法加入購物車結帳
+{
+  "name": "此賣場任選滿3件299元, 滿5件399元",
+  "Description": "未達活動門檻件數, 無法加入購物車結帳",
+  "ruleSet": [
+    {
+      "seq": 10,
+      "criteria": [{
+        "goodsID": [11, 22, 33, 44],
+        "goodsShipX": 3
+      }],
+      "action": [
+        { 
+          "fixedPrice": 299
+        }
+      ]
+    },
+    {
+      "seq": 20,
+      "criteria": [{
+        "goodsID": [11, 22, 33, 44],
+        "goodsShipX": 5
+      }],
+      "action": [
+        {
+          "fixedPrice": 399
+        }
+      ]
+    }    
+  ]
+}
+
+9. 此賣場任選滿3000元結帳金額再打88折
+{
+  "name": "此賣場任選滿3000元結帳金額再打88折",
+  "Description": "未達活動門檻金額, 仍可用東森價(原價)結帳, 但無法享折扣",
+  "ruleSet": [
+    {
+      "seq": 10,
+      "criteria": [{
+        "goodsID": [11, 22, 33, 44],
+        "orderAmount": {
+          gt: 3000
+        }
+      }],
+      "action": [
+        { 
+          "originalPrice": "goodsSelectedAmountX",
+          "rate": 88
+        }
+      ]
+    }
+  ]
+}
+
+10. 此賣場任選滿3000元結帳金額再折300元
+{
+  "name": "此賣場任選滿3000元結帳金額再折300元",
+  "Description": "未達活動門檻金額, 仍可用東森價(原價)結帳, 但無法享折扣",
+  "ruleSet": [
+    {
+      "seq": 10,
+      "criteria": [{
+        "goodsID": [11, 22, 33, 44],
+        "orderAmount": {
+          gt: 3000
+        }
+      }],
+      "action": [
+        { 
+          "originalPrice": "goodsSelectedAmountX",
+          "deductAmount": 300
+        }
+      ]
+    }
+  ]
+}
+
+11. 任選滿M件出貨
+{
+  "name": "本賣場任選3件以上出貨",
+  "Description": "任選商品不需另外提報, 設定 & 賣場做在promo不鎖金額, 但未達件數門檻, 無法加入購物車結帳。",
+  "ruleSet": [
+    {
+      "seq": 10,
+      "criteria": [{
+        "goodsID": [11, 22, 33, 44],
+        "goodsShipX": {
+          gte: 3
+        }
+      }],
+      "action": [
+        { 
+          "originalPrice": "salesPrice",
+        }
+      ]
+    }
+  ]
+}
+
+12. 任選滿額出貨
+{
+  "name": "本賣場任選滿488元出貨",
+  "ruleSet": [
+    {
+      "seq": 10,
+      "criteria": [{
+        "goodsID": [11, 22, 33, 44],
+        "goodsSelectedAmountX": {
+          "gte": 488
+        }
+      }],
+      "action": [
+        { 
+          "originalPrice": "salesPrice"
+        }
+      ]
+    }
+  ]
+}
+
+13. 買ASUS手機, 享優惠價加購指定配件
+{
+  "name": "買ASUS手機, 享優惠價加購指定配件",
+  "ruleSet": [
+    {
+      "seq": 10,
+      "criteria": [{
+        "goodsID": [11, 22, 33, 44],
+      }],
+      "action": [
+        { 
+          "extraGoods": [
+            {
+              "goodsID": 55,
+              "fixedPrice": 100
+            },
+            {
+              "goodsID": 200,
+              "fixedPrice": 200
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+14. 買ASUS指定手機, 任選以下1個配件免費
+{
+  "name": "買ASUS手機, 享優惠價加購指定配件",
+  "ruleSet": [
+    {
+      "seq": 10,
+      "criteria": [{
+        "goodsID": [11, 22, 33, 44],
+      }],
+      "action": [
+        { 
+          "freeGoods": {
+            "goodsID" : [55, 100, 200],
+            "goodsBuyX": 1
+          }
+        }
+      ]
+    }
+  ]
+}
+
+15. 紅配綠成套出貨享組合價: 內衣、內褲各任選一件, 成套出貨享488元優惠價
+{
+  "name": "內衣、內褲各任選一件, 成套出貨享488元優惠價",
+  "Description": "未成套, 無法加入購物車結帳",
+  "ruleSet": [
+    {
+      "seq": 10,
+      "criteria": [
+        {
+          "goodsID": [11, 22, 33, 44],
+          "goodsShipX": 1,
+        }, 
+        {
+          "goodsID": [111, 222, 333, 444],
+          "goodsShipX": 1
+        }
+      ],
+      "action": [
+        {
+          "fixedPrice": 488
+        }
+      ]
+    }
+  ]
+}
+
+16.購物車結帳金額滿20,000元現折200元，滿50,000元現折600元
+{
+  "name": "購物車結帳金額滿20,000元現折200元，滿50,000元現折600元",
+  "ruleSet": [
+    {
+      "seq": 10,
+      "criteria": [
+        {
+          "orderAmount": {
+            "gte": 20000,
+            "lt": 50000
+          }
+        }
+      ],
+      "action": [
+        {
+          "originalPrice": "orderAmount",
+          "deductAmount": 200
+        }
+      ]
+    },
+    {
+      "seq": 20,
+      "criteria": [
+        {
+          "orderAmount": {
+            "gte": 50000
+          }
+        }
+      ],
+      "action": [
+        {
+          "originalPrice": "orderAmount",
+          "deductAmount": 600
+        }
+      ]
+    },    
+  ]
+}
+
+17.購物車結帳金額滿100,000元再打98折，滿200,000元再打95折
+{
+  "name": "購物車結帳金額滿100,000元再打98折，滿200,000元再打95折",
+  "ruleSet": [
+    {
+      "seq": 10,
+      "criteria": [
+        {
+          "orderAmount": {
+            "gte": 100000,
+            "lt": 200000
+          }
+        }
+      ],
+      "action": [
+        {
+          "originalPrice": "orderAmount",
+          "rate": 98
+        }
+      ]
+    },
+    {
+      "seq": 20,
+      "criteria": [
+        {
+          "orderAmount": {
+            "gte": 200000
+          }
+        }
+      ],
+      "action": [
+        {
+          "originalPrice": "orderAmount",
+          "rate": 95
+        }
+      ]
+    },    
+  ]
+}
+
