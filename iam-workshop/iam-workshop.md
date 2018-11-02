@@ -219,5 +219,9 @@ If you change existing EC2 instance tag `eva:project` from `starAlliance` to `cl
 
 ### Fix the modification issue. 
 
-Add the policy createTags condisitons
+Add a new additional permissions:
+
+![](images/22-ec2-tags.png)
+
+Now you can modify the launched EC2 instance project name.
 
