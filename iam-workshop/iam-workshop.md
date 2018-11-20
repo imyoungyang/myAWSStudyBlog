@@ -1,6 +1,6 @@
 # AWS IAM Policy Ninja Workshop
 
-
+### Part 1: EC2
 
 ## Create users and group
 Adminstor's works:
