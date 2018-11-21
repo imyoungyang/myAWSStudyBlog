@@ -1,6 +1,4 @@
-# AWS IAM Policy Ninja Workshop
-
-### Part 1: EC2
+# AWS IAM Policy Ninja Workshop - EC2
 
 ## Create users and group
 Adminstor's works:
@@ -271,3 +269,5 @@ Add a new additional permissions:
 
 Now you can modify the launched EC2 instance project name.
 
+# Conclusions
+For the all workshop answers, you can reference this [policy json file](https://github.com/imyoungyang/myAWSStudyBlog/blob/master/iam-workshop/eva-dev-sd1.json)
