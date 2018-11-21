@@ -122,15 +122,17 @@ limited ec2 instance types to t2* and t3*
 
 ### Condition 3: 
 
-Cost center `softwareDept1`
+Cost center `eva:costCenter`, value `softwareDept1`
 
 ![](images/10-ec2-tags.png)
 
-Click on review policy and finish.
+### Confirmed you will have the following three condistions
 
 ![](images/11-ec2-tags.png)
 
-## Debug launch failures
+Click on review policy and finish.
+
+## Debug launch failures - Configure Instance
 
 Login `dev@evaair.com` account and launch ec2 instance. You will stop at the step 2. You can't go to `Step 3. Configure Instance`. Turn on the browser debug mode, you will see the follow HTTP 403 forbidden. 
 
@@ -161,9 +163,44 @@ Login `dev@evaair.com` account and launch ec2 instance. You will stop at the ste
 
 ![](images/13-ec2-tags.png)
 
-#### Debug launch failures again
-
+## Debug launch failures - Run Instnace
 Login `dev@evaair.com` account and in the last steps, you still see the following error screen.
+
+![](images/14-ec2-tags.png)
+
+The error message is encoded and need to use the following command to decode the error messages with Admin role
+
+`aws sts decode-authorization-message --encoded-message`
+
+#### Switch back to Adminstrator
+
+You can use cloud9 bash shell and decode the error message:
+
+![](images/23-ec2-tags.png)
+
+The error message is about `actions:ec2:RunInstances`. If you put into the json formatter, you will see that:
+
+![](images/24-ec2-tags.png)
+
+Because you don't allow for the resource `arn:aws:ec2:*:*:instance/*`
+
+#### Fix IAM Policy
+
+##### Add addtional permission
+
+We need to add additional permissions for EC2 RunInstnaces with resource `arn:aws:ec2:*:*:instance/*`. Put the instanceType `t2.* or t3.*` in a seperate rule.
+
+![](images/25-ec2-tags.png)
+
+##### Modify original permission
+
+Remove resources `arn:aws:ec2:*:*:instance/*` and request conditions for `t2.* or t3.*` from previous RunInstance permissions statement. Maker sure it likes the following screen:
+
+![](images/26-ec2-tags.png)
+
+Click on the review policy and then save it.
+
+Login `dev@evaair.com` account and in the last steps, you still see the following error screen. **Yes, again...**
 
 ![](images/14-ec2-tags.png)
 
@@ -175,10 +212,11 @@ The error message is encoded and need to use the following command to decode the
 #### Switch back to Adminstrator
 
 You can use cloud9 bash shell and decode the error message:
+You will found the error at `"action\":\"ec2:CreateTags\"`
 
 ![](images/15-ec2-tags.png)
 
-You will found the error at `"action\":\"ec2:CreateTags\"`
+## Debug launch failures - Tags
 
 Back to IAM, edit policy `eva-dev-sd1`. click on`Add additional permissions`
 
@@ -210,6 +248,14 @@ The `CreateTags` configuration is as the following:
 ### Switch to dev1 account
 
 Now, you can create a EC2 instance successfully with tags: `Name`,  `eva:costCenter`, and `eva:project`
+
+## Oh! Yes, You can Launch EC2.
+
+
+
+# Futher challenge
+if you want to change ec2 instance project name. How can you do?
+
 
 ## Change launched EC2 instance project name
 
