@@ -65,11 +65,11 @@
             ],
             "Condition": {
                 "StringEquals": {
+                    "ec2:ResourceTag/eva:costCenter": "softwareDept1",
                     "ec2:ResourceTag/eva:project": [
                         "starAlliance",
                         "cloudTeam"
-                    ],
-                    "ec2:ResourceTag/eva:costCenter": "softwareDept1"
+                    ]
                 },
                 "ForAllValues:StringEquals": {
                     "aws:TagKeys/Name": [
@@ -103,6 +103,28 @@
         {
             "Sid": "VisualEditor4",
             "Effect": "Allow",
+            "Action": "ec2:RunInstances",
+            "Resource": [
+                "arn:aws:ec2:*::snapshot/*",
+                "arn:aws:ec2:*:*:launch-template/*",
+                "arn:aws:ec2:*:*:placement-group/*"
+            ],
+            "Condition": {
+                "StringEquals": {
+                    "ec2:ResourceTag/eva:costCenter": "softwareDept1"
+                },
+                "ForAllValues:StringEquals": {
+                    "aws:TagKeys": [
+                        "eva:costCenter",
+                        "Name",
+                        "eva:project"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "VisualEditor5",
+            "Effect": "Allow",
             "Action": [
                 "ec2:DescribeInstances",
                 "ec2:DescribeAddresses",
@@ -121,32 +143,17 @@
             "Resource": "*"
         },
         {
-            "Sid": "VisualEditor5",
+            "Sid": "VisualEditor6",
             "Effect": "Allow",
             "Action": "ec2:RunInstances",
             "Resource": [
                 "arn:aws:ec2:*:*:subnet/*",
                 "arn:aws:ec2:*:*:key-pair/*",
-                "arn:aws:ec2:*::snapshot/*",
-                "arn:aws:ec2:*:*:launch-template/*",
                 "arn:aws:ec2:*:*:volume/*",
                 "arn:aws:ec2:*:*:security-group/*",
-                "arn:aws:ec2:*:*:placement-group/*",
                 "arn:aws:ec2:*:*:network-interface/*",
                 "arn:aws:ec2:*::image/*"
-            ],
-            "Condition": {
-                "StringEquals": {
-                    "ec2:ResourceTag/eva:costCenter": "softwareDept1"
-                },
-                "ForAllValues:StringEquals": {
-                    "aws:TagKeys": [
-                        "eva:costCenter",
-                        "Name",
-                        "eva:project"
-                    ]
-                }
-            }
+            ]
         }
     ]
 }

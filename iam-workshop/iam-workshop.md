@@ -198,6 +198,45 @@ Remove resources `arn:aws:ec2:*:*:instance/*` and request conditions for `t2.* o
 
 Click on the review policy and then save it.
 
+#### Fix other resouces in the run instances
+
+Check the ec2 supported iam actions reouces [link](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-iam-actions-resources.html)
+
+Modify permissions statement. The following resouces supports `aws:TagKeys` and `ec2:ResourceTag`
+
+```
+"arn:aws:ec2:*::snapshot/*",
+"arn:aws:ec2:*:*:launch-template/*",
+"arn:aws:ec2:*:*:placement-group/*"
+```
+
+So, the original runInstances policy statement becomes the following:
+
+![](images/27-ec2-tags.png)
+
+##### Create new run instances statement
+
+With a run instances actions with the following resources:
+
+```
+"arn:aws:ec2:*:*:subnet/*",
+"arn:aws:ec2:*:*:key-pair/*",
+"arn:aws:ec2:*:*:volume/*",
+"arn:aws:ec2:*:*:security-group/*",
+"arn:aws:ec2:*:*:network-interface/*",
+"arn:aws:ec2:*::image/*"
+```
+
+![](images/28-ec2-tags.png)
+
+So that, you will have 3 RunInstances policy statmes:
+
+1. Allow to create t2.* and t3.* instance type
+2. Allow to create with tags (eva:costCenter, Name, and eva:project) and (eva:costCenter value is softwareDept1)
+3. Allow to use any resources: images, key-pair, network-interface, security group, subnet, and volume.
+
+#### Let us try fails again
+
 Login `dev@evaair.com` account and in the last steps, you still see the following error screen. **Yes, again...**
 
 ![](images/14-ec2-tags.png)
@@ -271,3 +310,7 @@ Now you can modify the launched EC2 instance project name.
 
 # Conclusions
 For the all workshop answers, you can reference this [policy json file](https://github.com/imyoungyang/myAWSStudyBlog/blob/master/iam-workshop/eva-dev-sd1.json)
+
+# Refrences
+* [EC2 policy](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ExamplePolicies_EC2.html#iam-example-runinstances)
+* [Policy example](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_examples.html)
