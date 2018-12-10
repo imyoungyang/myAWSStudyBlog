@@ -1,5 +1,3 @@
-# CloudWatch Logs
-
 # CloudWatch Logs Insigts - Lambda
 Use lambda as the example. You can select any prefix `/aws/lambda/` to check the lambda logs. You can reference the lambda code [here](https://github.com/imyoungyang/myAWSStudyBlog/blob/master/api-gw/echo-request.py) which to get the request user name.
 
