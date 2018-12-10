@@ -1,3 +1,8 @@
+# SageMaker Pipe Mode
+
+* [Accelerate model training using faster Pipe mode on Amazon SageMaker](https://aws.amazon.com/blogs/machine-learning/accelerate-model-training-using-faster-pipe-mode-on-amazon-sagemaker/)
+* [Sample Notebook](https://github.com/awslabs/amazon-sagemaker-examples/blob/master/advanced_functionality/pipe_bring_your_own/train.py)
+
 # Image Recognition In ML
 * Convolutional Neural Network (CNN) is good to handle image classification problem.
 
