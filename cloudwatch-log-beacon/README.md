@@ -1,5 +1,9 @@
 # CloudWatch Log Insights - Beacon Sample
 
+I wrote a step by step workshop to demo cloudwatch log insights, which is the new launch in re:Invent 2018. This workshop contains telemetric simulator + apigw + lambda + cloudwatch log inisghts and x-ray. It will be helpful to quickly understand the power of cloudwatch insights. The benefit to customers is you don't need to setup Elastic Search + Kibana to create simple dashboard.
+
+![](./images/00-overview.png)
+
 ## Log beacon lambda function
 This lambda function will log the beacon body into the lambda cloudwatch log. The souce code is [here](./apigw-log-body.py). 
 
