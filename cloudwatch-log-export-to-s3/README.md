@@ -31,7 +31,7 @@ Now we are ready configure our permission resources(IAM Role).
 
 #### Step 2 Create Lambda function
 Lambda: log-export
-1. Create new function from scratch then copy [code](.backup-cwlog-to-s3.py) to the function, and use the execution role we created(Lambda_log_export_task).
+1. Create new function from scratch then copy [code](backup-cwlog-to-s3.py) to the function, and use the execution role we created(Lambda_log_export_task).
 ![](./images/Lambda_Create.png)
 2. After function created, there are some value need to change in the code: EXPORT_BUCKET and CLOUDWATCH_LOG_GROUP. And also the EXPORT_PERIOD can be change if needed.
 
