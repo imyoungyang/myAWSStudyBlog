@@ -152,3 +152,50 @@ Click on Visulazation
 Click on "View traces". It goes to detail traces to see the slow query
 
 ![](./images/16-apigw.png) 
+
+## Create CloudWatch Alert
+
+select log groups `/aws/lambda/apigw-log-body` then create metric filter.
+
+![](./images/20-apigw.png) 
+
+In the filter pattern, input `{$.event = "exception"}`
+
+![](./images/21-apigw.png) 
+
+create filter
+
+![](./images/22-apigw.png) 
+
+create alarm
+
+![](./images/23-apigw.png) 
+
+### Setting Alarm
+![](./images/24-apigw.png) 
+![](./images/25-apigw.png) 
+
+### create actions
+
+![](./images/26-apigw.png) 
+![](./images/27-apigw.png) 
+![](./images/28-apigw.png) 
+![](./images/29-apigw.png) 
+
+### check filter
+
+![](./images/31-apigw.png) 
+![](./images/30-apigw.png) 
+
+### Get the matrics
+
+![](./images/32-apigw.png) 
+
+### Create exceptions and get email notification
+
+![](./images/33-apigw.png) 
+
+![](./images/34-apigw.png) 
+
+![](./images/35-apigw.png) 
+
