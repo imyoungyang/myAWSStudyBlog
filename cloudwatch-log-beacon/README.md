@@ -103,7 +103,28 @@ group: `/aws/lambda/apigw-log-body`
 fields event, page, clientid, Referer, custom_metric_name | filter @message like /event/
 | limit 20
 ```
+
 ![](./images/10-apigw.png) 
+
+Click on the add to dashboard
+
+
+### Beacon Log filter login
+group: `/aws/lambda/apigw-log-body`
+
+```
+fields event, page, clientid, Referer, custom_metric_name | filter @message like /event/
+| filter event = 'login'
+```
+![](./images/17-apigw.png) 
+
+create dashboard
+
+![](./images/18-apigw.png) 
+
+Then you will see it in the dashboard
+
+![](./images/19-apigw.png) 
 
 #### see the viualization report
 

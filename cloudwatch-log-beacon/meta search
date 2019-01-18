@@ -1,0 +1,12 @@
+meta search
+sky scaner 網路 search, api
+Line 連線過來, 1 & 2 second delay
+IIS
+
+VM Redis, 打掛了
+redis stat 
+cluster mode
+
+Actions:
+1. Hyber cloud
+2. auto scaling promotion campaign
