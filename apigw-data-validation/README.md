@@ -8,6 +8,7 @@ Amazon API Gateway recently announced the release of request validators, a simpl
 3. Create models in the API Gateway
 4. Enable API Gateway Request Validator
 5. Test the request validator
+6. Customerize the validation error message
 
 ## Analysis the request body format
 Give the example for the reqeust body as the following to create the transactin tickets:
@@ -242,6 +243,49 @@ curl -v -H "Content-Type: application/json" -X POST -d '[
   }
 ]' https://$API_ID.execute-api.us-east-1.amazonaws.com/dev
 ```
+
+## Customerize the validation error message
+
+If you want to frontend get the validation error message, you can add the validation error message in your repsonse message.
+
+Click on "Gateway Response". Find "Bad Request Body (400)". Change the mapping template as: 
+
+```
+{"message":$context.error.messageString,
+"error":$context.error.validationErrorString}
+```
+
+more informaiton about context you can check the [link](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#context-variable-reference)
+
+![](./images/19-api-validator.png)
+
+You can use the test client post the following body:
+
+```
+[
+    {
+      "account-id": "abcdef123456sss",
+      "type": "WOW",
+      "symbol": "AMZN",
+      "shares": 10000000,
+      "order-date": "2018-01-28",
+      "details": {
+        "limit": 1000
+      }
+    }
+]
+```
+
+Now, you can see the error message as the following:
+
+```
+{"message": "Invalid request body", "error":[instance value (\"WOW\")
+ not found in enum (possible values: [\"STOCK\",\"BOND\",\"CASH\"]), 
+ numeric instance is greater than the required maximum (maximum: 1000,
+  found: 10000000)]}
+```
+
+![](./images/20-api-validator.png)
 
 # References
 * [How do I associate a model with my API in Amazon API Gateway?](https://aws.amazon.com/premiumsupport/knowledge-center/model-api-gateway/)
