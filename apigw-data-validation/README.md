@@ -8,7 +8,8 @@ Amazon API Gateway recently announced the release of request validators, a simpl
 3. Create models in the API Gateway
 4. Enable API Gateway Request Validator
 5. Test the request validator
-6. Customerize the validation error message
+6. (Optional) Customerize the validation error message
+7. (Optional) Log the invalidate body information to cloudwatch log
 
 ## Analysis the request body format
 Give the example for the reqeust body as the following to create the transactin tickets:
@@ -286,6 +287,39 @@ Now, you can see the error message as the following:
 ```
 
 ![](./images/20-api-validator.png)
+
+## (Optional) Log the invalidate body information to cloudwatch log
+
+Click on the stage and select tab `log`. Add the `"invalidBody": $context.error.validationErrorString` in the json log format.
+
+![](./images/21-api-validator.png)
+
+Use the following curl command to hit the dev stage api:
+
+```
+curl -v -H "Content-Type: application/json" -X POST -d '[
+  {
+    "account-id": "abcdef123456",
+    "type": "foobar",
+    "symbol": "thisstringistoolong",
+    "shares": 999999,
+    "order-date": "2018-1-2",
+    "details": {
+       "limit": 1000
+    }
+  }
+]' https://$API_ID.execute-api.us-east-1.amazonaws.com/dev
+```
+
+You can get the error message about format error.
+
+```
+{"message": "Invalid request body", "error":[ECMA 262 regex \"^\\d{4}\\-(0[1-9]|1[012])\\-(0[1-9]|[12][0-9]|3[01])$\" does not match input string \"2018-1-2\", numeric instance is greater than the required maximum (maximum: 1000, found: 999999), string \"thisstringistoolong\" is too long (length: 19, maximum allowed: 4), instance value (\"foobar\") not found in enum (possible values: [\"STOCK\",\"BOND\",\"CASH\"])]}
+```
+
+Later on, you can check in the cloudwatch log to see the invalid body messages:
+
+![](./images/22-api-validator.png)
 
 # References
 * [How do I associate a model with my API in Amazon API Gateway?](https://aws.amazon.com/premiumsupport/knowledge-center/model-api-gateway/)
