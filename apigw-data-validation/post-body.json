@@ -1,0 +1,23 @@
+[
+    {
+      "account-id": "abcdef123456",
+      "type": "STOCK",
+      "symbol": "AMZN",
+      "shares": 100,
+      "order-date": "2018-01-28",
+      "details": {
+        "limit": 1000
+      }
+    },
+    {
+      "account-id": "zyxwvut987654",
+      "type": "STOCK",
+      "symbol": "BA",
+      "shares": 250,
+      "order-date": "2018-01-28",
+      "details": {
+        "limit": 200
+      }
+    }
+]
+

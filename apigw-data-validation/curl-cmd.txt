@@ -1,0 +1,12 @@
+curl -v -H "Content-Type: application/json" -X POST -d '[
+  {
+    "account-id": "abcdef123456",
+    "type": "foobar",
+    "symbol": "thisstringistoolong",
+    "shares": 999999,
+    "order-date": "2018-1-2",
+    "details": {
+       "limit": 1000
+    }
+  }
+]' https://$API_ID.execute-api.us-east-1.amazonaws.com/dev
