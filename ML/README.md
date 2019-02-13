@@ -1,3 +1,7 @@
+# Machine Learning at the Edge
+* Image classification [blog1](https://aws.amazon.com/blogs/iot/machine-learning-at-the-edge-using-and-retraining-image-classification-models-with-aws-iot-greengrass-part-1/) [blog2](https://aws.amazon.com/blogs/iot/machine-learning-at-the-edge-using-and-retraining-image-classification-models-with-aws-iot-greengrass-part-2/?nc1=b_rp)
+* [greengrass ml](https://docs.aws.amazon.com/greengrass/latest/developerguide/ml-console.html)
+
 # SageMaker Pipe Mode
 
 * [Accelerate model training using faster Pipe mode on Amazon SageMaker](https://aws.amazon.com/blogs/machine-learning/accelerate-model-training-using-faster-pipe-mode-on-amazon-sagemaker/)
