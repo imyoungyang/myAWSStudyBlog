@@ -34,12 +34,16 @@ Follow the step by step [instruction](https://github.com/imyoungyang/myAWSStudyB
 
 ## Part5: Let corp DNS work with AWS
 
-Add rout53 inbound endpoints into corp dc dns forwarder. The instruction is [here](https://github.com/imyoungyang/myAWSStudyBlog/tree/master/vpc-hero-lab-with-AD#change-corp-dns-forwarder-to-route53-resolver-inbound)
+Add rout53 inbound endpoints into corp dc dns forwarder. The instruction is [here](https://github.com/imyoungyang/myAWSStudyBlog/tree/master/win-dns-forwarder)
 
 ![](./images/05-archi.png)
 
 ## Part6: Verify DNS Query Corp Machines in AWS
 
-Login to the AWS basion machines and run command `nslookup the corp.example.com`. You should get the DNS result from route53 resolver via corp AD.
+1. Login to the AWS basion machines and run command `nslookup the corp.example.com`. You should get the DNS result from route53 resolver via corp AD.
 
-![](./images/verify-01.png)
+	![](./images/verify-01.png)
+
+2. Login to corp SRV01 machine. run command `nslookup secretsmanager.us-east-1.amazonaws.com`. You should get the private link ips.
+
+	![](./images/verify-02.png)
