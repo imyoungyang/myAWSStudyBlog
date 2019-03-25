@@ -213,6 +213,7 @@ Ensure that your security group configuration permits the following:
 	* udp/500 from the VPN Endpoint IP(s) (ingress)
 	* udp/4500 from the VPN Endpoint IP(s) (ingress)
 	* VPC CIDR Block of the destination block ie. `172.17.0.0/16` is allowed to send traffic as desired, e.g. ALL traffic (ingress)
+	* VPC CIDR Block of the source block. You can control which subnets allows to use VPN. In here example, we add `172.16.0.0/16` (ingress)
 
 ![](./images/12.png)
 ![](./images/11.png)
@@ -234,8 +235,12 @@ Now we can test the tunnel:
 	
 3. Create a basion machine in the public subnet at destination VPC. i.e **us-east-1** for your destination VPC `172.17.0.0/16`. And, then ping the Openswan server.
 
-	![](./images/16.png)   
+	![](./images/16.png) 
+	
+4. Create a PINGable machine in the private subnet at source VPC. ie **us-west-2**. Remember to setup the private subnet route tables. And, then test basion machine can ping this machine. And, this machine can ping monitoring mahcines. 
 
+	![](./images/17.png)
+	![](./images/18.png)
 
 ## Final Diagram
 This is the final architecture diagram
