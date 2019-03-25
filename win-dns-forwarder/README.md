@@ -23,3 +23,12 @@
 2. nslookup the private link and you will get the private ip instead of public internet ip.
 
 ![](./images/05.png)
+
+## Additional Notes for security
+
+If you need to have the DNS server in pubic subnet, we recommend that you:
+
+1. Update your EC2 Security Group settings to disable internet accessibility, and
+2. Disable DNS recursion.
+	1. To disable recursion on [BIND](https://www.team-cymru.org/Open-Resolver-Challenge.html)
+	2. To disable recursion on [Windows DNS server](https://technet.microsoft.com/en-us/library/cc771738.aspx)
