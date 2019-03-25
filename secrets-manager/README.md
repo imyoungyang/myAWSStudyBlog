@@ -49,3 +49,5 @@
 4. Test the lambda to make sure it can get the response from the secrets manager. The sample code is [here](./sample.py)
 
 	![](./images/05.png)
+	
+5. Publish your lambda code.

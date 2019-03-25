@@ -47,3 +47,10 @@ Add rout53 inbound endpoints into corp dc dns forwarder. The instruction is [her
 2. Login to corp SRV01 machine. run command `nslookup secretsmanager.us-east-1.amazonaws.com`. You should get the private link ips.
 
 	![](./images/verify-02.png)
+	
+## Part7: Setup the secrets manager and lambda function
+
+In this step, you will store your application secrets in the secrets manager. The secrets manager support KMS, key rotation, and DB connection strings. You can use a lambda funciton in the VPC to retrieve the secrets. The instructions is [here](
+
+![](./images/06-archi.png)
+
