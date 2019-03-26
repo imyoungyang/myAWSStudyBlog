@@ -1,4 +1,4 @@
-# Enterprise Hybrid DNS solutions on AWS
+# Enterprise Hybrid Cloud Solutions on AWS
 
 In this workshop, you will simulate a hybrid cloud environment:
 
