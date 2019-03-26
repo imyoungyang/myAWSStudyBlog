@@ -50,7 +50,13 @@ Add rout53 inbound endpoints into corp dc dns forwarder. The instruction is [her
 	
 ## Part7: Setup the secrets manager and lambda function
 
-In this step, you will store your application secrets in the secrets manager. The secrets manager support KMS, key rotation, and DB connection strings. You can use a lambda funciton in the VPC to retrieve the secrets. The instructions is [here](https://github.com/imyoungyang/myAWSStudyBlog/tree/master/secrets-manager)
+In this step, you will store your application secrets in the secrets manager. The secrets manager support KMS, key rotation, and DB connection strings. You can use a lambda funciton in the VPC to retrieve the secrets. The instructions are [here](https://github.com/imyoungyang/myAWSStudyBlog/tree/master/secrets-manager)
 
 ![](./images/06-archi.png)
+
+## Part8: Add X-Ray to trace more detail information
+
+Add X-ray lambda layer and instrumentation in the lambda codes. You can break down more detail informations. The instructions are [here](https://github.com/imyoungyang/myAWSStudyBlog/tree/master/x-ray)
+
+![](./images/07-archi.png)
 
