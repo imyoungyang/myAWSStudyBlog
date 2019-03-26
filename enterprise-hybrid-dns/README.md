@@ -60,3 +60,8 @@ Add X-ray lambda layer and instrumentation in the lambda codes. You can break do
 
 ![](./images/07-archi.png)
 
+## Part9: Add private API Gateway
+
+In this step, you need to create a private API Gateway Endpoint, invoke secrete manger lambda function, and build up the service map to see the latency of all hops. Also, make sure the private api endpoint can be invoked from the corp, i.e `us-west-2`. The instructions are [here](https://github.com/imyoungyang/myAWSStudyBlog/tree/master/apigw-private)
+
+![](./images/08-archi.png)
