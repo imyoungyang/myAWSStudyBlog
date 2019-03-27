@@ -1,13 +1,17 @@
-# Enterprise Hybrid Cloud Solutions on AWS
+# Architecting on AWS Workshop
 
 In this workshop, you will simulate a hybrid cloud environment:
 
 - Corp (on-premise in `us-west-2`): An Windows AD. ie. corp.example.com
 - Site-to-Site VPN Connections: DX or software VPN (Openswan)
+- Hybrid DNS for Corp and Cloud
 - Cloud (aws in `us-east-1`): 
-	- Basion: An EC2
-	- Internal Applications via private links: API Gateway, Secrets Manager, s3, and etc.
+	- IAM Nijia controller
+	- WAF, Private API Gateway, Lambda, Secrets Manager, S3, CloudWatch, CloudWatch Log insides, and etc.
+	- RDS, DynamoBD
+	- Kinesis Firehouse
 
+It's a real case in a enterprise or start-up companies environment. The workshop level is 300 to 400. Good to sharp your saw on AWS.
 
 ## Part1: Setup the site to site VPN
 Setup the following diagram to connect Corp (`us-west-2`) and AWS Cloud (`us-east-1`). Please follow the step by step instructions [here](https://github.com/imyoungyang/myAWSStudyBlog/tree/master/openswan)
