@@ -1,84 +1,71 @@
-# Setup You EC2
+# Architecting on AWS Workshop
 
-### Setup Development Tools
-```
-sudo yum update -y
-sudo yum groupinstall "Development Tools"
-```
-Now, you will have python 2.7.
+In this workshop, you will simulate a hybrid cloud environment:
 
-### Install Node.js 8:
-```
-curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -
-sudo yum -y install nodejs
-```
+- Corp (on-premise in `us-west-2`): An Windows AD. ie. corp.example.com
+- Site-to-Site VPN Connections: DX or software VPN (Openswan)
+- Hybrid DNS for Corp and Cloud
+- Cloud (aws in `us-east-1`): 
+	- IAM Nijia controller
+	- WAF, Private API Gateway, Lambda, Secrets Manager, S3, CloudWatch, CloudWatch Log insides, and etc.
+	- RDS, DynamoBD
+	- Kinesis Firehouse
 
-### Enable the EPEL repository
+It's a real case in a enterprise or start-up companies environment. The workshop level is 300 to 400. Good to sharp your saw on AWS.
 
-  * Please see this [FAQ - EC2 enable EPEL](https://aws.amazon.com/premiumsupport/knowledge-center/ec2-enable-epel/)
-    - `vim /etc/yum.repos.d/epel.repo`
-    - Locate and change the entry enabled=0 to enabled=1 that is located in the $basearch section of the epel.repo file.
-    - `sudo yum-config-manager --enable epel`
-    - `sudo yum --enablerepo=epel install zabbix`
+## Part1: Setup the site to site VPN
+Setup the following diagram to connect Corp (`us-west-2`) and AWS Cloud (`us-east-1`). Please follow the step by step instructions [here](https://github.com/imyoungyang/myAWSStudyBlog/tree/master/openswan)
 
-### Add Repositories for Amazon Linux
-  - default launch with two Repositories: `amzn-main` and `amzn-updates`.
-  - List the installed yum repositories with the following command:
+![](./images/01-archi.png)
 
-    `yum repolist all`
+## Part2: Setup windows AD
+Setup a windows RDP basion, Windows Active Directory, and a windows server to join AD domain. Please follow the step by step instructions [here](https://github.com/imyoungyang/myAWSStudyBlog/tree/master/windows-ad-on-ec2) to setup a windows AD on EC2.
 
-  - enable a yum repository in `/etc/yum.repos.d`
+![](./images/02-archi.png)
 
-    `sudo yum-config-manager --enable <repo id>`
+## Part3: Private Links for AWS
+You need to store some secrets such as DB connection strings in AWS secrets manager. But, you don't want to routes the API calls via public internet. In AWS, you need to create a private links for secrets manager.
 
-    such as `epel` for `<repo id>`.
+Please follow the instrucitons [here](https://github.com/imyoungyang/myAWSStudyBlog/tree/master/vpc-private-link) to create the private links.
 
-  - reference this [link](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/add-repositories.html)
+![](./images/03-archi.png)
 
-### Setup `cmake`
-```
-wget https://cmake.org/files/v3.8/cmake-3.8.0.tar.gz
-tar -zxf cmake-3.8.0.tar.gz
-cd cmake-3.8.0
-./configure
-make
-sudo make install
-```
+## Part4: Route53 Resolver
 
-### Install OpenSSL
-  * Note: Please visit [Openssl website](https://www.openssl.org/source/) to get latest OpenSSL
+Follow the step by step [instruction](https://github.com/imyoungyang/myAWSStudyBlog/tree/master/route53-resolver) to setup the route53 resolver. So, the AWS cloud can forward the DNS query for the `corp.example.com` to the on-premise DC.
 
-```
-wget https://www.openssl.org/source/openssl-1.1.0f.tar.gz
-tar -xvzf openssl-1.0.2k.tar.gz
-cd openssl-1.0.2k
-./config --prefix=/usr/
-make
-sudo make install
-```
-  * Check openssl version
+![](./images/04-archi.png)
 
-```
-openssl version -a
-```
+## Part5: Let corp DNS work with AWS
 
-### Hardlink/Softlink Protection
-  * For security, recommend to do this. See the [blog](http://danwalsh.livejournal.com/64493.html)
-  * Add two lines to `/etc/sysctl.d/00-defaults.conf`
+Add rout53 inbound endpoints into corp dc dns forwarder. The instruction is [here](https://github.com/imyoungyang/myAWSStudyBlog/tree/master/win-dns-forwarder)
 
-```
-# Hardlink/Softlink Protection
-fs.protected_hardlinks = 1
-fs.protected_symlinks = 1
-```
+![](./images/05-archi.png)
 
-  * validate the change
-    * `sudo sysctl -a | grep fs`
-    * check the results with
-    ```
-    fs.protected_hardlinks = 1
-    fs.protected_symlinks = 1    
-    ```
+## Part6: Verify DNS Query Corp Machines in AWS
 
-### Save an AMI for you
-  * After your AMI saved, run `sudo reboot` because let hardlink/softlink protection take effects.
+1. Login to the AWS basion machines and run command `nslookup the corp.example.com`. You should get the DNS result from route53 resolver via corp AD.
+
+	![](./images/verify-01.png)
+
+2. Login to corp SRV01 machine. run command `nslookup secretsmanager.us-east-1.amazonaws.com`. You should get the private link ips.
+
+	![](./images/verify-02.png)
+	
+## Part7: Setup the secrets manager and lambda function
+
+In this step, you will store your application secrets in the secrets manager. The secrets manager support KMS, key rotation, and DB connection strings. You can use a lambda funciton in the VPC to retrieve the secrets. The instructions are [here](https://github.com/imyoungyang/myAWSStudyBlog/tree/master/secrets-manager)
+
+![](./images/06-archi.png)
+
+## Part8: Add X-Ray to trace more detail information
+
+Add X-ray lambda layer and instrumentation in the lambda codes. You can break down more detail informations. The instructions are [here](https://github.com/imyoungyang/myAWSStudyBlog/tree/master/x-ray)
+
+![](./images/07-archi.png)
+
+## Part9: Add private API Gateway
+
+In this step, you need to create a private API Gateway Endpoint, invoke secrete manger lambda function, and build up the service map to see the latency of all hops. Also, make sure the private api endpoint can be invoked from the corp, i.e `us-west-2`. The instructions are [here](https://github.com/imyoungyang/myAWSStudyBlog/tree/master/apigw-private)
+
+![](./images/08-archi.png)
