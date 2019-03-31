@@ -72,3 +72,6 @@ In this step, you need to create a private API Gateway Endpoint, invoke secrete 
 
 ## Part10: WAF
 
+Enable WAF to protect your private api gateway. The instructions are [here](https://github.com/imyoungyang/myAWSStudyBlog/tree/master/waf)
+
+![](./images/09-archi.png)
