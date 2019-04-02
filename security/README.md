@@ -22,6 +22,10 @@
 	* [ecs-canary-blue-green-deployment](https://github.com/awslabs/ecs-canary-blue-green-deployment)
 	* [ecs-blue-green-deployment](https://github.com/awslabs/ecs-blue-green-deployment)
 
+# Cognito
+
+* Demo [link](https://s3-ap-northeast-1.amazonaws.com/tsukada-aws/demos/cognito-user-pools-custom-auth/index.html)
+
 # Docker Network Modes
 
 * The Docker networking mode to use for the containers in the task. The valid values are `none, bridge, awsvpc, and host`. 
