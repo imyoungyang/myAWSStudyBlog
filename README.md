@@ -87,3 +87,10 @@ Build bidirectional communication applications using WebSocket APIs in Amazon AP
 In this section, you need to build a mobile app beacon solutions for the emergency incidents. The instructions are [here](./cloudwatch-log-beacon/README.md)
 
 ![](./images/11-archi.png)
+
+## Part13: AWS Identify and Access Management (IAM)
+
+Understand the resource tags, IAM PARC: Principle, Action, Resource, Conditions. Please finish the IAM Njia for EC2 [here](./iam-workshop/iam-workshop.md), for S3 [here](./iam-workshop/iam-workshop-s3.md), and for Lambda [here](./iam-workshop/iam-workshop-lambda.md).
+
+![](./images/12-archi.png)
+
