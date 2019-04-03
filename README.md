@@ -72,6 +72,24 @@ In this step, you need to create a private API Gateway Endpoint, invoke secrete 
 
 ## Part10: WAF
 
-Enable WAF to protect your private api gateway. The instructions are [here](https://github.com/imyoungyang/myAWSStudyBlog/tree/master/advance-architecting/waf)
+Enable WAF to protect your private api gateway. You need to verify the waf configuraiton for sql-injection, honey-pot, http flooding. The instructions are [here](https://github.com/imyoungyang/myAWSStudyBlog/tree/master/advance-architecting/waf)
 
 ![](./images/09-archi.png)
+
+## Part11: WebSocket on API Gateway
+
+Build bidirectional communication applications using WebSocket APIs in Amazon API Gateway without having to provision and manage any servers. API Gateway can handle the WebSocket connections between the client and service. It lets you build your business logic using HTTP-based backends such as AWS Lambda, Amazon Kinesis, or any other HTTP endpoint. The instructions are [here](./advance-architecting/waf/README.md)
+
+![](./images/10-archi.png)
+
+## Part12: WebSocket on API Gateway
+
+Build bidirectional communication applications using WebSocket APIs in Amazon API Gateway without having to provision and manage any servers. API Gateway can handle the WebSocket connections between the client and service. It lets you build your business logic using HTTP-based backends such as AWS Lambda, Amazon Kinesis, or any other HTTP endpoint. The instructions are [here](./advance-architecting/waf/README.md)
+
+![](./images/10-archi.png)
+
+## Part13: Beacon Solutions on - CloudWatch Log Insights
+
+In this section, you need to build a mobile app beacon solutions for the emergency incidents. The instructions are [here](./cloudwatch-log-beacon/README.md)
+
+![](./images/11-archi.png)
