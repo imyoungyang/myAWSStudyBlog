@@ -82,13 +82,7 @@ Build bidirectional communication applications using WebSocket APIs in Amazon AP
 
 ![](./images/10-archi.png)
 
-## Part12: WebSocket on API Gateway
-
-Build bidirectional communication applications using WebSocket APIs in Amazon API Gateway without having to provision and manage any servers. API Gateway can handle the WebSocket connections between the client and service. It lets you build your business logic using HTTP-based backends such as AWS Lambda, Amazon Kinesis, or any other HTTP endpoint. The instructions are [here](./advance-architecting/waf/README.md)
-
-![](./images/10-archi.png)
-
-## Part13: Beacon Solutions on - CloudWatch Log Insights
+## Part12: Beacon Solutions on - CloudWatch Log Insights
 
 In this section, you need to build a mobile app beacon solutions for the emergency incidents. The instructions are [here](./cloudwatch-log-beacon/README.md)
 
