@@ -78,7 +78,7 @@ Enable WAF to protect your private api gateway. You need to verify the waf confi
 
 ## Part11: WebSocket on API Gateway
 
-Build bidirectional communication applications using WebSocket APIs in Amazon API Gateway without having to provision and manage any servers. API Gateway can handle the WebSocket connections between the client and service. It lets you build your business logic using HTTP-based backends such as AWS Lambda, Amazon Kinesis, or any other HTTP endpoint. The instructions are [here](./advance-architecting/waf/README.md)
+Build bidirectional communication applications using WebSocket APIs in Amazon API Gateway without having to provision and manage any servers. API Gateway can handle the WebSocket connections between the client and service. It lets you build your business logic using HTTP-based backends such as AWS Lambda, Amazon Kinesis, or any other HTTP endpoint. The instructions are [here](./advance-architecting/apigw-websocket/README.md)
 
 ![](./images/10-archi.png)
 
