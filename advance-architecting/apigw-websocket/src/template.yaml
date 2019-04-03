@@ -1,0 +1,41 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Serverless Specification template describing your function.
+Resources:
+  wsEcho:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: wsEcho/echo.handler
+      Runtime: nodejs8.10
+      Description: ''
+      MemorySize: 128
+      Timeout: 15
+      Role: 'arn:aws:iam::<aws-account-id>:role/lambda_basic_execution_role'
+  wsConnect:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: wsConnect/connect.handler
+      Runtime: nodejs8.10
+      Description: ''
+      MemorySize: 128
+      Timeout: 15
+      Role: 'arn:aws:iam::<aws-account-id>:role/lambda_basic_execution_role'
+  wsDefault:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: wsDefault/default.handler
+      Runtime: nodejs8.10
+      Description: ''
+      MemorySize: 128
+      Timeout: 15
+      Role: 'arn:aws:iam::<aws-account-id>:role/lambda_basic_execution_role'
+  wsDisconnect:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: wsDisconnect/disconnect.handler
+      Runtime: nodejs8.10
+      Description: ''
+      MemorySize: 128
+      Timeout: 15
+      Role: 'arn:aws:iam::<aws-account-id>:role/lambda_basic_execution_role'
+

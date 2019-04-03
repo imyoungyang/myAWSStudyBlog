@@ -1,0 +1,11 @@
+{
+  "name": "wsecho",
+  "version": "1.0.0",
+  "description": "echo message for WebSockets on API Gateway",
+  "main": "echo.js",
+  "author": "beyoung@amazon.com",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.434.0"
+  }
+}

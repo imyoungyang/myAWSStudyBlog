@@ -1,0 +1,36 @@
+{
+    "requestContext": {
+        "routeKey": "echo",
+        "authorizer": "",
+        "messageId": "XjJHEekpoAMCJqQ=",
+        "integrationLatency": "",
+        "eventType": "MESSAGE",
+        "error": "",
+        "extendedRequestId": "XjJHEGM3IAMFivg=",
+        "requestTime": "03/Apr/2019:06:40:32 +0000",
+        "messageDirection": "IN",
+        "stage": "dev",
+        "connectedAt": 1554273393560,
+        "requestTimeEpoch": 1554273632457,
+        "identity": {
+            "cognitoIdentityPoolId": null,
+            "accountId": null,
+            "cognitoIdentityId": null,
+            "caller": null,
+            "sourceIp": "72.21.xx.99",
+            "accessKey": null,
+            "cognitoAuthenticationType": null,
+            "cognitoAuthenticationProvider": null,
+            "userArn": null,
+            "userAgent": null,
+            "user": null
+        },
+        "requestId": "XjJHEGM3IAMFivg=",
+        "domainName": "xxxxxx.execute-api.us-east-1.amazonaws.com",
+        "connectionId": "XjIhveb8IAMCJqQ=",
+        "apiId": "2ndnya1lq8",
+        "status": ""
+    },
+    "body": "{\"action\": \"echo\", \"data\": \"meow\"}",
+    "isBase64Encoded": false
+}
