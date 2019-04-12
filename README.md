@@ -94,3 +94,10 @@ Understand the resource tags, IAM PARC: Principle, Action, Resource, Conditions.
 
 ![](./images/12-archi.png)
 
+## Part14: Lambda Performance Tuning
+
+Please improve the lambda performance. Reduce the boto init time in the lambda function. The instructions are [here](./advance-architecting/lambda-black-belt/README.md)
+
+![](./images/13-archi.png)
+
+
