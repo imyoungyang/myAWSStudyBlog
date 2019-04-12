@@ -100,4 +100,8 @@ Please improve the lambda performance. Reduce the boto init time in the lambda f
 
 ![](./images/13-archi.png)
 
+## Part15: Face Recognition
 
+Use the AWS AI services - Rekognition to identify multi-faces in an image. The instructions are [here](./advance-architecting/face-rekognition/README.md)
+
+![](./images/14-archi.png)
