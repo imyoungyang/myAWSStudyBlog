@@ -3,6 +3,60 @@
 2. Create api gateway with labmda to get the webhook payload
 3. Create webhook in the github organization [link](https://developer.github.com/webhooks/creating/). Content type use `application/json`
 
+# Part1: GitHub Personal Access Tokens
+1. Create personal access tokens
+	![](./images/01.png)
+2. Give token name and select the token scope
+	![](./images/02.png)
+3. Copy the personal key and keep it in secrete place.
+	![](./images/03.png)
+4. Now, you have a personal access tokens
+	![](./images/04.png)
+	
+# Part2: Create Organizations
+1. In personal setting, click on organization.
+	![](./images/05.png)
+2. Create Organization
+	![](./images/06.png)
+
+# Part3: Save Creditial in AWS Secrets Manager
+1. In AWS Secrets Manager, create new secret
+	![](./images/12.png)
+2. Give secret name
+	![](./images/13.png)
+3. Save the secrets
+	![](./images/14.png)
+
+	
+# Part4: Create a webhook endpoint in AWS
+1. In AWS Cloud9, click on right tab AWS resources. Then Add Lambda.
+	![](./images/07.png)
+2. Application Name: `aws-gitee-webhook`, Function Name: `repoWebhook`
+	![](./images/08.png)
+3. Use api-gateway-hello-world node.js tempalte
+	![](./images/09.png)
+4. Add api gateway trigger
+	![](./images/10.png)
+5. Add lambda execution role
+	![](./images/11.png)
+6. Install [aws git secrets](https://github.com/awslabs/git-secrets) for the folder
+7. The sample code is [here](https://github.com/imyoungyang/aws-gitee-webhook/tree/master/repoWebhook)
+8. The SAM template file is [here](https://github.com/imyoungyang/aws-gitee-webhook/blob/master/template.yaml)
+9. After that, deploy your code to AWS APIGateway and Lambda
+	![](./images/15.png)
+1. Get the webhook endpoint in the lambda console
+	![](./images/16.png)
+
+# Part5: Verify the webhook
+1. In github EE organization setting pages, click on Add webhook
+	![](./images/17.png)
+2. Config the webhook. content type: `application/json` and put your personal access token in Secret. And, send me everything.
+	![](./images/18.png)
+3. After you save, GitHub EE will call your webhook endpoint. You can see the log in your lambda cloudwatch.
+	![](./images/19.png)
+4. Create a new repository in the orginzation. You will get the repo create webhook event.
+	![](./images/20.png)
+
 # Codebuild or CodePipeline
 
 ## CodeBuild
@@ -46,6 +100,7 @@ SSH URLs provide access to a Git repository via SSH, a secure protocol. To use t
 * [Implementing gitflow using codepipeline, codecommit, codebuild and codedeploy](https://aws.amazon.com/blogs/devops/implementing-gitflow-using-aws-codepipeline-aws-codecommit-aws-codebuild-and-aws-codedeploy/)
 
 # CDK
+* [CDK Developer Guide](https://docs.aws.amazon.com/cdk/api/latest/)
 * [CDK APP Delivery](https://github.com/awslabs/aws-cdk/tree/master/packages/%40aws-cdk/app-delivery)
 * [CDK Codebuild soure github enterprise](https://awslabs.github.io/aws-cdk/refs/_aws-cdk_aws-codebuild.html#githubsource-and-githubenterprisesource)
 * [CDK connect github with personal token](https://github.com/awslabs/aws-cdk/issues/1844)
@@ -65,6 +120,18 @@ SSH URLs provide access to a Git repository via SSH, a secure protocol. To use t
 	```
 	curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com
 	```
+	
+* Create authrization token [here](https://developer.github.com/v3/oauth_authorizations/#create-a-new-authorization). The easy way is use personal access tokens in the console [here](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line#creating-a-token)
+	![](./images/01.png)
+
+# Run CDK in AWS Lambda
+* Check out this [repo](https://github.com/imyoungyang/cdk-app). It is the full CDK in AWS lambda to build a code build.
+* node.js runtime require >= 8.12.0. Use [customer runtime](https://github.com/lambci/node-custom-lambda)
+* create package.json then install cdk in your code folder.
+* ref: [cdk javascript example](https://github.com/aws-samples/aws-cdk-changelogs-demo)
+
+# Run Code Build in local
+* [local build support in AWS CodeBuild - blog](https://aws.amazon.com/blogs/devops/announcing-local-build-support-for-aws-codebuild/)
 
 # Reference
 * [Integrating Git with AWS CodePipeline]
@@ -78,3 +145,4 @@ SSH URLs provide access to a Git repository via SSH, a secure protocol. To use t
 * [Git personal access token for command line](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line)
 * [Lambda GitPulltoS3](http://aws-quickstart.s3.amazonaws.com/quickstart-git2s3/functions/packages/GitPullS3/lambda.zip)
 * [Access s3 bucket url](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro)
+* [TypeScript HandBook](https://www.typescriptlang.org/docs/handbook/basic-types.html)
