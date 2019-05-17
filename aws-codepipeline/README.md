@@ -12,6 +12,12 @@
 	![](./images/03.png)
 4. Now, you have a personal access tokens
 	![](./images/04.png)
+5. Use [aws cli command](https://docs.aws.amazon.com/codebuild/latest/userguide/sample-access-tokens.html#sample-access-tokens-cli) to import your personal access token
+	```
+	aws codebuild import-source-credentials --token YOUR TOKEN \
+	> --server-type GITHUB_ENTERPRISE --auth-type PERSONAL_ACCESS_TOKEN
+	```
+	![](./images/23.png)
 	
 # Part2: Create Organizations
 1. In personal setting, click on organization.
@@ -56,6 +62,71 @@
 	![](./images/19.png)
 4. Create a new repository in the orginzation. You will get the repo create webhook event.
 	![](./images/20.png)
+	
+# Part5: Get Git EE Certs
+1. In Cloud9 shell, run the following command
+
+	```
+	echo -n | openssl s_client -connect HOST:PORTNUMBER \
+    | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /folder/filename.pem
+	```
+	![](./images/21.png)
+2. Copy the pem file to s3
+	![](./images/22.png)
+3. Use self-sign cert for github ee. Can reference [here](https://stackoverflow.com/questions/11621768/how-can-i-make-git-accept-a-self-signed-certificate)
+
+	* `GIT_SSL_CAINFO=gitEE.pem git clone url`
+	* `git config http.sslCAInfo ~/environment/gitEE.pem` in your repo.
+	
+	![](./images/24.png)
+
+4. (optional) Setup a code build in aws console [here](https://docs.aws.amazon.com/codebuild/latest/userguide/sample-github-enterprise.html). Please aware the cert key setting.
+	![](./images/25.png)
+5. (optional) use the command line to create a new webhook [here](https://docs.aws.amazon.com/cli/latest/reference/codebuild/update-webhook.html)
+	`aws codebuild update-webhook --rotate-secret --project-name=gitee-demo`
+	`aws codebuild delete-webhook --project-name=gitee-demo`
+	`aws codebuild create-webhook --project-name=gitee-demo`
+	![](./images/26.png)
+
+6. (optional) use command line to create gitEE webhook [here](https://developer.github.com/v3/repos/hooks/#create-a-hook) and authentication [here](https://developer.github.com/v3/auth/#via-oauth-tokens)
+
+	`curl -u username:token -d "@data.txt" https://api.github.com/repos/:owner/:repo/hooks`
+	![](./images/28.png)
+	![](./images/29.png)
+	
+	* Notes: gitEE hooks_url format `https://HOST_NAME/api/v3/repos/specialist-sa/helloWorld/hooks`
+	* Notes: the post webhook file format
+	
+	```
+	{
+	  "name": "web",
+	  "active": true,
+	  "events": [
+	    "push",
+	    "pull_request"
+	  ],
+	  "config": {
+	    "url": "https://codebuild.us-east-1.amazonaws.com/",
+	    "content_type": "json",
+	    "secret": "xxx"
+	  }
+	}
+	```
+
+# Part6: CDK APP for Git EE
+1. In Cloud9, mkdir a folder `cdk-gitee`. And install CDK in cloud9 by `npm install -g aws-cdk`.
+2. Can referece the code [here](https://github.com/imyoungyang/cdk-gitee). CDK is easy to implment and test. It's better than write CloudFormation template.
+
+	![](./images/31.png)
+
+3. Use the command `cdk deploy`. It will trigger cloudformation and then create the code pipeline.
+4. Go to codebuild console. Click on the start build. It will pull your GitHub EE code successfully.
+	![](./images/32.png)
+
+	* The gitEE repos sample code is [here](
+#### Important
+Cloudformation did not support Webhook feature for GitHub Enterprise projects. Use the AWS CLI or AWS CodeBuild console to create the webhook.
+	![](./images/30.png)
 
 # Codebuild or CodePipeline
 
@@ -70,6 +141,12 @@ AWS CodePipeline is a **continuous delivery** service you can use to model, visu
 # Git Authentication
 
 Which remote URL should I use? HTTPS or SSH [link](https://help.github.com/en/articles/which-remote-url-should-i-use)
+
+## Via OAuth Tokens to call github api
+You can use personal access tokens instead of the password
+`curl -u username:token https://api.github.com/user`
+The document link is [here](https://developer.github.com/v3/auth/#via-oauth-tokens)
+
 
 
 ## Personal access token (HTTPS)
@@ -146,3 +223,5 @@ SSH URLs provide access to a Git repository via SSH, a secure protocol. To use t
 * [Lambda GitPulltoS3](http://aws-quickstart.s3.amazonaws.com/quickstart-git2s3/functions/packages/GitPullS3/lambda.zip)
 * [Access s3 bucket url](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro)
 * [TypeScript HandBook](https://www.typescriptlang.org/docs/handbook/basic-types.html)
+* [CodeBuild for webhooks](https://docs.aws.amazon.com/codepipeline/latest/userguide/pipelines-webhooks-migration.html)
+* [CDK CodeBuild README](https://github.com/awslabs/aws-cdk/blob/master/packages/@aws-cdk/aws-codebuild/README.md)
