@@ -12,12 +12,14 @@
 	![](./images/03.png)
 4. Now, you have a personal access tokens
 	![](./images/04.png)
-5. Use [aws cli command](https://docs.aws.amazon.com/codebuild/latest/userguide/sample-access-tokens.html#sample-access-tokens-cli) to import your personal access token
+5. Use [aws cli command import-source-credentials](https://docs.aws.amazon.com/codebuild/latest/userguide/sample-access-tokens.html#sample-access-tokens-cli) to import your personal access token
 	```
 	aws codebuild import-source-credentials --token YOUR TOKEN \
 	> --server-type GITHUB_ENTERPRISE --auth-type PERSONAL_ACCESS_TOKEN
 	```
 	![](./images/23.png)
+6. (Optional) You can use command `curl -v -H "Authorization: token TOKEN" ` to get query the webhooks list or other github webapi command.
+	![](./images/33.png)
 	
 # Part2: Create Organizations
 1. In personal setting, click on organization.
@@ -94,6 +96,7 @@
 	![](./images/28.png)
 	![](./images/29.png)
 	
+	* Notes: Also can use `	curl -v -H "Authorization: token TOKEN"`
 	* Notes: gitEE hooks_url format `https://HOST_NAME/api/v3/repos/specialist-sa/helloWorld/hooks`
 	* Notes: the post webhook file format
 	
@@ -112,6 +115,7 @@
 	  }
 	}
 	```
+
 
 # Part6: CDK APP for Git EE
 1. In Cloud9, mkdir a folder `cdk-gitee`. And install CDK in cloud9 by `npm install -g aws-cdk`.

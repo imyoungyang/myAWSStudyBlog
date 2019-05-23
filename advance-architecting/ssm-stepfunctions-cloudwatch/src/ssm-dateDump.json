@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "2.2",
+  "description": "Command Document Example JSON Template",
+  "parameters": {
+    "Message": {
+      "type": "String",
+      "description": "Example",
+      "default": "Hello Young, shell script here"
+    }
+  },
+  "mainSteps": [
+    {
+      "action": "aws:runPowerShellScript",
+      "name": "echo",
+      "inputs": {
+        "runCommand": [
+          "echo {{Message}}"
+        ]
+      }
+    },
+    {
+      "action": "aws:runPowerShellScript",
+      "name": "date",
+      "inputs": {
+        "runCommand": [
+          "date >> c:\\arun.txt",
+          "date"
+        ]
+      }
+    }
+  ]
+}

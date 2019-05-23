@@ -1,0 +1,77 @@
+{
+  "Comment": "An example of the Amazon States Language that runs an AWS Batch job and monitors the job until it completes.",
+  "StartAt": "Submit Job",
+  "States": {
+    "Submit Job": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:<account-id>:function:runSSMComand",
+      "ResultPath": "$.guid",
+      "Next": "Wait X Seconds",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "IntervalSeconds": 1,
+          "MaxAttempts": 3,
+          "BackoffRate": 2
+        }
+      ]
+    },
+    "Wait X Seconds": {
+      "Type": "Wait",
+      "SecondsPath": "$.guid.wait_time",
+      "Next": "Get Job Status"
+    },
+    "Get Job Status": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:<account-id>:function:getSSMCommandStatus",
+      "Next": "Job Complete?",
+      "InputPath": "$.guid",
+      "ResultPath": "$.result",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "IntervalSeconds": 1,
+          "MaxAttempts": 3,
+          "BackoffRate": 2
+        }
+      ]
+    },
+    "Job Complete?": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.result.Status",
+          "StringEquals": "FAILED",
+          "Next": "Job Failed"
+        },
+        {
+          "Variable": "$.result.Status",
+          "StringEquals": "Success",
+          "Next": "Get Final Job Status"
+        }
+      ],
+      "Default": "Wait X Seconds"
+    },
+    "Job Failed": {
+      "Type": "Fail",
+      "Cause": "AWS Batch Job Failed",
+      "Error": "DescribeJob returned FAILED"
+    },
+    "Get Final Job Status": {
+      "Type": "Task",
+      "Resource":
+      "arn:aws:lambda:us-east-1:<account-id>:function:getSSMCommandStatus",
+      "InputPath": "$.guid",
+      "End": true,
+      "Retry": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "IntervalSeconds": 1,
+          "MaxAttempts": 3,
+          "BackoffRate": 2
+        }
+      ]
+    }
+  }
+}
+
