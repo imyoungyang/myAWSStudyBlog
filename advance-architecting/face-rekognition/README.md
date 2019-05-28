@@ -63,7 +63,7 @@ Steup env in cloud9 console. The source code is [here](./identify-faces-in-image
 
 ```
 aws s3 cp s3://beyoung-demo/group.jpg group.jpg
-virtual env
+virtualenv env
 source env/bin/activate
 pip3 install pillow boto3
 python3 identify-faces-in-image.py
