@@ -22,6 +22,21 @@
 # NLP
 * [text distance](https://pypi.org/project/textdistance/)
 
+# Handwriting
+* [Handwriting recognition using Tensorflow and Keras](https://towardsdatascience.com/handwriting-recognition-using-tensorflow-and-keras-819b36148fe5)
+* [Build a Handwritten Text Recognition System using TensorFlow](https://towardsdatascience.com/build-a-handwritten-text-recognition-system-using-tensorflow-2326a3487cd5)
+* [pdf search for elastic search](https://stackoverflow.com/questions/43706192/lambda-s3-getobject-stream-to-es-ingest-pipeline)
+* [Indexing many PDF files for full-text search using Elasticsearch](https://www.youtube.com/watch?v=vziwQjHk1Bk)
+* [AWS-Elastic-Search-with-AWS-Lambda-using-Nodejs](https://www.oodlestechnologies.com/blogs/Integrate-AWS-Elastic-Search-with-AWS-Lambda-using-Nodejs/)
+* [elastic search js client example](https://gist.github.com/parthdesai93/1bd3a25ad4cf788d49ce4a00a1bb3268)
+* [AWS lab sample s3 to elastic search](https://github.com/aws-samples/amazon-elasticsearch-lambda-samples)
+* [Elastic Search JS Example](https://gist.github.com/StephanHoyer/b9cd6cbc4cc93cee8ea6)
+
+## PDF OCR
+* [tika](http://tika.apache.org/)
+* [slate](https://micropyramid.com/blog/extract-data-from-pdf-and-all-microsoft-office-files-in-python/)
+* [tika and es pipeline](https://forums.aws.amazon.com/thread.jspa?threadID=248836)
+
 # Forecasting
 * [Forecasting financial time series with dynamic deep learning on AWS](https://aws.amazon.com/blogs/machine-learning/forecasting-time-series-with-dynamic-deep-learning-on-aws/)
 
