@@ -9,13 +9,13 @@
 2. Build the docker image: `./build_and_push.sh <image-name>`. Image name suggest to use `scikit-<your-name>` format.
 	![](images/01-cloud9.png)
 
-3. `docker images`: you will see `sckit-<your-name>` with `latest` TAG in your cloud9 and ecr respository.
+3. `docker images`: you will see `scikit-<your-name>` with `latest` TAG in your cloud9 and ecr respository.
 	![](images/02-cloud9.png)
 
 ## local training
 1. `cd local_test`
 2. `chmod +x *.sh`
-3. ` ./train_local.sh sckit-<your-name>`
+3. ` ./train_local.sh scikit-<your-name>`
    	![](images/03-cloud9.png)
 4. `ls test_dir/model/` to check the model output.
 
@@ -25,7 +25,7 @@
 3. `cat test_dir/output/failure` to see failure
    ![](images/04-cloud9.png)
 4. `mv test_dir/input/config/hyperparameters.json.bak test_dir/input/config/hyperparameters.json`
-5. `./train_local.sh  sckit-<your-name>`
+5. `./train_local.sh  scikit-<your-name>`
 
 ## Local Server Inference
 1. `./serve_local.sh <image-name> > output.log`

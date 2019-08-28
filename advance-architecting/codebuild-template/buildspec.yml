@@ -1,0 +1,33 @@
+version: 0.2 
+ 
+env: 
+  parameter-store: 
+    gitee_keys: /aws/reference/secretsmanager/devops/gitee/keys 
+ 
+phases: 
+  install: 
+    runtime-versions: 
+      docker: 18 
+  pre_build: 
+    commands: 
+      - echo Logging in to Amazon ECR... 
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION) 
+  build: 
+    commands: 
+      - echo Build started on `date` 
+      - export TOKEN=$(echo "${gitee_keys}" | jq -r '.GITEE_PSA_TOKEN') 
+      - export LOGIN=$(echo "${gitee_keys}" | jq -r '.GITEE_LOGIN') 
+      - $(git config --global http.sslVerify false) 
+      - $(git clone https://$LOGIN:$TOKEN@172.18.1.73/trend-poc/pipe-ecs.git)
+      - echo Building the Docker image...          
+      # Here, we are using the environment variable passed in via CodeBuild IMAGE_REPO_NAME
+      - docker build -t $REPOSITORY_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION . 
+      - docker tag $REPOSITORY_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION $REPOSITORY_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION     
+  post_build: 
+    commands: 
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push $REPOSITORY_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - printf '[{"name":"like-service","imageUri":"%s"}]' $REPOSITORY_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION > imagedefinitions.json
+artifacts:
+    files: imagedefinitions.json
