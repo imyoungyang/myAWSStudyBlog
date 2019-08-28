@@ -18,9 +18,10 @@ phases:
       - export TOKEN=$(echo "${gitee_keys}" | jq -r '.GITEE_PSA_TOKEN') 
       - export LOGIN=$(echo "${gitee_keys}" | jq -r '.GITEE_LOGIN') 
       - $(git config --global http.sslVerify false) 
-      - $(git clone https://$LOGIN:$TOKEN@172.18.1.73/trend-poc/pipe-ecs.git)
+      # environment variable passed in via GITEE
+      - $(git clone https://$LOGIN:$TOKEN@$GITEE/trend-poc/pipe-ecs.git)
       - echo Building the Docker image...          
-      # Here, we are using the environment variable passed in via CodeBuild IMAGE_REPO_NAME
+      # environment variable passed in via CodeBuild IMAGE_REPO_NAME
       - docker build -t $REPOSITORY_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION . 
       - docker tag $REPOSITORY_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION $REPOSITORY_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION     
   post_build: 
