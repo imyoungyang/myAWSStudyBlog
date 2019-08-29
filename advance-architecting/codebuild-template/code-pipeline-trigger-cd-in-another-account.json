@@ -1,0 +1,101 @@
+{
+    "pipeline": {
+        "roleArn": "arn:aws:iam::<devops-account-id>:role/devops-CodePipeline-Service", 
+        "stages": [
+            {
+                "name": "Source", 
+                "actions": [
+                    {
+                        "inputArtifacts": [], 
+                        "name": "Source", 
+                        "region": "us-east-1", 
+                        "actionTypeId": {
+                            "category": "Source", 
+                            "owner": "AWS", 
+                            "version": "1", 
+                            "provider": "CodeCommit"
+                        }, 
+                        "outputArtifacts": [
+                            {
+                                "name": "SourceArtifact"
+                            }
+                        ], 
+                        "configuration": {
+                            "PollForSourceChanges": "false", 
+                            "BranchName": "master", 
+                            "RepositoryName": "<appspec-repo>"
+                        }, 
+                        "runOrder": 1
+                    }, 
+                    {
+                        "inputArtifacts": [], 
+                        "name": "image", 
+                        "region": "us-east-1", 
+                        "actionTypeId": {
+                            "category": "Source", 
+                            "owner": "AWS", 
+                            "version": "1", 
+                            "provider": "ECR"
+                        }, 
+                        "outputArtifacts": [
+                            {
+                                "name": "MyImage"
+                            }
+                        ], 
+                        "configuration": {
+                            "RepositoryName": "nginx"
+                        }, 
+                        "runOrder": 1
+                    }
+                ]
+            }, 
+            {
+                "name": "Deploy", 
+                "actions": [
+                    {
+                        "inputArtifacts": [
+                            {
+                                "name": "SourceArtifact"
+                            }, 
+                            {
+                                "name": "MyImage"
+                            }
+                        ], 
+                        "name": "BetaDeploy", 
+                        "roleArn": "arn:aws:iam::<beta-account-id>:role/devops-CodeDeployDeployer", 
+                        "actionTypeId": {
+                            "category": "Deploy", 
+                            "owner": "AWS", 
+                            "version": "1", 
+                            "provider": "CodeDeployToECS"
+                        }, 
+                        "outputArtifacts": [], 
+                        "configuration": {
+                            "ApplicationName": "sample-website", 
+                            "DeploymentGroupName": "beta", 
+                            "Image1ArtifactName": "MyImage", 
+                            "TaskDefinitionTemplateArtifact": "SourceArtifact", 
+                            "Image1ContainerName": "IMAGE1_NAME", 
+                            "TaskDefinitionTemplatePath": "taskdef.json", 
+                            "AppSpecTemplateArtifact": "SourceArtifact", 
+                            "AppSpecTemplatePath": "appspec.yaml"
+                        }, 
+                        "region": "us-east-1", 
+                        "runOrder": 1
+                    }
+                ]
+            }
+        ], 
+        "artifactStore": {
+            "type": "S3", 
+            "location": "codepipeline-us-east-1-<devops-pipeline-bucket>", 
+            "encryptionKey": {
+                "type": "KMS", 
+                "id": "arn:aws:kms:us-east-1:<devops-account-id>:key/9f4ced69-f1a0-4ddb-9044-d5104e43218e"
+            }
+        }, 
+        "name": "cross-account-s3-cmk", 
+        "version": 2
+    }
+}
+
