@@ -3,6 +3,7 @@
 * Image Rekognition demo [link](https://jsfiddle.net/pauluaws/95rhk4mL/)
 * [streaming video](https://aws.amazon.com/blogs/machine-learning/building-automatic-analysis-of-body-language-to-gauge-attention-and-engagement-using-amazon-kinesis-video-streams-and-amazon-ai-services/)
 * [Visual Search with MXNet](https://thomasdelteil.github.io/VisualSearch_MXNet/)
+* [Paper with Code](https://paperswithcode.com/area/computer-vision)
 
 # Computer Vision
 ## Level 100
@@ -52,3 +53,21 @@
 
 # Papers And Blogs
 * [Papers with code](https://paperswithcode.com/)
+
+# Open Data Set
+### Person Re-identification
+* [Common Data Set at paperwith code](https://paperswithcode.com/task/person-re-identification)
+* Market-1501, DukeMTMC-reID, MSMT17, CUHK03
+
+### Semantic Segmentation
+* [Paper at Code](https://paperswithcode.com/task/semantic-segmentation)
+* 	Cityscapes, PASCAL VOC 2012
+
+### Image Classification
+* [Paper at Code](https://paperswithcode.com/task/image-classification)
+* ImageNet, CIFAR-10, MNIST, CIFAR-100, Fashion-MNIST, Stanford Cars
+
+### Pose Estimation
+
+
+
