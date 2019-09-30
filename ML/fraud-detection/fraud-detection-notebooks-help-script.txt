@@ -1,0 +1,25 @@
+total_row, total_feature = df_fraud.shape
+
+# percentage of data
+cls_fraud_1 = df_fraud['Class'].value_counts()[1]
+cls_normal_0 = df_fraud['Class'].value_counts()[0]
+
+
+print('# of fraud: ' + str(cls_fraud_1) + ' % of fraud: ' + str(cls_fraud_1 / total_row * 100))
+print('# of normal: ' + str(cls_normal_0) + ' % of normal: ' + str(cls_normal_0 / total_row * 100))
+
+
+df_fraud.isna().sum()
+
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+fig, ax = plt.subplots(figsize=(20,10))
+
+corr = df_fraud.corr()
+sns.heatmap(corr)
+
+plt.show()
+
+corr['Class'].sort_values()

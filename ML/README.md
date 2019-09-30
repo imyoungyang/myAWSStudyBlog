@@ -22,6 +22,8 @@
 
 # NLP
 * [text distance](https://pypi.org/project/textdistance/)
+* [GloVe](https://nlp.stanford.edu/projects/glove/
+): Global Vectors for Word Representation
 
 # Handwriting
 * [Handwriting recognition using Tensorflow and Keras](https://towardsdatascience.com/handwriting-recognition-using-tensorflow-and-keras-819b36148fe5)
@@ -66,8 +68,8 @@
 ### Image Classification
 * [Paper at Code](https://paperswithcode.com/task/image-classification)
 * ImageNet, CIFAR-10, MNIST, CIFAR-100, Fashion-MNIST, Stanford Cars
+* [Dog vs Cat](https://www.kaggle.com/c/dogs-vs-cats)
 
-### Pose Estimation
 
 
 
