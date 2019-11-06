@@ -53,8 +53,13 @@ Embeddings that are pre-trained on a large corpus and can be plugged in a variet
 
 ## L200
 * [Word Embedding and Sentence Embedding](https://github.com/adsieg/text_similarity/blob/master/EMBEDDING%20(word2vec%2C%20FastText%2C%20Glove%2C%20HomeMadeEmbedding).ipynb)
+* [**BERT - Word Embeddings Tutorial**](https://mccormickml.com/2019/05/14/BERT-word-embeddings-tutorial/)
 * [BERT - Beyong Word2Vec](https://towardsdatascience.com/beyond-word-embeddings-part-2-word-vectors-nlp-modeling-from-bow-to-bert-4ebd4711d0ec)
 * [fastText Model](https://radimrehurek.com/gensim/models/fasttext.html)
 
 ## L300
+* [BERT Introduction](http://jalammar.github.io/illustrated-bert/)
 * [How to predict Quora Question Pairs using Siamese Manhattan LSTM - kaggles-quora-question-pairs-competition](https://medium.com/mlreview/implementing-malstm-on-kaggles-quora-question-pairs-competition-8b31b0b16a07)
+
+## L400
+* BERT [https://arxiv.org/pdf/1810.04805.pdf](https://arxiv.org/pdf/1810.04805.pdf)
