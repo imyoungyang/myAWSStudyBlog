@@ -2,7 +2,11 @@
 
 What's the different?
 
+**After stealing money from the bank vault, the bank robber was seen fishing on the Mississippi river bank.**
+
+
 ## Less Context sensitive
+
 For example, "bank" in the context of rivers or any water body and in the context of finance would have the same representation.
 
 * Word2vec / GloVe : encodes a word fixed representation into a single vector. Can't easily handle words they haven't seen before.
