@@ -1,0 +1,23 @@
+version: 0.2
+
+env:
+  parameter-store:
+    build_ssh_key: "build_ssh_key"
+
+phases:
+  install:
+    commands:
+      - mkdir -p ~/.ssh
+      - echo "$build_ssh_key" > ~/.ssh/id_rsa
+      - chmod 600 ~/.ssh/id_rsa
+      - ssh-keygen -F github.com || ssh-keyscan github.com >>~/.ssh/known_hosts
+      - git config --global url."git@github.com:".insteadOf "https://github.com/"
+      - mkdir -p ${GOPATH}/src/github.com/a-h/project
+      - cp -r $CODEBUILD_SRC_DIR/* $GOPATH/src/github.com/a-h/project
+      - cd $GOPATH/src/github.com/a-h/project
+      - make get
+  build:
+    commands:
+      - cd $GOPATH/src/github.com/a-h/project
+      - make test
+      - make build
