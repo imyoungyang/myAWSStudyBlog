@@ -1,4 +1,5 @@
 .DS_Store
+.ipynb_checkpoints
 aws-codepipeline/others/gitPullS3-lambda/
 ci-cd-gitee-slides-demo-video
 cicd-gitee-integration-compress.pdf
