@@ -6,3 +6,4 @@ In this example, there are two notebooks:
 
 * xgboost: it will use SageMaker build in xgboost algorithm and HPO to get the model. xgboost notebook is credited to [wmlba](https://github.com/wmlba/Fraud_Detection_Techniques).
 
+* QuickSight for Fraud detection [lab](https://master.d3oeug6bezhkq6.amplifyapp.com/lab2.html)
