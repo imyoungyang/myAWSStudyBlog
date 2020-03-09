@@ -1,4 +1,8 @@
-### Fraud detection on SageMaker
+# Fraud detection on SageMaker
+
+## Step 1 - Data Preparation
+
+### References
 I will use dataset from Kaggle that is used for Credit Card Fraud detection.
 In this example, there are two notebooks:
 
