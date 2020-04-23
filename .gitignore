@@ -1,5 +1,7 @@
 .DS_Store
 .ipynb_checkpoints
+gt_label_config.json
+*.manifest
 sagemaker-image-classification-detection/0-object-detection/generated
 sagemaker-image-classification-detection/0-object-detection/train*
 sagemaker-image-classification-detection/0-object-detection/val*
