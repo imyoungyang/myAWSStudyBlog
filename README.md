@@ -105,3 +105,8 @@ Please improve the lambda performance. Reduce the boto init time in the lambda f
 Use the AWS AI services - Rekognition to identify multi-faces in an image. The instructions are [here](./advance-architecting/face-rekognition/README.md). After you done `Python` version, you should try `node.js` version [here](./advance-architecting/face-rekognition-nodejs/README.md). You will find the performance different between python and node.js.
 
 ![](./images/14-archi.png)
+
+
+## What's the next
+
+* [Data Engineer Immersion Day](https://aws-dataengineering-day.workshop.aws/en/)
