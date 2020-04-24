@@ -1,5 +1,7 @@
 .DS_Store
 .ipynb_checkpoints
+connect_device_package.zip
+iot-beyoung-01/
 gt_label_config.json
 *.manifest
 sagemaker-image-classification-detection/0-object-detection/generated
