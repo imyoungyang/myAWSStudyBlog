@@ -1,6 +1,7 @@
 .DS_Store
 .ipynb_checkpoints
 connect_device_package.zip
+aws-iot-device-sdk-python-v2/
 iot-beyoung-01/
 gt_label_config.json
 *.manifest
