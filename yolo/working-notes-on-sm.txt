@@ -1,3 +1,12 @@
+vim ~/.screenrc
+# Enable mouse scrolling and scroll bar history scrolling
+termcapinfo xterm* ti@:te@
+
+screen
+
+set scrollback limit by typing 
+Ctrl+A, :, type "scrollback 10000"
+
 conda create -n cv python=3.6.9
 source activate cv
 conda install numpy
@@ -20,19 +29,24 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D CMAKE_INSTALL_PREFIX=/usr/local \
     -D WITH_CUDA=ON \
     -D WITH_CUDNN=ON \
-    -D OPENCV_DNN_CUDA=ON \  
+    -D OPENCV_DNN_CUDA=ON \
     -D ENABLE_FAST_MATH=1 \
     -D CUDA_FAST_MATH=1 \
     -D CUDA_ARCH_BIN=7.0 \
-    -D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda \
     -D WITH_CUBLAS=1 \
     -D INSTALL_PYTHON_EXAMPLES=ON \
-    -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-4.3.0/modules \
+    -D OPENCV_EXTRA_MODULES_PATH=/home/ubuntu/opencv_contrib-4.3.0/modules \
     -D PYTHON_EXECUTABLE=$python_exec \
     -D PYTHON_DEFAULT_EXECUTABLE=$default_exec \
     -D PYTHON_INCLUDE_DIRS=$include_dir \
     -D PYTHON_LIBRARY=$library \
     -D BUILD_EXAMPLES=ON ..
+make -j8
+sudo make install
+sudo ldconfig
+
+
+### Others
 
 vim cmake/OpenCVDetectPython.cmake
 
