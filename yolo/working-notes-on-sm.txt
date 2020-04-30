@@ -1,0 +1,86 @@
+conda create -n cv python=3.6.9
+source activate cv
+conda install numpy
+
+wget -O opencv.zip https://github.com/opencv/opencv/archive/4.3.0.zip
+wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/4.3.0.zip
+unzip opencv.zip
+unzip opencv_contrib.zip
+
+export python_exec=`which python`
+export include_dir=`python -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())"`
+export library=`python -c "import distutils.sysconfig as sysconfig; print(sysconfig.get_config_var('LIBDIR'))"`
+export default_exec=`which python3.6`
+
+cd opencv-4.3.0/
+mkdir build
+cd build
+
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+    -D CMAKE_INSTALL_PREFIX=/usr/local \
+    -D WITH_CUDA=ON \
+    -D WITH_CUDNN=ON \
+    -D OPENCV_DNN_CUDA=ON \  
+    -D ENABLE_FAST_MATH=1 \
+    -D CUDA_FAST_MATH=1 \
+    -D CUDA_ARCH_BIN=7.0 \
+    -D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda \
+    -D WITH_CUBLAS=1 \
+    -D INSTALL_PYTHON_EXAMPLES=ON \
+    -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-4.3.0/modules \
+    -D PYTHON_EXECUTABLE=$python_exec \
+    -D PYTHON_DEFAULT_EXECUTABLE=$default_exec \
+    -D PYTHON_INCLUDE_DIRS=$include_dir \
+    -D PYTHON_LIBRARY=$library \
+    -D BUILD_EXAMPLES=ON ..
+
+vim cmake/OpenCVDetectPython.cmake
+
+
+
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+    -D CMAKE_INSTALL_PREFIX=/usr/local \
+    -D INSTALL_PYTHON_EXAMPLES=ON \
+    -D INSTALL_C_EXAMPLES=OFF \
+    -D OPENCV_ENABLE_NONFREE=ON \
+    -D WITH_CUDA=ON \
+    -D WITH_CUDNN=ON \
+    -D OPENCV_DNN_CUDA=ON \
+    -D ENABLE_FAST_MATH=1 \
+    -D CUDA_FAST_MATH=1 \
+    -D CUDA_ARCH_BIN=7.0 \
+    -D WITH_CUBLAS=1 \
+    -D PYTHON_DEFAULT_EXECUTABLE=/usr/bin/python3 \
+    -D OPENCV_EXTRA_MODULES_PATH=/home/ubuntu/opencv_contrib-4.3.0/modules/ \
+    -D HAVE_opencv_python3=ON \
+    -D PYTHON3_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.6m.so \
+    -D PYTHON_EXECUTABLE=/home/ubuntu/anaconda3/envs/python3/bin/python \
+    -D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda \
+    -D BUILD_EXAMPLES=ON ..
+
+wget -O dog.jpg https://commons.wikimedia.org/wiki/File:Akita_Inu_dog.jpg
+
+
+>>> import cv2
+>>> cv2.__file__
+'/home/ubuntu/anaconda3/envs/python3/lib/python3.6/site-packages/cv2/cv2.cpython-36m-x86_64-linux-gnu.so'
+
+git clone https://github.com/AlexeyAB/darknet
+./darknet detector test cfg/coco.data cfg/yolov4.cfg yolov4.weights -thresh 0.25
+detector test cfg/coco.data cfg/yolov4.cfg yolov4.weights -thresh 0.25 -ext_output dog.jpg
+
+
+
+check dependencies
+sudo apt list
+
+
+-- Checking for module 'gtk+-3.0'
+--   No package 'gtk+-3.0' found
+-- Checking for module 'gtk+-2.0'
+--   No package 'gtk+-2.0' found
+
+
+-- Could NOT find PythonLibs: Found unsuitable version "3.6.9", but required is exact version "3.6.10" (found /usr/lib/x86_64-linux-gnu/libpython3.6m.so)
+
+conda search python
