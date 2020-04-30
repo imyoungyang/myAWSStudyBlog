@@ -45,6 +45,26 @@ make -j8
 sudo make install
 sudo ldconfig
 
+ls /usr/local/lib/python3.6/site-packages/cv2/python-3.6
+python -m site
+
+ln -s /usr/local/lib/python3.6/site-packages/cv2 /home/ubuntu/anaconda3/envs/cv/lib/python3.6/site-packages
+
+### Yolo
+git clone https://github.com/AlexeyAB/darknet.git
+mkdir build-release
+cd build-release
+cmake ..
+make
+make install
+
+wget -O dog.jpg https://commons.wikimedia.org/wiki/File:Akita_Inu_dog.jpg
+wget -O yolov4.weights https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.weights
+
+./darknet detector test cfg/coco.data cfg/yolov4.cfg yolov4.weights -thresh 0.25
+./darknet detector test cfg/coco.data cfg/yolov4.cfg yolov4.weights -thresh 0.25 -ext_output dog.jpg
+
+
 
 ### Others
 
@@ -72,7 +92,6 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda \
     -D BUILD_EXAMPLES=ON ..
 
-wget -O dog.jpg https://commons.wikimedia.org/wiki/File:Akita_Inu_dog.jpg
 
 
 >>> import cv2
@@ -80,9 +99,6 @@ wget -O dog.jpg https://commons.wikimedia.org/wiki/File:Akita_Inu_dog.jpg
 '/home/ubuntu/anaconda3/envs/python3/lib/python3.6/site-packages/cv2/cv2.cpython-36m-x86_64-linux-gnu.so'
 
 git clone https://github.com/AlexeyAB/darknet
-./darknet detector test cfg/coco.data cfg/yolov4.cfg yolov4.weights -thresh 0.25
-detector test cfg/coco.data cfg/yolov4.cfg yolov4.weights -thresh 0.25 -ext_output dog.jpg
-
 
 
 check dependencies
