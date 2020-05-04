@@ -50,13 +50,29 @@ python -m site
 
 ln -s /usr/local/lib/python3.6/site-packages/cv2 /home/ubuntu/anaconda3/envs/cv/lib/python3.6/site-packages
 
-### Yolo
+### Yolov3 from pjreddie
+sagemaker notebook t2
+source activate tensorflow_p36
+https://pjreddie.com/darknet/yolo/
+git clone https://github.com/pjreddie/darknet
+cd darknet
+make
+wget https://pjreddie.com/media/files/yolov3.weights
+./darknet detect cfg/yolov3.cfg yolov3.weights data/dog.jpg
+
+
+
+### Yolo v3
+sagemaker notebook p2
+source activate tensorflow_p36
 git clone https://github.com/AlexeyAB/darknet.git
+cd darknet
 mkdir build-release
 cd build-release
 cmake ..
 make
 make install
+
 
 wget -O dog.jpg https://commons.wikimedia.org/wiki/File:Akita_Inu_dog.jpg
 wget -O yolov4.weights https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.weights
@@ -65,8 +81,19 @@ wget -O yolov4.weights https://github.com/AlexeyAB/darknet/releases/download/dar
 ./darknet detector test cfg/coco.data cfg/yolov4.cfg yolov4.weights -thresh 0.25 -ext_output dog.jpg
 
 
+Enter Image Path: ./dog.jpg
+Cannot load image ./dog.jpg
+./dog.jpg: Predicted in 158.203000 milli-seconds.
+OpenCV exception: show_image_cv 
+OpenCV exception: wait_key_cv 
+OpenCV exception: destroy_all_windows_cv
 
 ### Others
+
+-- Found OpenMP: TRUE (found version "4.5")  
+--   ->  darknet is fine for now, but uselib_track has been disabled!
+--   ->  Please rebuild OpenCV from sources with CUDA support to enable it
+
 
 vim cmake/OpenCVDetectPython.cmake
 
@@ -114,3 +141,7 @@ sudo apt list
 -- Could NOT find PythonLibs: Found unsuitable version "3.6.9", but required is exact version "3.6.10" (found /usr/lib/x86_64-linux-gnu/libpython3.6m.so)
 
 conda search python
+
+
+(tensorflow_p36) [ec2-user@ip-172-16-8-108 yolo-v4]$ ./darknet detect cfg/yolov3.cfg yolov3.weights data/dog.jpg
+./darknet: error while loading shared libraries: libopencv_dnn.so.4.2: cannot open shared object file: No such file or directory
