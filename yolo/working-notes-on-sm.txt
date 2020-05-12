@@ -62,7 +62,7 @@ wget https://pjreddie.com/media/files/yolov3.weights
 
 
 
-### Yolo v3
+### Yolo v3/4
 sagemaker notebook p2
 source activate tensorflow_p36
 git clone https://github.com/AlexeyAB/darknet.git
@@ -72,6 +72,19 @@ cd build-release
 cmake ..
 make
 make install
+
+### Training Yolo v4 - Coco
+
+https://github.com/AlexeyAB/darknet/wiki#training-and-evaluation-of-speed-and-accuracy-on-ms-coco
+
+ Tensor Cores are used.
+ 7712: 18.006495, 15.311893 avg loss, 0.002610 rate, 3.529329 seconds, 493568 images, 698.390108 hours left
+OpenCV exception: draw_train_loss()
+
+ Tensor Cores are used.
+ 9673: 10.253999, 13.218609 avg loss, 0.002610 rate, 5.616142 seconds, 619072 images, 639.159224 hours left
+OpenCV exception: draw_train_loss()
+Loaded: 0.000073 seconds
 
 
 wget -O dog.jpg https://commons.wikimedia.org/wiki/File:Akita_Inu_dog.jpg
