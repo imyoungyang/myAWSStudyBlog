@@ -1,3 +1,8 @@
+## TensorRT for Yolo
+https://docs.nvidia.com/deeplearning/sdk/tensorrt-sample-support-guide/index.html#yolov3_onnx
+
+https://jkjung-avt.github.io/tensorrt-yolov3/
+
 vim ~/.screenrc
 # Enable mouse scrolling and scroll bar history scrolling
 termcapinfo xterm* ti@:te@
@@ -19,6 +24,7 @@ https://tvm.apache.org/docs/install/from_source.html#
 6. sudo find / -name "llvm-config*"
 
 set(USE_LLVM /usr/lib/llvm-6.0/bin/llvm-config)
+sudo make install
 
 conda create -n cv python=3.6.9
 source activate cv
@@ -171,3 +177,6 @@ conda search python
 
 (tensorflow_p36) [ec2-user@ip-172-16-8-108 yolo-v4]$ ./darknet detect cfg/yolov3.cfg yolov3.weights data/dog.jpg
 ./darknet: error while loading shared libraries: libopencv_dnn.so.4.2: cannot open shared object file: No such file or directory
+
+sudo bash -c 'echo "/usr/local/lib64" > /etc/ld.so.conf.d/opencv.conf'
+sudo ldconfig -v

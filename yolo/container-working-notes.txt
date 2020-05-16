@@ -1,0 +1,63 @@
+## Get AWS DLC
+
+$(aws ecr get-login --registry-ids 763104351884 --no-include-email)
+
+docker pull 763104351884.dkr.ecr.us-west-2.amazonaws.com/tensorflow-training:1.15.2-gpu-py36-cu100-ubuntu18.04
+
+docker run -it --name working 763104351884.dkr.ecr.us-west-2.amazonaws.com/tensorflow-training:1.15.2-gpu-py36-cu100-ubuntu18.04 /bin/bash
+
+## install cmake 3.17
+apt remove cmake
+apt update
+curl -sSL https://github.com/Kitware/CMake/releases/download/v3.17.2/cmake-3.17.2-Linux-x86_64.tar.gz | tar -xzC /opt
+mv /opt/cmake-3.17.2-Linux-x86_64 /opt/cmake
+ln -s /opt/cmake/bin/cmake /usr/bin/cmake
+
+## opencv
+apt install python3-opencv
+
+## fix /usr/local/cuda-10.0/compat/libcuda.so
+sudo bash -c 'echo "/usr/local/cuda-10.0/compat" > /etc/ld.so.conf.d/cuda.conf'
+sudo ldconfig -v
+
+## Build darknet
+cd opt;git clone https://github.com/AlexeyAB/darknet
+cd darknet
+./build.sh
+
+wget https://pjreddie.com/media/files/yolov3.weights
+
+## commit docker images
+open another terminal
+docker ps
+docker commit cd6d30372fbd 476271697919.dkr.ecr.us-west-2.amazonaws.com/tensor-gpu-yolo:latest
+aws ecr create-repository --repository-name tensor-gpu-yolo
+$(aws ecr get-login --no-include-email)
+docker push 476271697919.dkr.ecr.us-west-2.amazonaws.com/tensor-gpu-yolo:latest
+
+## open p2
+$(aws ecr get-login --no-include-email)
+docker pull 476271697919.dkr.ecr.us-west-2.amazonaws.com/tensor-gpu-yolo:latest
+nvidia-docker run -it --name yolo 476271697919.dkr.ecr.us-west-2.amazonaws.com/tensor-gpu-yolo:latest /bin/bash
+cd /opt/darknet
+./darknet detect cfg/yolov3.cfg yolov3.weights data/dog.jpg
+
+## cheers
+Loading weights from yolov3.weights...
+ seen 64, trained: 32013 K-images (500 Kilo-batches_64)
+Done! Loaded 107 layers from weights-file
+data/dog.jpg: Predicted in 235.283000 milli-seconds.
+bicycle: 99%
+dog: 100%
+truck: 93%
+
+
+## Reference
+
+https://docs.aws.amazon.com/deep-learning-containers/latest/devguide/deep-learning-containers-images.html
+
+## Check python
+python -m site
+python
+cv2.__version__
+cv2.__file__
