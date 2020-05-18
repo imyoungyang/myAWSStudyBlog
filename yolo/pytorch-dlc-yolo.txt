@@ -1,0 +1,13 @@
+$(aws ecr get-login --registry-ids 763104351884 --no-include-email)
+docker pull 763104351884.dkr.ecr.us-west-2.amazonaws.com/pytorch-training:1.5.0-gpu-py36-cu101-ubuntu16.04
+
+docker run -it --name pytorch 763104351884.dkr.ecr.us-west-2.amazonaws.com/pytorch-training:1.5.0-gpu-py36-cu101-ubuntu16.04 /bin/bash
+
+bash -c 'echo "/opt/conda/lib" > /etc/ld.so.conf.d/cuda.conf'
+ldconfig -v
+
+cd opt;git clone https://github.com/AlexeyAB/darknet
+cd darknet
+./build.sh
+
+It seems that some cuda dev libraries are required 
