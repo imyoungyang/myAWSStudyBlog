@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # The name of our algorithm
-algorithm_name=pytorch-yolo
+algorithm_name=yolo-tensorflow
 
 cd container
 
@@ -26,7 +26,7 @@ fi
 $(aws ecr get-login --region ${region} --no-include-email)
 
 # Get the login command from ECR in order to pull down the SageMaker PyTorch image
-$(aws ecr get-login --registry-ids 520713654638 --region ${region} --no-include-email)
+$(aws ecr get-login --registry-ids 763104351884 --region ${region} --no-include-email)
 
 # Build the docker image locally with the image name and then push it to ECR
 # with the full name.

@@ -1,8 +1,24 @@
 # SageMaker PyTorch image
-#FROM 520713654638.dkr.ecr.us-west-2.amazonaws.com/sagemaker-pytorch:1.4.0-gpu-py3
-FROM 763104351884.dkr.ecr.us-west-2.amazonaws.com/pytorch-training:1.5.0-gpu-py36-cu101-ubuntu16.04
+FROM 763104351884.dkr.ecr.us-west-2.amazonaws.com/tensorflow-training:1.15.2-gpu-py36-cu100-ubuntu18.04
 
 ENV PATH="/opt/ml/code:${PATH}"
+
+## install cmake 3.17 && opencv
+RUN apt remove cmake
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends --allow-unauthenticated \
+    python3-opencv
+RUN curl -sSL https://github.com/Kitware/CMake/releases/download/v3.17.2/cmake-3.17.2-Linux-x86_64.tar.gz | tar -xzC /opt
+RUN mv /opt/cmake-3.17.2-Linux-x86_64 /opt/cmake
+RUN ln -s /opt/cmake/bin/cmake /usr/bin/cmake
+
+## fix /usr/local/cuda-10.0/compat/libcuda.so
+RUN bash -c 'echo "/usr/local/cuda-10.0/compat" > /etc/ld.so.conf.d/cuda.conf'
+RUN ldconfig -v
+
+## Build darknet
+RUN cd opt && git clone https://github.com/AlexeyAB/darknet
+RUN cd /opt/darknet && ./build.sh
 
 # /opt/ml and all subdirectories are utilized by SageMaker, we use the /code subdirectory to store our user code.
 #COPY /darknet /opt/ml/code
