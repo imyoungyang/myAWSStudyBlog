@@ -4,7 +4,7 @@ FROM 763104351884.dkr.ecr.us-west-2.amazonaws.com/tensorflow-training:1.15.2-gpu
 ENV PATH="/opt/ml/code:${PATH}"
 
 ## install cmake 3.17 && opencv
-RUN apt remove cmake
+RUN apt-get remove cmake
 RUN apt-get update \
  && apt-get install -y --no-install-recommends --allow-unauthenticated \
     python3-opencv
