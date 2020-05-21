@@ -52,6 +52,41 @@ dog: 100%
 truck: 93%
 
 
+## Training customized data set
+
+Overview:
+1. yolo-obj.cfg (batch, subdivisions, max_batches, classes, filters)
+2. obj.names
+3. obj.data
+4. image files
+5. annotation file: <object-class> <x_center> <y_center> <width> <height> normalized (divided) by the image width and height respectively.
+6. train.txt
+7. pre-trained weights
+8. ./darknet detector train data/obj.data yolo-obj.cfg yolov4.conv.137 -dont_show
+
+
+* [YoloV4 Detect your custom objects](https://github.com/AlexeyAB/darknet/tree/master#how-to-train-to-detect-your-custom-objects)
+
+* [YoloV3 pjreddie training](https://github.com/pjreddie/darknet/wiki/YOLO:-Real-Time-Object-Detection#training-yolo)
+
+* [Blog-YoloV3 training your customer data](https://www.learnopencv.com/training-yolov3-deep-learning-based-custom-object-detector/)
+
+* Although it is pytorch version, but the configration is almost the same as original Yolo. [Yolo config format](https://github.com/ultralytics/yolov3/wiki/Train-Custom-Data#train-on-custom-data)
+Download Pretrained Convolutional Weights: csdarknet53-omega.conv.105
+https://drive.google.com/open?id=18jCwaL4SJ-jOvXrZNGHJ5yz44g9zi8Hm
+
+download weights csdarknet53-omega_final.weights for Classifier: https://drive.google.com/open?id=18jCwaL4SJ-jOvXrZNGHJ5yz44g9zi8Hm
+
+
+get only the first 105 layers ./darknet partial cfg/csdarknet53-omega.cfg csdarknet53-omega_final.weights csdarknet53-omega.conv.105 105
+
+Preparing YOLOv3 configuration files
+three files(.data, .names and .cfg)
+
+cfg/cat-dog-obj.data
+cfg/cat-dog-obj.names
+
+
 ## Reference
 
 https://docs.aws.amazon.com/deep-learning-containers/latest/devguide/deep-learning-containers-images.html
