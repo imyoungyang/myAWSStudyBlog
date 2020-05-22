@@ -17,3 +17,4 @@ aws-codepipeline/others/gitPullS3-lambda/
 ci-cd-gitee-slides-demo-video
 cicd-gitee-integration-compress.pdf
 *.pptx
+sm-detection-model-ml_c5.tar.gz
