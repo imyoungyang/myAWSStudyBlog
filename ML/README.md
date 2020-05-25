@@ -75,5 +75,5 @@
 * [Dask](https://examples.dask.org/machine-learning.html)
 * [SageMaker RL Distributed Training](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-rl-distributed.html)
 * [Horovod](https://aws.amazon.com/blogs/machine-learning/launching-tensorflow-distributed-training-easily-with-horovod-or-parameter-servers-in-amazon-sagemaker/)
-
+* [Distributed Training Workshop](https://distributed-training-workshop.go-aws.com/)
 
