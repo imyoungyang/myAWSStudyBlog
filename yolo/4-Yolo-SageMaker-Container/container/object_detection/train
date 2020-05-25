@@ -1,0 +1,1 @@
+./darknet detector train cfg/coco.data cfg/yolov4.cfg weight/yolov4.conv.137 -dont_show -map
