@@ -70,6 +70,10 @@
 * ImageNet, CIFAR-10, MNIST, CIFAR-100, Fashion-MNIST, Stanford Cars
 * [Dog vs Cat](https://www.kaggle.com/c/dogs-vs-cats)
 
-
+# ML Distrubted Training
+* [XGBoost](https://medium.com/rapids-ai/a-new-official-dask-api-for-xgboost-e8b10f3d1eb7)
+* [Dask](https://examples.dask.org/machine-learning.html)
+* [SageMaker RL Distributed Training](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-rl-distributed.html)
+* [Horovod](https://aws.amazon.com/blogs/machine-learning/launching-tensorflow-distributed-training-easily-with-horovod-or-parameter-servers-in-amazon-sagemaker/)
 
 
