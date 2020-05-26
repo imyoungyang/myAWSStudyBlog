@@ -1,5 +1,6 @@
 .DS_Store
 .ipynb_checkpoints
+annotations_trainval2017.zip
 connect_device_package.zip
 aws-iot-device-sdk-python-v2/
 iot-beyoung-01/
