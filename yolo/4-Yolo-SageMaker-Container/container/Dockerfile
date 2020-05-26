@@ -21,7 +21,7 @@ RUN cd opt && git clone https://github.com/AlexeyAB/darknet
 RUN cd /opt/darknet && ./build.sh
 
 ENV PATH="/opt/darknet:${PATH}"
-WORKDIR /opt/darknet
+WORKDIR /opt/ml/code
 
 # /opt/ml and all subdirectories are utilized by SageMaker, we use the /code subdirectory to store our user code.
 #COPY /darknet /opt/ml/code

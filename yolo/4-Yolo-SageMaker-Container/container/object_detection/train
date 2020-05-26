@@ -1,1 +1,5 @@
-./darknet detector train cfg/coco.data cfg/yolov4.cfg weight/yolov4.conv.137 -dont_show -map
+#!/bin/bash
+FP_DATA=/opt/ml/input/data/cfg/coco.data
+FP_YOLO=/opt/ml/input/data/cfg/yolov4.cfg
+FP_WEIGHT=/opt/ml/input/data/weights/yolov4.conv.137
+darknet detector train $FP_DATA $FP_YOLO $FP_WEIGHT -dont_show -map
