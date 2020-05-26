@@ -7,7 +7,9 @@ ENV PATH="/opt/ml/code:${PATH}"
 RUN apt-get remove cmake
 RUN apt-get update \
  && apt-get install -y --no-install-recommends --allow-unauthenticated \
-    python3-opencv
+    python3-opencv \
+    libopencv-dev \
+    libopencv-contrib-dev
 RUN curl -sSL https://github.com/Kitware/CMake/releases/download/v3.17.2/cmake-3.17.2-Linux-x86_64.tar.gz | tar -xzC /opt
 RUN mv /opt/cmake-3.17.2-Linux-x86_64 /opt/cmake
 RUN ln -s /opt/cmake/bin/cmake /usr/bin/cmake
