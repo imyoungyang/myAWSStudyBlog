@@ -1,5 +1,6 @@
 .DS_Store
 .ipynb_checkpoints
+yolo/4-Yolo-SageMaker-Container/container/local_test/test_dir/code/*
 annotations_trainval2017.zip
 connect_device_package.zip
 aws-iot-device-sdk-python-v2/
