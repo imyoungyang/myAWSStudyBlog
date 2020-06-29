@@ -10,6 +10,8 @@ account=$(aws sts get-caller-identity --query Account --output text)
 # Get the region defined in the current configuration (default to us-west-2 if none defined)
 region=$(aws configure get region)
 region=${region:-us-west-2}
+echo $region
+
 
 fullname="${account}.dkr.ecr.${region}.amazonaws.com/${algorithm_name}:latest"
 
@@ -30,8 +32,10 @@ $(aws ecr get-login --registry-ids 763104351884 --region ${region} --no-include-
 
 # Build the docker image locally with the image name and then push it to ECR
 # with the full name.
+base_img='763104351884.dkr.ecr.'$region'.amazonaws.com/tensorflow-training:1.15.2-gpu-py36-cu100-ubuntu18.04'
+echo 'base_img:'$base_img
 
-docker build  -t ${algorithm_name} . --build-arg REGION=${region}
+docker build  -t ${algorithm_name} -f Dockerfile  --build-arg BASE_IMG="${base_img}" .  
 docker tag ${algorithm_name} ${fullname}
 
 docker push ${fullname}
