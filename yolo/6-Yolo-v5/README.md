@@ -12,6 +12,9 @@ python detect.py --weights yolov5s.pt --img 416 --conf 0.4 --source ./inference/
 ```
 
 # Container way
+
+```
 sudo docker pull ultralytics/yolov5:latest
 sudo docker run --gpus all --ipc=host -it ultralytics/yolov5:latest
 python3 detect.py
+```

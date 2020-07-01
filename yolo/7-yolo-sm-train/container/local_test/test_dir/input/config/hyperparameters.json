@@ -1,0 +1,5 @@
+{
+   "FP_DATA": "/opt/ml/input/data/cfg/obj.data",
+   "FP_YOLO": "/opt/ml/input/data/cfg/yolo-obj.cfg",
+   "FP_WEIGHT": "/opt/ml/input/data/weights/yolov4.conv.137"
+}

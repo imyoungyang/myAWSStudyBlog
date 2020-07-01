@@ -1,0 +1,4 @@
+classes= 1
+train  = /opt/ml/input/data/train/train.txt
+names = /opt/ml/input/data/cfg/obj.names
+backup = /opt/ml/model/

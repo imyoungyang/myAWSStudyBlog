@@ -1,0 +1,9 @@
+#! /bin/bash
+FP_PARA=/opt/ml/input/config/hyperparameters.json
+data=$(cat $FP_PARA | jq -r '.FP_DATA')
+yolo=$(cat $FP_PARA | jq -r '.FP_YOLO')
+weight=$(cat $FP_PARA | jq -r '.FP_WEIGHT')
+echo $data
+echo $yolo
+echo $weight
+darknet detector train $data $yolo $weight -dont_show -map
