@@ -1,0 +1,13 @@
+#! /bin/bash
+FP_PARA=/opt/ml/input/config/hyperparameters.json
+data=$(cat $FP_PARA | jq -r '.FP_DATA')
+yolo=$(cat $FP_PARA | jq -r '.FP_YOLO')
+weight=$(cat $FP_PARA | jq -r '.FP_PREDICT_WEIGHT')
+img=$(cat $FP_PARA | jq -r '.FP_PREDICT_IMG')
+results=$(cat $FP_PARA | jq -r '.FP_PREDICT_RESULTS')
+echo $data
+echo $yolo
+echo $weight
+echo $img
+darknet detector test $data $yolo $weight $img -thresh 0.5 -dont_show
+cp predictions.jpg $results

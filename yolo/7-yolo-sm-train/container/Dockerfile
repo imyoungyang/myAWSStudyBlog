@@ -28,3 +28,4 @@ ENV PATH="/opt/darknet:${PATH}"
 WORKDIR /opt/code
 
 COPY train /opt/code
+COPY serve /opt/code
