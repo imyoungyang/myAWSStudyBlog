@@ -1,5 +1,7 @@
 .DS_Store
 .ipynb_checkpoints
+coco*
+yolov5
 yolo/4-Yolo-SageMaker-Container/container/local_test/test_dir/code/*
 annotations_trainval2017.zip
 connect_device_package.zip
