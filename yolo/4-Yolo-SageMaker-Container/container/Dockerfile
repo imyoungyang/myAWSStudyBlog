@@ -1,7 +1,5 @@
 
 
-# SageMaker PyTorch image
-#ARG BASE_IMG=763104351884.dkr.ecr.us-east-1.amazonaws.com/tensorflow-training:1.15.2-gpu-py36-cu100-ubuntu18.04
 ARG BASE_IMG=${BASE_IMG}
 FROM ${BASE_IMG} 
 
@@ -27,18 +25,9 @@ RUN cd opt && git clone https://github.com/AlexeyAB/darknet
 RUN cd /opt/darknet && ./build.sh
 
 ENV PATH="/opt/darknet:${PATH}"
-WORKDIR /code
+WORKDIR /opt/program
 
-COPY train.py /code
-# /opt/ml and all subdirectories are utilized by SageMaker, we use the /code subdirectory to store our user code.
-#COPY /darknet /opt/ml/code
-
-# this environment variable is used by the SageMaker PyTorch container to determine our user code directory.
-#ENV SAGEMAKER_SUBMIT_DIRECTORY /opt/ml/code
-
-# this environment variable is used by the SageMaker PyTorch container to determine our program entry point
-# for training and serving.
-# For more information: https://github.com/aws/sagemaker-pytorch-container
-#ENV SAGEMAKER_PROGRAM cifar10.py
+COPY train.py /opt/program
+#entry point for sagemaker training job 
 ENTRYPOINT ["python", "train.py"]
 

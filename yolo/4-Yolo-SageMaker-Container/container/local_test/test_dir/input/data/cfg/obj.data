@@ -1,4 +1,0 @@
-classes= 1
-train  = data/train/train.txt
-names = data/cfg/obj.names
-backup = model/
