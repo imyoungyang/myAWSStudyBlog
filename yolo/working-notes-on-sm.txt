@@ -180,3 +180,5 @@ conda search python
 
 sudo bash -c 'echo "/usr/local/lib64" > /etc/ld.so.conf.d/opencv.conf'
 sudo ldconfig -v
+
+
