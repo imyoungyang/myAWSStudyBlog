@@ -25,4 +25,4 @@ cd container
 docker build -t ${image} -f Dockerfile --build-arg BASE_IMG=$base_img .
 docker tag ${image} ${fullname}
 
-#docker push ${fullname}
+docker push ${fullname}

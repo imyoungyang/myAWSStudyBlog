@@ -11,3 +11,4 @@ echo $yolo
 echo $weight
 python /opt/yolov5/train.py --img $img --batch $batch --epochs $epochs --data $data \
 --cfg $yolo --weights $weight
+cp -r /opt/code/runs /opt/ml/model/
