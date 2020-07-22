@@ -1,0 +1,13 @@
+#! /bin/bash
+FP_PARA=/opt/ml/input/data/cfg/train-args.json
+data=$(cat $FP_PARA | jq -r '.FP_DATA')
+yolo=$(cat $FP_PARA | jq -r '.FP_YOLO')
+weight=$(cat $FP_PARA | jq -r '.FP_WEIGHT')
+img=$(cat $FP_PARA | jq -r '.IMG_SIZE')
+batch=$(cat $FP_PARA | jq -r '.BATCH')
+epochs=$(cat $FP_PARA | jq -r '.EPOCHS')
+echo $data
+echo $yolo
+echo $weight
+python /opt/yolov5/train.py --img $img --batch $batch --epochs $epochs --data $data \
+--cfg $yolo --weights $weight

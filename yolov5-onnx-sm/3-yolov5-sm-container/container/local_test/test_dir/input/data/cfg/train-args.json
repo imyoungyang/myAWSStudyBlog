@@ -1,0 +1,8 @@
+{
+   "FP_DATA": "/opt/ml/input/data/cfg/coco128.yaml",
+   "FP_YOLO": "/opt/ml/input/data/cfg/yolov5s.yaml",
+   "FP_WEIGHT": "/opt/ml/input/data/weights/yolov5s.pt",
+   "IMG_SIZE": "640",
+   "EPOCHS": "5",
+   "BATCH": "16"
+}

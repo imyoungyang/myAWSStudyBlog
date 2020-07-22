@@ -1,0 +1,10 @@
+#! /bin/bash
+FP_PARA=/opt/ml/input/data/cfg/serv-args.json
+weight=$(cat $FP_PARA | jq -r '.FP_WEIGHT')
+img=$(cat $FP_PARA | jq -r '.FP_SOURCE')
+conf=$(cat $FP_PARA | jq -r '.CONF')
+output=$(cat $FP_PARA | jq -r '.FP_OUTPUT')
+echo $weight
+echo $img
+python /opt/yolov5/detect.py --source $img --weights $weight --conf $conf
+cp -r /opt/code/inference/output $output

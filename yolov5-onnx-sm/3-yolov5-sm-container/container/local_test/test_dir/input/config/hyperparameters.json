@@ -1,0 +1,8 @@
+{
+   "FP_DATA": "/opt/ml/input/data/cfg/obj.data",
+   "FP_YOLO": "/opt/ml/input/data/cfg/yolo-obj.cfg",
+   "FP_WEIGHT": "/opt/ml/input/data/weights/yolov4.conv.137",
+   "FP_PREDICT_WEIGHT": "/opt/ml/model/yolo-obj_final.weights",
+   "FP_PREDICT_IMG": "/opt/ml/input/data/valid/bear.jpg",
+   "FP_PREDICT_RESULTS": "/opt/ml/input/data/valid/predictions.jpg"
+}

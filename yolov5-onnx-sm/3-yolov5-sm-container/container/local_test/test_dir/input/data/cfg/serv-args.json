@@ -1,0 +1,6 @@
+{
+   "FP_SOURCE": "/opt/ml/input/data/images/inference",
+   "FP_WEIGHT": "/opt/ml/input/data/weights/yolov5s.pt",
+   "CONF": "0.4",
+   "FP_OUTPUT": "/opt/ml/input/data/images/inference/"
+}
