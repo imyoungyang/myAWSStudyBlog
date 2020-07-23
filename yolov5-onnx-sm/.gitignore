@@ -2,3 +2,4 @@ yolov5
 *.onnx
 *.pt
 *.gz
+*.pth
