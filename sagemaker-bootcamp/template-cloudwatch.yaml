@@ -1,0 +1,126 @@
+Parameters:
+    DashboardName:
+      Description: "The name of the dashboard to monitor the endpoint"
+      Type: "String"
+      Default: "SageMaker-Endpoint-Metrics"
+    EndpointName:
+        Description: "The endpoint you want to monitor"
+        Type: "String"
+    VariantName:
+      Description: "The variant used in the endpoint serving the traffic"
+      Type: "String"
+      Default: "AllTraffic"
+    TargetLatency:
+      Description: "The value of the target latency"
+      Type: "Number"
+      Default: 5000
+
+
+Resources:
+    Dashboard:
+        Type: "AWS::CloudWatch::Dashboard"
+        Properties:
+            DashboardName: !Ref DashboardName
+            DashboardBody: !Sub '
+            {
+              "widgets": [
+                  {
+                      "type": "metric",
+                      "x": 0,
+                      "y": 0,
+                      "width": 6,
+                      "height": 6,
+                      "properties": {
+                          "metrics": [
+                              [ "AWS/SageMaker", "Invocations", "EndpointName", "${EndpointName}", "VariantName", "${VariantName}", { "stat": "Sum" } ],
+
+                              [ ".", "InvocationsPerInstance", ".", ".", ".", ".", { "stat": "Sum" }]
+                          ],
+                          "view": "timeSeries",
+                          "stacked": false,
+                          "region": "${AWS::Region}",
+                          "stat": "Sum",
+                          "period": 60,
+                          "annotations": {
+                            "horizontal": [
+                                {
+                                    "color": "#2ca02c",
+                                    "label": "Target",
+                                    "value": ${TargetLatency}
+                                }
+                            ]
+                          },
+                          "title": "Invocations"
+                      }
+                  },
+                  {
+                      "type": "metric",
+                      "x": 6,
+                      "y": 0,
+                      "width": 6,
+                      "height": 6,
+                      "properties": {
+                          "metrics": [
+                              [ "AWS/SageMaker", "Invocation5XXErrors", "EndpointName", "${EndpointName}", "VariantName", "${VariantName}", { "stat": "Sum" } ],
+                              [ ".", "Invocation4XXErrors", ".", ".", ".", ".", { "stat": "Sum" } ]
+                          ],
+                          "view": "timeSeries",
+                          "stacked": false,
+                          "region": "${AWS::Region}",
+                          "stat": "Sum",
+                          "period": 60,
+                          "start": "-PT1H",
+                          "end": "P0D",
+                          "title": "Endpoint errors"
+                      }
+                  },
+                  {
+                      "type": "metric",
+                      "x": 6,
+                      "y": 6,
+                      "width": 6,
+                      "height": 6,
+                      "properties": {
+                          "metrics": [
+
+          [ "/aws/sagemaker/Endpoints", "DiskUtilization", "EndpointName", "${EndpointName}", "VariantName", "${VariantName}", { "stat": "Average" } ],
+                              [ ".", "MemoryUtilization", ".", ".", ".", ".", { "stat": "Average" } ],
+                              [ ".", "CPUUtilization", ".", ".", ".", ".", { "stat": "Average" } ]
+                          ],
+                          "view": "timeSeries",
+                          "stacked": false,
+                          "region": "${AWS::Region}",
+                          "period": 60,
+                          "stat": "Average",
+                          "start": "-PT1H",
+                          "end": "P0D",
+                          "title": "Endpoint instance utilization"
+                      }
+                  },
+                  {
+                      "type": "metric",
+                      "x": 0,
+                      "y": 6,
+                      "width": 6,
+                      "height": 6,
+                      "properties": {
+                          "metrics": [
+                              [ "AWS/SageMaker", "ModelLatency", "EndpointName", "${EndpointName}", "VariantName", "${VariantName}", { "stat": "Average" } ]
+                          ],
+                          "view": "timeSeries",
+                          "stacked": false,
+                          "region": "${AWS::Region}",
+                          "stat": "Average",
+                          "period": 60,
+                          "start": "-PT1H",
+                          "end": "P0D",
+                          "title": "Model latency"
+                      }
+                  }
+              ]
+          }'
+
+Outputs:
+    Dashboard:
+        Description: "Dashboard created:"
+        Value: !Sub "https://${AWS::Region}.console.aws.amazon.com/cloudwatch/home#dashboards:name=${DashboardName}"
