@@ -41,6 +41,10 @@ POSTGIS="2.4.4" PGSQL="100" GEOS="3.6.2-CAPI-1.10.2 4d2925d6" PROJ="Rel. 4.9.3, 
 * security group: self-referencing inbound rule for ALL Traffic. [link](https://docs.aws.amazon.com/glue/latest/dg/setup-vpc-for-glue-access.html)
 * s3 vpcend point for vpc-subnet: Could not find S3 endpoint or NAT gateway for subnetId
 
+## ML - trajectory geospatial temporal
+* [movingpandas](https://github.com/anitagraser/movingpandas)
+* [scikit-mobility](https://github.com/scikit-mobility/scikit-mobility)
+
 ## Geospatial Opensources
 * [Open source for geospatial](https://github.com/inspire-helsinki-2019/challenge/issues/14)
 * geomesa [link](https://www.geomesa.org/)
