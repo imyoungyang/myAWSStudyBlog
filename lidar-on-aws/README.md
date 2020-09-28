@@ -15,36 +15,80 @@ Image source: Deep Learning for 3D Point Clouds: A Survey, Yulan Guo [link](http
 ![](https://raw.githubusercontent.com/QingyongHu/SoTA-Point-Cloud/master/taxonomy.png)
 
 ## Data process and visulization
-#### 1. Raw Data of Point Cloud
+### 1. Raw Data of Point Cloud
 
-* 3D Point Clouds: (x, y, z, i, r, g, b)
-	* Three coordinates: x, y, and z.
-	* Intensity: i
-	* Color: red (r), green (g), and blue (b) 8-bit color channels.
+#### 1.1 3D Point Clouds: (x, y, z, i, r, g, b)
+* Three coordinates: x, y, and z.
+* Intensity: i
+* Color: red (r), green (g), and blue (b) 8-bit color channels.
 
-* Coordinate systems and sensor fusion
+#### 1.2 Coordinate systems
 
-	Applications: global path planning, localization, mapping, and driving scenario simulations.
+Applications: global path planning, localization, mapping, and driving scenario simulations.
 	
-	World coordiante system (WCS): 1. two sensors with different point clouds data. 2. Translate all point cloud frames into a single coordinate system.
-	
-	
-	* Vehicle Axis System(VAS)[ISO 8855](https://www.iso.org/standard/51180.html): x axis is forward toward the car’s movement, y axis is left, and the z axis points up from the ground.
-
-	![](https://upload.wikimedia.org/wikipedia/commons/f/f5/RPY_angles_of_cars.png)
-	
-	* GPS/IMU - OxTS in AV KITTI dataset
-		*  (latitude, longitude, altitude and roll, pitch, yaw)
-
-		![](https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Flight_dynamics_with_text_ortho.svg/1920px-Flight_dynamics_with_text_ortho.svg.png)[By Aashmango4793 - Own work, CC BY-SA 4.0](https://commons.wikimedia.org/w/index.php?curid=81688701)
+World coordiante system (WCS): 1. two LiDAR sensors with different point clouds data. 2. Translate all point cloud frames into a single coordinate system.
 		
-	### Compare OxTS and VAS ISO 8855 
-	Notes: the Z-axis direction is different
+##### 1.2.1 Vehicle Axis System(VAS)
+
+[ISO 8855](https://www.iso.org/standard/51180.html):
+x axis is forward toward the car’s movement, y axis is left, and the z axis points up from the ground.
+
+![](https://upload.wikimedia.org/wikipedia/commons/f/f5/RPY_angles_of_cars.png)
 	
-	![](https://www.oxts.com/wp-content/uploads/2016/01/555_ISO8855_ISO70000.jpg)
+##### 1.2.2 GPS/IMU - OxTS in AV KITTI dataset
+
+Data format: **(latitude, longitude, altitude and roll, pitch, yaw)**
+
+##### Roll Pitch and Yaw from WikiMedia
+![](https://upload.wikimedia.org/wikipedia/commons/0/00/Pitch_Roll_and_Yaw.svg)
+
+##### Drone: Roll Pitch and Yaw, mapping to (X, Y, Z)
+![](https://www.researchgate.net/profile/Sriharsha_Etigowni/publication/329521700/figure/fig2/AS:701942607138816@1544367567309/Drones-pitch-roll-and-yaw.png)
+	
+![](./images/01.png)[source: NOAA](https://spationetblog.files.wordpress.com/2016/01/an-introduction-to-lidar-technology.pdf)
+	
+##### 1.2.3 GPS/IMU OxTS vs VAS ISO 8855 
+Notes: the Z-axis direction is different
+![](https://www.oxts.com/wp-content/uploads/2016/01/555_ISO8855_ISO70000.jpg)
+	
+#### 1.3 Sensor fusion
+
+3 different positions: LiDAR, Camera, and Ego-Vehicle pose. For example, project 3D point cloud to camera image plane:
+
+- Step1: LiDAR Extrinsic: transforms 3D points from LiDAR's own coordinate system to a world coordinate system (WCS)
+- Step2: Camera Inverse Extrinsic: transforms WCS to image plane.
+
+Checking:
+
+* AWS Ground Truth Sensor Fusion Transformations [link](https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud-sensor-fusion-details.html#sms-point-cloud-extrinsic-intrinsic-explanation)
+* Understand Coordinate Systems and Sensor Fusion [link](https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud-sensor-fusion-details.html)
+
+#### 1.4 Annotations:
+3D Point Cloud Object Detection Output example [link](https://docs.aws.amazon.com/sagemaker/latest/dg/sms-data-output.html#sms-output-point-cloud-object-detection) and Compute Orientation Quaternions and Position [link](https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud-sensor-fusion-details.html#sms-point-cloud-ego-vehicle-orientation)
+
+LiDAR Extrinsic matrices:
+
+* heading (qx, qy, qz, and qw) in quaternions [link](https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.transform.Rotation.as_quat.html#scipy.spatial.transform.Rotation.as_quat)
+* position (x, y, z) in WCS
 
 
-#### 2. Processed Point Cloud
+```
+"ego-vehicle-pose": {
+    "heading": {
+        "qx": -0.02111296123795955,
+        "qy": -0.006495469416730261,
+        "qz": -0.008024565904865688,
+        "qw": 0.9997181192298087
+    },
+    "position": {
+        "x": -2.7161461413869947,
+        "y": 116.25822288149078,
+        "z": 1.8348751887989483
+    }
+},
+```
+
+### 2. Processed Point Cloud
 
 * Coordinate systems 
 * Conversion to 3D surfaces: polygon mesh, triangle mesh, CAD models.
@@ -56,29 +100,16 @@ Image source: Deep Learning for 3D Point Clouds: A Survey, Yulan Guo [link](http
 
 ![Wiki 3D Rendering DEM](https://upload.wikimedia.org/wikipedia/commons/f/ff/Mtm-05277e_3d.png)
 	
-#### 3. Visulized Point Cloud
+### 3. Visulized Point Cloud
 
 
 ## Analytic and ML cases
+
 * 3D point cloud object detection
 * 3D point cloud object tracking
 * 3D point cloud semantic segmentation
 
-
-## LiDAR Technology Overview
-* LiDAR Tech Stock [link](https://spationetblog.files.wordpress.com/2016/01/an-introduction-to-lidar-technology.pdf)
-
-## AWS
-* Labeling data for 3D object tracking and sensor fusion [link](https://aws.amazon.com/blogs/machine-learning/labeling-data-for-3d-object-tracking-and-sensor-fusion-in-amazon-sagemaker-ground-truth/)
-
-## Apple
-* Acess to the point cloud/mesh created by LiDAR with the new Ipad Pro [Link](https://developer.apple.com/forums/thread/131161) Currently, Apple ARKit don't provide simple way to export cloud points. Need to use ARKit to retrieve geometry object. Require iOS 13.4+ and Xcode 11.4+.
-
-* Sample Code
-	* Visualizing and Interacting with a Reconstructed Scene [link](https://developer.apple.com/documentation/arkit/world_tracking/visualizing_and_interacting_with_a_reconstructed_scene)
-	* WWDC2020 ARKit4 [link](https://developer.apple.com/videos/play/wwdc2020/10611/) Sample code [link](https://developer.apple.com/documentation/arkit/visualizing_a_point_cloud_using_scene_depth)
-
-## Machine Learning
+### Open source libraries
 * OpenPCDet [repo](https://github.com/open-mmlab/OpenPCDet)
 
 ### Papers
@@ -86,6 +117,8 @@ Image source: Deep Learning for 3D Point Clouds: A Survey, Yulan Guo [link](http
 * Deep Learning for 3D Point Cloud Understanding: A Survey [link](https://arxiv.org/pdf/2009.08920.pdf) [github](https://github.com/SHI-Labs/3D-Point-Cloud-Learning)
 * Deep Learning for LiDAR Point Clouds in Autonomous Driving: A Review IEEE 2020 [link](https://arxiv.org/pdf/2005.09830.pdf)
 * PV-RCNN: Point-Voxel Feature Set Abstraction for 3D Object Detection. [CVPR 2020](https://openaccess.thecvf.com/content_CVPR_2020/papers/Shi_PV-RCNN_Point-Voxel_Feature_Set_Abstraction_for_3D_Object_Detection_CVPR_2020_paper.pdf)
+* **NOAA - Lidar An Introduction to LiDAR Technology, Data, and Applications**: LiDAR on geo-spatial tech stock [link](https://spationetblog.files.wordpress.com/2016/01/an-introduction-to-lidar-technology.pdf)
+
 
 ## LiDAR datasets
 * KITTI cvlibs [link](http://www.cvlibs.net/datasets/kitti/)
@@ -95,3 +128,17 @@ Image source: Deep Learning for 3D Point Clouds: A Survey, Yulan Guo [link](http
 ## Devices
 
 * Robotis LDS-01 [link](https://emanual.robotis.com/docs/en/platform/turtlebot3/appendix_lds_01/)
+
+
+## Solutions
+
+### 1. AWS
+* Labeling data for 3D object tracking and sensor fusion [blog](https://aws.amazon.com/blogs/machine-learning/labeling-data-for-3d-object-tracking-and-sensor-fusion-in-amazon-sagemaker-ground-truth/)
+
+### 2. Apple iPad Pro
+* Acess to the point cloud/mesh created by LiDAR with the new Ipad Pro [Link](https://developer.apple.com/forums/thread/131161) Currently, Apple ARKit don't provide simple way to export cloud points. Need to use ARKit to retrieve geometry object. Require iOS 13.4+ and Xcode 11.4+.
+
+* Sample Code
+	* Visualizing and Interacting with a Reconstructed Scene [link](https://developer.apple.com/documentation/arkit/world_tracking/visualizing_and_interacting_with_a_reconstructed_scene)
+	* WWDC2020 ARKit4 [link](https://developer.apple.com/videos/play/wwdc2020/10611/) Sample code [link](https://developer.apple.com/documentation/arkit/visualizing_a_point_cloud_using_scene_depth)
+
