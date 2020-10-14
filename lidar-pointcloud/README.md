@@ -72,6 +72,9 @@ Data format: **(latitude, longitude, altitude and roll, pitch, yaw)**
 ##### 1.2.3 GPS/IMU OxTS vs VAS ISO 8855 
 Notes: the Z-axis direction is different
 ![](https://www.oxts.com/wp-content/uploads/2016/01/555_ISO8855_ISO70000.jpg)
+
+##### 1.2.4 Indoor coordiation system
+[AprilTags](https://april.eecs.umich.edu/software/apriltag): Fiducials are artificial features with a variety of uses in computer vision such as object tracking and localization. AprilTag detection software computes the precise 3D position, orientation, and identity of the tags relative to the camera. 
 	
 #### 1.3 Sensor fusion
 
@@ -112,7 +115,8 @@ LiDAR Extrinsic matrices:
 
 ### 2. Processed Point Cloud
 
-* Coordinate systems 
+* Coordinate systems transform
+* LiDAR processing tools: [LAStools](https://rapidlasso.com/lastools/)
 * Conversion to 3D surfaces: polygon mesh, triangle mesh, CAD models.
 * Building Information Model (BIM): 3D or 2D. Generating or reconstructing 3D shapes from single or multi-view depth maps or silhouettes and visualizing them in dense point clouds.
 
@@ -125,6 +129,9 @@ LiDAR Extrinsic matrices:
 ### 3. Visulized Point Cloud
 
 * [Potree.org](https://github.com/potree/potree/): web-based point cloud viewer [example](http://potree.org/potree/examples/showcase/LDHI_module.html)
+
+### 4. Geospatial Database
+* [ESRI Geoportal Server](https://www.esri.com/en-us/arcgis/products/geoportal-server/overview), Apache 2.0
 
 ## Open source libraries
 * [COLMAP](https://colmap.github.io/index.html): COLMAP is a general-purpose Structure-from-Motion (SfM) and Multi-View Stereo (MVS) pipeline with a graphical and command-line interface. BSD
