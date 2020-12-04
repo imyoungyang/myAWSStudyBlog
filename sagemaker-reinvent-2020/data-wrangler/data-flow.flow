@@ -1,0 +1,205 @@
+{
+  "metadata": {
+    "version": 1
+  },
+  "nodes": [
+    {
+      "node_id": "8017f2a0-f617-4928-affb-dde0baa05b25",
+      "type": "SOURCE",
+      "operator": "sagemaker.s3_source_0.1",
+      "parameters": {
+        "dataset_definition": {
+          "__typename": "S3CreateDatasetDefinitionOutput",
+          "datasetSourceType": "S3",
+          "name": "titanic-data-set.csv",
+          "description": null,
+          "s3ExecutionContext": {
+            "__typename": "S3ExecutionContext",
+            "s3Uri": "s3://beyoung-sagemaker/titanic/titanic-data-set.csv",
+            "s3ContentType": "csv",
+            "s3HasHeader": true
+          }
+        }
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "default",
+          "sampling": {
+            "sampling_method": "sample_by_ratio",
+            "sample_ratio": 1
+          }
+        }
+      ]
+    },
+    {
+      "node_id": "c15a426e-33fd-4d59-a157-91016f06b88a",
+      "type": "TRANSFORM",
+      "operator": "sagemaker.spark.infer_and_cast_type_0.1",
+      "parameters": {},
+      "trained_parameters": {
+        "schema": {
+          "pclass": "long",
+          "survived": "long",
+          "name": "string",
+          "sex": "string",
+          "age": "long",
+          "sibsp": "long",
+          "parch": "long",
+          "ticket": "string",
+          "fare": "float",
+          "cabin": "string",
+          "embarked": "string",
+          "boat": "string",
+          "body": "string",
+          "home.dest": "string"
+        }
+      },
+      "inputs": [
+        {
+          "name": "default",
+          "node_id": "8017f2a0-f617-4928-affb-dde0baa05b25",
+          "output_name": "default"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "default"
+        }
+      ]
+    },
+    {
+      "node_id": "b7ffb579-a6db-4e06-83a1-c1e971d222e8",
+      "type": "VISUALIZATION",
+      "operator": "sagemaker.visualizations.describe_0.1",
+      "parameters": {
+        "name": "summar"
+      },
+      "inputs": [
+        {
+          "name": "df",
+          "node_id": "c15a426e-33fd-4d59-a157-91016f06b88a",
+          "output_name": "default"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "default"
+        }
+      ]
+    },
+    {
+      "node_id": "75117937-614f-49a5-8430-9737690ab9f0",
+      "type": "TRANSFORM",
+      "operator": "sagemaker.spark.custom_pandas_0.1",
+      "parameters": {
+        "code": "cols = ['name', 'ticket', 'cabin', 'sibsp', 'parch', 'home.dest','boat', 'body']\ndf = df.drop(cols, axis=1)\n"
+      },
+      "inputs": [
+        {
+          "name": "df",
+          "node_id": "c15a426e-33fd-4d59-a157-91016f06b88a",
+          "output_name": "default"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "default"
+        }
+      ]
+    },
+    {
+      "node_id": "5697febf-0e37-4d42-9f1e-551cc8381d46",
+      "type": "TRANSFORM",
+      "operator": "sagemaker.spark.handle_missing_0.1",
+      "parameters": {
+        "operator": "Drop missing",
+        "drop_missing_parameters": {
+          "dimension": "Drop Rows",
+          "drop_rows_parameters": {
+            "input_column": "age"
+          }
+        },
+        "impute_parameters": {
+          "column_type": "Numeric",
+          "numeric_parameters": {
+            "strategy": "Approximate Median",
+            "input_column": "age"
+          }
+        }
+      },
+      "inputs": [
+        {
+          "name": "df",
+          "node_id": "75117937-614f-49a5-8430-9737690ab9f0",
+          "output_name": "default"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "default"
+        }
+      ]
+    },
+    {
+      "node_id": "27f7cf30-9ccb-4336-8fed-82372cdad170",
+      "type": "TRANSFORM",
+      "operator": "sagemaker.spark.custom_pandas_0.1",
+      "parameters": {
+        "code": "df.info()\n"
+      },
+      "inputs": [
+        {
+          "name": "df",
+          "node_id": "5697febf-0e37-4d42-9f1e-551cc8381d46",
+          "output_name": "default"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "default"
+        }
+      ]
+    },
+    {
+      "node_id": "c3f5948c-5761-4348-ad33-621cd4bce014",
+      "type": "TRANSFORM",
+      "operator": "sagemaker.spark.custom_pandas_0.1",
+      "parameters": {
+        "code": "import pandas as pd\n\ndummies = []\ncols = ['pclass','sex','embarked']\nfor col in cols:\n    dummies.append(pd.get_dummies(df[col]))\n    \nencoded = pd.concat(dummies, axis=1)\n\ndf = pd.concat((df, encoded),axis=1)\n"
+      },
+      "inputs": [
+        {
+          "name": "df",
+          "node_id": "27f7cf30-9ccb-4336-8fed-82372cdad170",
+          "output_name": "default"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "default"
+        }
+      ]
+    },
+    {
+      "node_id": "906d977f-9c10-40f2-ab58-acfc70065203",
+      "type": "TRANSFORM",
+      "operator": "sagemaker.spark.custom_sql_0.1",
+      "parameters": {
+        "sql": "/* Table is available as variable `df`*/\nSELECT survived, age, fare, 1, 2, 3, female, male, C, Q, S FROM df;"
+      },
+      "inputs": [
+        {
+          "name": "df",
+          "node_id": "c3f5948c-5761-4348-ad33-621cd4bce014",
+          "output_name": "default"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "default"
+        }
+      ]
+    }
+  ]
+}
