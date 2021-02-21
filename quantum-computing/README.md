@@ -5,6 +5,8 @@
 * Quantum Shuttle: Traffic Navigation with Quantum Computing, Jun 2020, [link](https://arxiv.org/abs/2006.14162)
 * Optimal Control of Traffic Signals using Quantum Annealing, Nov 2020 [link](https://arxiv.org/abs/1912.07134)
 * Garden optimization problems for benchmarking quantum annealers, Jan 2021, [link](https://arxiv.org/abs/2101.10827)
+* Traffic Flow Optimization Using a Quantum Annealer [link](https://www.frontiersin.org/articles/10.3389/fict.2017.00029/full), 2017
+![](https://www.frontiersin.org/files/Articles/301656/fict-04-00029-HTML/image_m/fict-04-00029-g005.jpg)
 
 ## Open Source
 * Quantum open source projects [link](https://qosf.org/project_list/)
@@ -28,6 +30,8 @@
 
 ## Terminalogies
 * Fidelity of quantum states: fidelity is a measure of the "closeness" of two quantum states [wiki](https://en.wikipedia.org/wiki/Fidelity_of_quantum_states)
+* **Noisy Intermediate-Scale Quantum (NISQ)** [link](https://arxiv.org/abs/1801.00862), In a [keynote speech](https://youtu.be/h4nUyF9cSaw) given in late 2017, the physicist John Preskill coined the term Noisy Intermediate Scale Quantum (NISQ) technology for the kinds of quantum computers that will be available in the next few years. Here, ‘noisy’ refers to the fact that the devices will be disturbed by what is happening in their environment. For instance, small changes in temperature, or stray electric or magnetic fields, can cause the quantum information in the computer to be degraded — a process known as decoherence. To overcome this, we need to be able to perform error correction — essentially looking at the system to determine which disturbances have occurred, then reversing them. Error Correction Algorithms for NISQ Machines: applicable to gate-based quantum computers,
+are the Variational Quantum Eigensolver (VQE) and the Quantum Approximate Optimisation Algorithm (QAOA).
 
 ## Papers
 ### Quantum Physics Computation Algorithms
@@ -45,6 +49,9 @@
 * Quantum computing with atomic qubits and Rydberg interactions: Progress and challenges, 2016 [link](https://iopscience.iop.org/article/10.1088/0953-4075/49/20/202001/ampdf)
 
 ### level 100
+* Introduction new quantum revolution, NIST [link](NIST: https://www.nist.gov/topics/physics/introduction-new-quantum-revolution
+)
+* Second Quantum Revolution [link](http://aappsbulletin.org/myboard/read.php?Board=featurearticles&id=236)
 * short introduction about quantum (Chinese), 2018, [link](https://medium.com/@kelispinor/%E9%87%8F%E5%AD%90%E9%9B%BB%E8%85%A6%E6%A5%B5%E7%B0%A1%E4%BB%8B-short-introduction-to-quantum-computer-a7b159861786): Please aware it is 2018, some information or technologies are changed. But it's a good statring if you don't want to study English :)
 
 ## AWS Braket
