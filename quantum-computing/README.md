@@ -1,12 +1,19 @@
 # Quantum Computing
 
 ## Applications
+### Quantum Annealing
 * Volkswagen: Paint Shop Optimization with Quantum Annealing [link](https://youtu.be/Uenk1SF8NsI?t=276)
 * Quantum Shuttle: Traffic Navigation with Quantum Computing, Jun 2020, [link](https://arxiv.org/abs/2006.14162)
 * Optimal Control of Traffic Signals using Quantum Annealing, Nov 2020 [link](https://arxiv.org/abs/1912.07134)
 * Garden optimization problems for benchmarking quantum annealers, Jan 2021, [link](https://arxiv.org/abs/2101.10827)
 * Traffic Flow Optimization Using a Quantum Annealer [link](https://www.frontiersin.org/articles/10.3389/fict.2017.00029/full), 2017
 ![](https://www.frontiersin.org/files/Articles/301656/fict-04-00029-HTML/image_m/fict-04-00029-g005.jpg)
+
+### Quantum Gate
+As of 2020, quantum gate applications are still mostly in research states.
+
+#### Chemistry
+* Active Space, Hartree-Fock State, Molecular Hamiltonian Estimation (Electronic, Vibronic Structure, Ground State) [pennylane-link](https://pennylane.readthedocs.io/en/stable/code/qml_qchem.html) [qiskit-link](https://qiskit.org/documentation/tutorials/chemistry/index.html)
 
 ## Open Source
 * Quantum open source projects [link](https://qosf.org/project_list/)
@@ -39,8 +46,10 @@ are the Variational Quantum Eigensolver (VQE) and the Quantum Approximate Optimi
 * Beating classical heuristics for the binary paint shop problem with the quantum approximate optimization algorithm [link](https://arxiv.org/abs/2011.03403)
 
 ### Chemistry
+* Quantum Information and Computation for Chemistry, Olson, Jonathan, et al., 2017, [link](https://arxiv.org/pdf/1706.05413.pdf): An overview of early-stage quantum operation components and their mathematical similarity to the corresponding chemistry status.
 * Quantum Chemistry in the Age of Quantum Computing, Y Cao, 2018 Dec, [link](https://arxiv.org/abs/1812.09976): This article is an overview of the algorithms and results that are relevant for quantum chemistry.
 * Quantum algorithms for quantum chemistry and quantum materials science, Bela Bauer, 2020 Jul, [link](https://arxiv.org/abs/2001.03685): take a detailed snapshot of current progress in quantum algorithms for ground-state, dynamics, and thermal state simulation, and analyze their strengths and weaknesses for future developments.
+* How will quantum computers provide an industrially relevant computational advantage in quantum chemistry?, Elfving, Vincent E., et al., 2020 Sep, [link](https://arxiv.org/pdf/2009.12472.pdf): Compare the chemistry simulation efficiency of quantum computer (quantum gate) and classical computer on different physical accuracy scale.
 
 ### Quantum Architectures
 * Quantum Computer Architecture: Towards Full-Stack Quantum Accelerators, 2019, [link](https://arxiv.org/abs/1903.09575)
@@ -49,8 +58,7 @@ are the Variational Quantum Eigensolver (VQE) and the Quantum Approximate Optimi
 * Quantum computing with atomic qubits and Rydberg interactions: Progress and challenges, 2016 [link](https://iopscience.iop.org/article/10.1088/0953-4075/49/20/202001/ampdf)
 
 ### level 100
-* Introduction new quantum revolution, NIST [link](NIST: https://www.nist.gov/topics/physics/introduction-new-quantum-revolution
-)
+* Introduction new quantum revolution, NIST [link](NIST: https://www.nist.gov/topics/physics/introduction-new-quantum-revolution)
 * Second Quantum Revolution [link](http://aappsbulletin.org/myboard/read.php?Board=featurearticles&id=236)
 * short introduction about quantum (Chinese), 2018, [link](https://medium.com/@kelispinor/%E9%87%8F%E5%AD%90%E9%9B%BB%E8%85%A6%E6%A5%B5%E7%B0%A1%E4%BB%8B-short-introduction-to-quantum-computer-a7b159861786): Please aware it is 2018, some information or technologies are changed. But it's a good statring if you don't want to study English :)
 
