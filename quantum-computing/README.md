@@ -14,6 +14,7 @@ As of 2020, quantum gate applications are still mostly in research states.
 
 * Noisy intermediate-scale quantum (NISQ) algorithms, John Preskill, 2018 [arxiv](https://arxiv.org/abs/1801.00862), [keynote speech](https://youtu.be/h4nUyF9cSaw)
 * Hybrid quantum-classical algorithms and quantum error mitigation, Nov 2020 [arxiv](https://arxiv.org/abs/2011.01382)
+* Noisy intermediate-scale quantum (NISQ) algorithms, Jan 2021 [arxiv](https://arxiv.org/abs/2101.08448)
 
 #### Chemistry
 * Making quantum computing for quantum chemistry more useful, Jens Eisert, Feb 26, 2021, QuCQC 2021 [video](https://youtu.be/iFstcq2RYzc)
