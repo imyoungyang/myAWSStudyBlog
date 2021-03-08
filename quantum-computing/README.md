@@ -12,6 +12,9 @@
 ### Quantum Gate
 As of 2020, quantum gate applications are still mostly in research states.
 
+* Noisy intermediate-scale quantum (NISQ) algorithms, John Preskill, 2018 [arxiv](https://arxiv.org/abs/1801.00862), [keynote speech](https://youtu.be/h4nUyF9cSaw)
+* Hybrid quantum-classical algorithms and quantum error mitigation, Nov 2020 [arxiv](https://arxiv.org/abs/2011.01382)
+
 #### Chemistry
 * Making quantum computing for quantum chemistry more useful, Jens Eisert, Feb 26, 2021, QuCQC 2021 [video](https://youtu.be/iFstcq2RYzc)
 * Active Space, Hartree-Fock State, Molecular Hamiltonian Estimation (Electronic, Vibronic Structure, Ground State) [pennylane-link](https://pennylane.readthedocs.io/en/stable/code/qml_qchem.html) [qiskit-link](https://qiskit.org/documentation/tutorials/chemistry/index.html)
@@ -41,8 +44,7 @@ efficient fully quantum mechanical protein-ligand scoring. This approach is prov
 
 ## Terminalogies
 * Fidelity of quantum states: fidelity is a measure of the "closeness" of two quantum states [wiki](https://en.wikipedia.org/wiki/Fidelity_of_quantum_states)
-* **Noisy Intermediate-Scale Quantum (NISQ)** [link](https://arxiv.org/abs/1801.00862), In a [keynote speech](https://youtu.be/h4nUyF9cSaw) given in late 2017, the physicist John Preskill coined the term Noisy Intermediate Scale Quantum (NISQ) technology for the kinds of quantum computers that will be available in the next few years. Here, ‘noisy’ refers to the fact that the devices will be disturbed by what is happening in their environment. For instance, small changes in temperature, or stray electric or magnetic fields, can cause the quantum information in the computer to be degraded — a process known as decoherence. To overcome this, we need to be able to perform error correction — essentially looking at the system to determine which disturbances have occurred, then reversing them. Error Correction Algorithms for NISQ Machines: applicable to gate-based quantum computers,
-are the Variational Quantum Eigensolver (VQE) and the Quantum Approximate Optimisation Algorithm (QAOA).
+* **Noisy Intermediate-Scale Quantum (NISQ)** [link](https://arxiv.org/abs/1801.00862), In a [keynote speech](https://youtu.be/h4nUyF9cSaw) given in late 2017, the physicist John Preskill coined the term Noisy Intermediate Scale Quantum (NISQ) technology for the kinds of quantum computers that will be available in the next few years. Here, ‘noisy’ refers to the fact that the devices will be disturbed by what is happening in their environment. For instance, small changes in temperature, or stray electric or magnetic fields, can cause the quantum information in the computer to be degraded — a process known as decoherence. To overcome this, we need to be able to perform error correction — essentially looking at the system to determine which disturbances have occurred, then reversing them. Error Correction Algorithms for NISQ Machines: applicable to gate-based quantum computers, are the Variational Quantum Eigensolver (VQE) and the Quantum Approximate Optimisation Algorithm (QAOA).
 
 ## Papers
 ### Quantum Physics Computation Algorithms
