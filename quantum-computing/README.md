@@ -17,8 +17,10 @@ As of 2020, quantum gate applications are still mostly in research states.
 * Noisy intermediate-scale quantum (NISQ) algorithms, Jan 2021 [arxiv](https://arxiv.org/abs/2101.08448)
 
 #### Chemistry
+* Quantum algorithms for quantum chemistry and quantum materials science, Jul 2020, [arxiv.2001.03685](https://arxiv.org/abs/2001.03685)
 * Making quantum computing for quantum chemistry more useful, Jens Eisert, Feb 26, 2021, QuCQC 2021 [video](https://youtu.be/iFstcq2RYzc)
 * Active Space, Hartree-Fock State, Molecular Hamiltonian Estimation (Electronic, Vibronic Structure, Ground State) [pennylane-link](https://pennylane.readthedocs.io/en/stable/code/qml_qchem.html) [qiskit-link](https://qiskit.org/documentation/tutorials/chemistry/index.html)
+* Quantum Computation for Chemistry and Materials [video](https://www.youtube.com/watch?v=KTDfEiJQj2E)
 * Amgen, Novel algorithms and high-performance cloud computing enable
 efficient fully quantum mechanical protein-ligand scoring. This approach is provided by quantum mechanical density functional theory (DFT/QM) scoring. [arxiv](https://arxiv.org/pdf/2004.08725.pdf)
 * Rahko, project Quantifi, an Innovate UK funded project, Rahko, Johnson Matthey and Amazon Web Services (AWS) have jointly demonstrated the use of high-performance computing (‘HPC’) to deliver efficient, large-scale Density Functional Theory (‘DFT’) calculations on the cloud. [link](https://rahko.ai/efficient-large-scale-density-functional-theory-on-the-cloud/) [link2](https://rahko.ai/innovate-uk-awards-grant-to-rahko-led-consortium-for-world-first-project/)
